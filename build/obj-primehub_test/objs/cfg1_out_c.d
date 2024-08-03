@@ -1,0 +1,1 @@
+cfg1_out.timestamp: /home/hayato/spike-rt/asp3/target/primehub_gcc/target_kernel.cfg /home/hayato/spike-rt/test/test.cfg /home/hayato/spike-rt/asp3/target/primehub_gcc/target_timer.cfg /home/hayato/spike-rt/asp3/arch/arm_m_gcc/common/core_timer.cfg /home/hayato/spike-rt/asp3/../drivers/drivers.cfg /home/hayato/spike-rt/asp3/../drivers/pybricks.cfg ./gen/tecsgen.cfg

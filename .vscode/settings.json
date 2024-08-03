@@ -1,0 +1,11 @@
+{
+    "cmake.sourceDirectory": "/home/hayato/spike-rt/external/Unity",
+    "files.associations": {
+        "color.h": "c",
+        "drive_mtr.h": "c",
+        "linetrace_run.h": "c",
+        "sonic_snc.h": "c",
+        "motor.h": "c",
+        "button1.h": "c"
+    }
+}
