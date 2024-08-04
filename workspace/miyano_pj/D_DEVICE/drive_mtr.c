@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <kernel.h>
 
+#include "spike/hub/speaker.h"  /* debug */
+
 #include <spike/hub/system.h>
 
 #include "spike/pup/motor.h"

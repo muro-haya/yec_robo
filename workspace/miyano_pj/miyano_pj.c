@@ -3,6 +3,7 @@
 #include <kernel.h>
 
 #include "spike/hub/speaker.h"  /* debug */
+#include <t_syslog.h>           /*debug */
 
 #include <miyano_pj.h>
 
@@ -22,6 +23,8 @@
 void Main(intptr_t exinf){
   uint16_t button;
 
+  syslog(LOG_NOTICE, "Sample program starts (exinf = %d).", 0);   /* debug */
+
   /* デバイス層 */
   ini_drive_mtr();
   ini_arm_mtr();
@@ -32,16 +35,21 @@ void Main(intptr_t exinf){
   ini_ctl_main();
   /* アプリ層 */
 
-  hub_speaker_set_volume( 50 );
-  hub_speaker_play_tone( NOTE_C6, SOUND_MANUAL_STOP );
+  // hub_speaker_set_volume( 50 );
+  // hub_speaker_play_tone( NOTE_C6, SOUND_MANUAL_STOP );
 
   while(1){
+  //   g_u16_const_run_spd = 500;
     set_tgt_linetrace_run();
     button = get_button( BUTTON_BT );
     if( 1 == button ){
       break;
     }
   }
+  while (1){
+    cyc_ctl_main();               /* 機体制御周期処理 */
+  }
+  
   hub_speaker_stop();
 
   /* 2msecタスクの起動 */
@@ -55,11 +63,7 @@ void Main(intptr_t exinf){
 
 /* 2msec周期処理 */
 void Main_2m( void ){
-  g_u16_const_run_spd = 500;
-  cyc_ctl_main();               /* 機体制御周期処理 */
-  hub_speaker_set_volume( 20 );
-  hub_speaker_play_tone( NOTE_C4, SOUND_MANUAL_STOP );
-  
+  //cyc_ctl_main();               /* 機体制御周期処理 */
   /* タスク終了 */
   ext_tsk();
 }
