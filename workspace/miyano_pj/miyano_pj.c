@@ -52,7 +52,7 @@ void Main(intptr_t exinf){
   
   hub_speaker_stop();
 
-  /* 2msecタスクの起動 */ テステス
+  /* 2msecタスクの起動 */ テステスtesuto
   sta_cyc(MAIN_2M_CYC);
   /* 10msecタスクの起動 */
   sta_cyc(MAIN_10M_CYC);
