@@ -46,6 +46,7 @@ objs/D_DEVICE/drive_mtr.o: ../../workspace/miyano_pj/D_DEVICE/drive_mtr.c \
  ../../asp3/target/primehub_gcc/target_kernel.h \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
  ../../asp3/arch/arm_m_gcc/common/core_kernel.h \
+ ../../asp3/../drivers/include/spike/hub/speaker.h \
  ../../asp3/../drivers/include/spike/hub/system.h \
  ../../asp3/../drivers/include/spike/pup/motor.h \
  ../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h \
@@ -122,6 +123,7 @@ objs/D_DEVICE/drive_mtr.o: ../../workspace/miyano_pj/D_DEVICE/drive_mtr.c \
 ../../asp3/target/primehub_gcc/target_kernel.h:
 ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h:
 ../../asp3/arch/arm_m_gcc/common/core_kernel.h:
+../../asp3/../drivers/include/spike/hub/speaker.h:
 ../../asp3/../drivers/include/spike/hub/system.h:
 ../../asp3/../drivers/include/spike/pup/motor.h:
 ../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h:

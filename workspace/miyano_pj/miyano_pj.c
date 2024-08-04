@@ -62,14 +62,14 @@ void Main(intptr_t exinf){
 }
 
 /* 2msec周期処理 */
-void Main_2m( void ){
+void Main_2m( intptr_t unused ){
   //cyc_ctl_main();               /* 機体制御周期処理 */
   /* タスク終了 */
   ext_tsk();
 }
 
 /* 10msec周期処理 */
-void Main_10m( void ){
+void Main_10m( intptr_t unused ){
   // hub_speaker_set_volume( 20 );
   // hub_speaker_play_tone( NOTE_C5, SOUND_MANUAL_STOP );
 }

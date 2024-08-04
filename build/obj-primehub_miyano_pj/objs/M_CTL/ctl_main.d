@@ -46,6 +46,7 @@ objs/M_CTL/ctl_main.o: ../../workspace/miyano_pj/M_CTL/ctl_main.c \
  ../../asp3/target/primehub_gcc/target_kernel.h \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
  ../../asp3/arch/arm_m_gcc/common/core_kernel.h \
+ ../../asp3/../drivers/include/spike/hub/speaker.h \
  ../../workspace/miyano_pj/miyano_pj.h kernel_cfg.h \
  ../../asp3/syssvc/serial.h ../../workspace/miyano_pj/M_CTL/ctl_main.h \
  ../../workspace/miyano_pj/M_CTL/linetrace_run.h \
@@ -99,6 +100,7 @@ objs/M_CTL/ctl_main.o: ../../workspace/miyano_pj/M_CTL/ctl_main.c \
 ../../asp3/target/primehub_gcc/target_kernel.h:
 ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h:
 ../../asp3/arch/arm_m_gcc/common/core_kernel.h:
+../../asp3/../drivers/include/spike/hub/speaker.h:
 ../../workspace/miyano_pj/miyano_pj.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
