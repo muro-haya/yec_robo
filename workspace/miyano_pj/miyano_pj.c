@@ -55,7 +55,7 @@ void Main(intptr_t exinf){
   /* 2msecタスクの起動 */
   sta_cyc(MAIN_2M_CYC);
   /* 10msecタスクの起動 */
-  sta_cyc(MAIN_10M_CYC);
+  sta_cyc(MAIN_10M_CYC);/* ここ変更 */
   
   /* タスク終了 */
   ext_tsk();
