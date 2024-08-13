@@ -6,6 +6,7 @@
         "linetrace_run.h": "c",
         "sonic_snc.h": "c",
         "motor.h": "c",
-        "button1.h": "c"
+        "button1.h": "c",
+        "button.h": "c"
     }
 }

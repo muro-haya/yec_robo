@@ -22,5 +22,5 @@ void ini_sonic_snc( void ){
 
 /* 超音波センサ値取得 */
 void get_sonic_snc( uint16_t* distance ){
-  distance = pup_ultrasonic_sensor_distance(sonicS);
+  *distance = pup_ultrasonic_sensor_distance(sonicS);
 }

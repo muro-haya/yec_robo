@@ -25,6 +25,9 @@ void ini_arm_mtr( void ){
 
   // モータのセットアップ
   pup_motor_setup(motorArm, PUP_DIRECTION_CLOCKWISE, true);
+  
+  // アームモータの角度をリセット
+  pup_motor_reset_count(motorArm);
 }
 
 /* アームモータDUty設定 */

@@ -922,27 +922,49 @@ const signed_t TOPPERS_cfg_valueof_itskpri_68 = (signed_t)(LOW_PRIORITY);
 #line 6 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_valueof_stksz_68 = (unsigned_t)(STACK_SIZE);
 
-#line 8 "../../workspace/miyano_pj/miyano_pj.cfg"
+#line 7 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_static_api_69 = 69;
-#define MAIN_2M_CYC	(<>)
-#line 8 "../../workspace/miyano_pj/miyano_pj.cfg"
-const unsigned_t TOPPERS_cfg_valueof_cycatr_69 = (unsigned_t)(TA_NULL);
-#line 8 "../../workspace/miyano_pj/miyano_pj.cfg"
-const unsigned_t TOPPERS_cfg_valueof_nfymode_69 = (unsigned_t)(TNFY_ACTTSK);
-#line 8 "../../workspace/miyano_pj/miyano_pj.cfg"
-const unsigned_t TOPPERS_cfg_valueof_cyctim_69 = (unsigned_t)(2);
-#line 8 "../../workspace/miyano_pj/miyano_pj.cfg"
-const unsigned_t TOPPERS_cfg_valueof_cycphs_69 = (unsigned_t)(0);
+#define MAIN_100M_TASK	(<>)
+#line 7 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_tskatr_69 = (unsigned_t)(TA_NULL);
+#line 7 "../../workspace/miyano_pj/miyano_pj.cfg"
+const signed_t TOPPERS_cfg_valueof_itskpri_69 = (signed_t)(LOW_PRIORITY + 1);
+#line 7 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_stksz_69 = (unsigned_t)(STACK_SIZE);
 
 #line 9 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_static_api_70 = 70;
-#define MAIN_10M_CYC	(<>)
+#define MAIN_2M_CYC	(<>)
 #line 9 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_valueof_cycatr_70 = (unsigned_t)(TA_NULL);
 #line 9 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_valueof_nfymode_70 = (unsigned_t)(TNFY_ACTTSK);
 #line 9 "../../workspace/miyano_pj/miyano_pj.cfg"
-const unsigned_t TOPPERS_cfg_valueof_cyctim_70 = (unsigned_t)(10);
+const unsigned_t TOPPERS_cfg_valueof_cyctim_70 = (unsigned_t)(2 * 1000);
 #line 9 "../../workspace/miyano_pj/miyano_pj.cfg"
-const unsigned_t TOPPERS_cfg_valueof_cycphs_70 = (unsigned_t)(1);
+const unsigned_t TOPPERS_cfg_valueof_cycphs_70 = (unsigned_t)(0);
+
+#line 10 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_static_api_71 = 71;
+#define MAIN_10M_CYC	(<>)
+#line 10 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_cycatr_71 = (unsigned_t)(TA_NULL);
+#line 10 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_nfymode_71 = (unsigned_t)(TNFY_ACTTSK);
+#line 10 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_cyctim_71 = (unsigned_t)(10 * 1000);
+#line 10 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_cycphs_71 = (unsigned_t)(1);
+
+#line 11 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_static_api_72 = 72;
+#define MAIN_100M_CYC	(<>)
+#line 11 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_cycatr_72 = (unsigned_t)(TA_NULL);
+#line 11 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_nfymode_72 = (unsigned_t)(TNFY_ACTTSK);
+#line 11 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_cyctim_72 = (unsigned_t)(100 * 1000);
+#line 11 "../../workspace/miyano_pj/miyano_pj.cfg"
+const unsigned_t TOPPERS_cfg_valueof_cycphs_72 = (unsigned_t)(3);
 

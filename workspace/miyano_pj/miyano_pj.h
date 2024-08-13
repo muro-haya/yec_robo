@@ -13,14 +13,6 @@ extern "C" {
 #define MID_PRIORITY	10
 #define LOW_PRIORITY	11
 
-/*
- * Definitions of Port ID for Serial Adapter
- */
-#define SIO_USART_F_PORTID    1
-#define SIO_USB_PORTID        2
-#define SIO_BLUETOOTH_PORTID  3
-#define SIO_TEST_PORTID       4
-
 #ifndef STACK_SIZE
 #define	STACK_SIZE		4096		/* タスクのスタックサイズ */
 #endif /* STACK_SIZE */
@@ -31,7 +23,8 @@ extern "C" {
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void Main(intptr_t exinf);
-extern void Main_2m( void );
-extern void Main_10m( void );
+extern void Main_2m( intptr_t unused );
+extern void Main_10m( intptr_t unused );
+extern void Main_100m( intptr_t unused );
 
 #endif /* TOPPERS_MACRO_ONLY */

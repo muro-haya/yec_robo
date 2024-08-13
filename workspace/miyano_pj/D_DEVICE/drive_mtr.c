@@ -28,6 +28,10 @@ void ini_drive_mtr( void ){
   // モータのセットアップ
   pup_motor_setup(motorL, PUP_DIRECTION_COUNTERCLOCKWISE, true);
   pup_motor_setup(motorR, PUP_DIRECTION_CLOCKWISE, true);
+  
+  // 駆動モータの角度をリセット
+  pup_motor_reset_count(motorL);
+  pup_motor_reset_count(motorR);
 }
 
 /* 駆動モータDUty設定 */
