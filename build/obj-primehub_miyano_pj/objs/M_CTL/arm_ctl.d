@@ -1,5 +1,4 @@
-objs/M_CTL/linetrace_run.o: \
- ../../workspace/miyano_pj/M_CTL/linetrace_run.c \
+objs/M_CTL/arm_ctl.o: ../../workspace/miyano_pj/M_CTL/arm_ctl.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
@@ -48,22 +47,8 @@ objs/M_CTL/linetrace_run.o: \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
  ../../asp3/arch/arm_m_gcc/common/core_kernel.h \
  ../../workspace/miyano_pj/miyano_pj.h kernel_cfg.h \
- ../../asp3/syssvc/serial.h \
- ../../workspace/miyano_pj/M_CTL/linetrace_run.h \
- ../../workspace/miyano_pj/M_CTL/../D_DEVICE/drive_mtr.h \
- ../../workspace/miyano_pj/M_CTL/../D_DEVICE/color_snc.h \
- ../../workspace/miyano_pj/M_CTL/../D_DEVICE/button.h \
- ../../asp3/../drivers/include/spike/hub/system.h \
- ../../asp3/../drivers/include/spike/hub/button.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/button.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/error.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h \
- /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/config.h \
- ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h \
- ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h
+ ../../asp3/syssvc/serial.h ../../workspace/miyano_pj/M_CTL/arm_ctl.h \
+ ../../workspace/miyano_pj/M_CTL/../D_DEVICE/arm_mtr.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -115,18 +100,5 @@ objs/M_CTL/linetrace_run.o: \
 ../../workspace/miyano_pj/miyano_pj.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
-../../workspace/miyano_pj/M_CTL/linetrace_run.h:
-../../workspace/miyano_pj/M_CTL/../D_DEVICE/drive_mtr.h:
-../../workspace/miyano_pj/M_CTL/../D_DEVICE/color_snc.h:
-../../workspace/miyano_pj/M_CTL/../D_DEVICE/button.h:
-../../asp3/../drivers/include/spike/hub/system.h:
-../../asp3/../drivers/include/spike/hub/button.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/button.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/error.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h:
-/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/config.h:
-../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h:
-../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h:
+../../workspace/miyano_pj/M_CTL/arm_ctl.h:
+../../workspace/miyano_pj/M_CTL/../D_DEVICE/arm_mtr.h:

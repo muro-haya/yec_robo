@@ -35,13 +35,13 @@ void ini_drive_mtr( void ){
 }
 
 /* 駆動モータDUty設定 */
-void set_drive_mtr_duty( uint16_t dutyL, uint16_t dutyR ){
+void set_drive_mtr_duty( int16_t dutyL, int16_t dutyR ){
   pup_motor_set_power(motorL, dutyL);             // パワーを設定
   pup_motor_set_power(motorR, dutyR);             // パワーを設定
 }
 
 /* 駆動モータ回転速度設定 */
-void set_drive_mtr_spd( uint16_t spdL, uint16_t spdR ){
+void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
   pup_motor_set_speed(motorL, spdL);              // 速度を設定
   pup_motor_set_speed(motorR, spdR);              // 速度を設定
 }
@@ -53,7 +53,16 @@ void rst_drive_mtr_cnt( void ){
 }
 
 /* アームモータエンコーダカウント取得 */
-void get_drive_mtr_cnt( uint16_t* drive_cntL, uint16_t* drive_cntR ){
-  *drive_cntL = abs(pup_motor_get_count(motorL)); // 右駆動モータエンコーダカウント取得
-  *drive_cntR = abs(pup_motor_get_count(motorR)); // 左駆動モータエンコーダカウント取得
+void get_drive_mtr_cnt( int16_t* drive_cntL, int16_t* drive_cntR ){
+  int32_t ldat;
+  ldat = pup_motor_get_count(motorL);           // 右駆動モータエンコーダカウント取得
+  // if( 0 > ldat ){                               // 絶対値処理
+  //   ldat = -ldat;
+  // }
+  *drive_cntL = ldat;
+  ldat = pup_motor_get_count(motorR);
+  // if( 0 > ldat ){                               // 絶対値処理
+  //   ldat = -ldat;
+  // }
+  *drive_cntR = ldat;                           // 左駆動モータエンコーダカウント取得
 }

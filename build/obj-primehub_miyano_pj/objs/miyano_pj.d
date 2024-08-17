@@ -64,6 +64,10 @@ objs/miyano_pj.o: ../../workspace/miyano_pj/miyano_pj.c \
  ../../asp3/syssvc/serial.h ../../workspace/miyano_pj/M_CTL/ctl_main.h \
  ../../workspace/miyano_pj/M_CTL/linetrace_run.h \
  ../../workspace/miyano_pj/M_CTL/const_run.h \
+ ../../workspace/miyano_pj/M_CTL/arm_ctl.h \
+ ../../workspace/miyano_pj/M_MEASURE/cal_movement.h \
+ ../../workspace/miyano_pj/M_MEASURE/cal_distance.h \
+ ../../workspace/miyano_pj/M_MEASURE/rec_color.h \
  ../../workspace/miyano_pj/D_DEVICE/drive_mtr.h \
  ../../workspace/miyano_pj/D_DEVICE/arm_mtr.h \
  ../../workspace/miyano_pj/D_DEVICE/color_snc.h \
@@ -138,6 +142,10 @@ kernel_cfg.h:
 ../../workspace/miyano_pj/M_CTL/ctl_main.h:
 ../../workspace/miyano_pj/M_CTL/linetrace_run.h:
 ../../workspace/miyano_pj/M_CTL/const_run.h:
+../../workspace/miyano_pj/M_CTL/arm_ctl.h:
+../../workspace/miyano_pj/M_MEASURE/cal_movement.h:
+../../workspace/miyano_pj/M_MEASURE/cal_distance.h:
+../../workspace/miyano_pj/M_MEASURE/rec_color.h:
 ../../workspace/miyano_pj/D_DEVICE/drive_mtr.h:
 ../../workspace/miyano_pj/D_DEVICE/arm_mtr.h:
 ../../workspace/miyano_pj/D_DEVICE/color_snc.h:

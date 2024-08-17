@@ -17,6 +17,10 @@
 #include "M_CTL/ctl_main.h"
 #include "M_CTL/linetrace_run.h"
 #include "M_CTL/const_run.h"
+#include "M_CTL/arm_ctl.h"
+#include "M_MEASURE/cal_movement.h"
+#include "M_MEASURE/cal_distance.h"
+#include "M_MEASURE/rec_color.h"
 #include "D_DEVICE/drive_mtr.h"
 #include "D_DEVICE/arm_mtr.h"
 #include "D_DEVICE/color_snc.h"
@@ -39,6 +43,9 @@ void Main(intptr_t exinf){
   ini_comm();
   /* ミドル層 */
   ini_ctl_main();
+  ini_cal_distance();
+  ini_cal_movement();
+  ini_rec_color();
   /* アプリ層 */
 
   /* 変数初期化 */
@@ -57,7 +64,7 @@ void Main(intptr_t exinf){
 
 /* 2msec周期処理 */
 void Main_2m( intptr_t unused ){
-  //cyc_ctl_main();               /* 機体制御周期処理 */
+  // cyc_ctl_main();               /* 機体制御周期処理 */
   /* タスク終了 */
   ext_tsk();
 }
@@ -71,19 +78,52 @@ void Main_10m( intptr_t unused ){
 
 /* 100msec周期処理 */
 void Main_100m( intptr_t unused ){
-  int r;
-  int g;
-  int b;
-  int l;
+  uint16_t r;
+  uint16_t g;
+  uint16_t b;
+  uint16_t l;
   int a;
+  int cmd;
+  uint32_t data;
+  uint16_t log;
+  int16_t slog;
+
+  cmd  = 0;
+  data = 0;
 
   cnt += 1;
-  // get_color_rgb(&r,&g,&b);
+  get_color_rgb(&r,&g,&b);
   // get_color_ref(&r);
   // get_sonic_snc(&r);
   // get_drive_mtr_cnt(&l, &r);
   // get_arm_mtr_cnt(&a);
-  send_data(0,cnt);
+
+  // log = get_cal_distance();
+  // log = get_cal_arm_deg();
+  log = get_rec_color();
+  slog = get_cal_movement_body_deg();
+  slog = get_cal_movement();
+
+  send_data(0,slog);
+  // send_data(0,r);
+  // send_data(1,g);
+  // send_data(2,b);
+
+  // if( RESULT_BLACK == log ){
+  //   g_s16_const_run_spd = 300;
+  //   g_s16_const_run_duty = 1;
+  // }
+  // else if( 1 != g_s16_const_run_spd ){
+  //   g_s16_const_run_spd = 300;
+  //   g_s16_const_run_duty = 40;
+  // }
+
+
+  // received_data(&cmd, &data);
+  // send_data(1, cnt);
+  // send_data(cmd, data);
+  // send_data(1, cnt);
+  // send_data(cmd, data);
 
   /* タスク終了 */
   ext_tsk();

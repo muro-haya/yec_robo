@@ -7,6 +7,9 @@
         "sonic_snc.h": "c",
         "motor.h": "c",
         "button1.h": "c",
-        "button.h": "c"
+        "button.h": "c",
+        "cal_distance.h": "c",
+        "serial.h": "c",
+        "color_snc.h": "c"
     }
 }

@@ -15,33 +15,31 @@
 #include "../D_DEVICE/color_snc.h"
 #include "../D_DEVICE/button.h"
 
-#include <t_syslog.h>   /* debug */
-
 #define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
 #define BSSPD  200                              /* 基本指令値 */
 #define KP     3                                /* Pゲイン[0.1] */
 #define KI     0                                /* Iゲイン[0.01] */
 #define KD     0                                /* Dゲイン[0.1] */
 
-/* 外部参照変数 */
-uint16_t g_u16_linetrace_run_way;    /* ライントレース制御指令方法(0:DUTY 1:回転速度) */
-uint16_t g_u16_linetrace_run_bsV;    /* FB制御基本値[-] */
-uint16_t g_u16_linetrace_run_fbTgt;  /* FB制御目標値[-] */
-uint16_t g_u16_linetrace_run_fbPv;   /* FB制御現在値[-] */
-int16_t g_u16_linetrace_run_p;      /* P項計算結果[0.1]*/
-int16_t g_u16_linetrace_run_i;      /* I項計算結果[0.1]*/
-int16_t g_u16_linetrace_run_d;      /* D項計算結果[0.1]*/
-int16_t g_u16_linetrace_run_kp;     /* P項ゲイン値[0.1]*/
-int16_t g_u16_linetrace_run_ki;     /* I項ゲイン値[0.01]*/
-int16_t g_u16_linetrace_run_kd;     /* D項ゲイン値[0.1]*/
-int16_t g_u16_linetrace_run_fbCmdv; /* FB制御指令値[-] */
+/* 外部公開変数 */
+uint16_t g_u16_linetrace_run_way;               /* ライントレース制御指令方法(0:DUTY 1:回転速度) */
+uint16_t g_u16_linetrace_run_bsV;               /* FB制御基本値[-] */
+uint16_t g_u16_linetrace_run_fbTgt;             /* FB制御目標値[-] */
+uint16_t g_u16_linetrace_run_fbPv;              /* FB制御現在値[-] */
+int16_t  g_u16_linetrace_run_p;                 /* P項計算結果[0.1]*/
+int16_t  g_u16_linetrace_run_i;                 /* I項計算結果[0.1]*/
+int16_t  g_u16_linetrace_run_d;                 /* D項計算結果[0.1]*/
+int16_t  g_u16_linetrace_run_kp;                /* P項ゲイン値[0.1]*/
+int16_t  g_u16_linetrace_run_ki;                /* I項ゲイン値[0.01]*/
+int16_t  g_u16_linetrace_run_kd;                /* D項ゲイン値[0.1]*/
+int16_t  g_u16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
 
 /* 外部非公開変数 */
 static int16_t s16_posdlt_old;                  /* 位置偏差前回値 */
 static int16_t s16_spddlt_old;                  /* 速度偏差前回値 */
 static uint16_t u16_dlt_sum;                    /* 位置偏差積算値 */
-uint16_t u16_wpos;                       /* 白色値 */
-uint16_t u16_bpos;                       /* 黒色値 */
+static uint16_t u16_wpos;                       /* 白色値 */
+static uint16_t u16_bpos;                       /* 黒色値 */
 
 /* ライントレース走行初期化 */
 void ini_linetrace_run( void ){
@@ -72,18 +70,15 @@ void set_tgt_linetrace_run( void ){
     if( 1 == button ){
         // get_color_rgb(&u16_wpos,0, 0);
         get_color_ref(&u16_wpos);                /* 現在値取得 */
-        syslog(LOG_NOTICE, "W", 0);                 /* debug */
     }
     button = get_button( BUTTON_RIGHT );
     if( 1 == button ){
         // get_color_rgb(&u16_bpos,0, 0);
         get_color_ref(&u16_bpos);                /* 現在値取得 */
-        syslog(LOG_NOTICE, "B", 0);                 /* debug */
     }
     button = get_button( BUTTON_CENTER );
     if( 1 == button ){
         g_u16_linetrace_run_fbTgt = ( u16_bpos + u16_wpos ) / 2;
-        syslog(LOG_NOTICE, "TGT", 0);                 /* debug */
     }
 }
 

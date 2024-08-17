@@ -31,12 +31,12 @@ void ini_arm_mtr( void ){
 }
 
 /* アームモータDUty設定 */
-void set_arm_mtr_duty( uint16_t duty ){
+void set_arm_mtr_duty( int16_t duty ){
   pup_motor_set_power(motorArm, duty);              // パワーを設定
 }
 
 /* アームモータ回転速度設定 */
-void set_arm_mtr_spd( uint16_t spd ){
+void set_arm_mtr_spd( int16_t spd ){
   pup_motor_set_speed(motorArm, spd);               // 速度を設定
 }
 
