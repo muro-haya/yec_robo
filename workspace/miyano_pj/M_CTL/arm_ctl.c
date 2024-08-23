@@ -1,5 +1,4 @@
 /* アーム制御 */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <kernel.h>

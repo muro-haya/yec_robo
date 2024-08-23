@@ -10,6 +10,7 @@
         "button.h": "c",
         "cal_distance.h": "c",
         "serial.h": "c",
-        "color_snc.h": "c"
+        "color_snc.h": "c",
+        "arm_mtr.h": "c"
     }
 }
