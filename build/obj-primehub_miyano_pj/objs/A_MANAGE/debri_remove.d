@@ -1,4 +1,5 @@
-objs/miyano_pj.o: ../../workspace/miyano_pj/miyano_pj.c \
+objs/A_MANAGE/debri_remove.o: \
+ ../../workspace/miyano_pj/A_MANAGE/debri_remove.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
@@ -45,36 +46,9 @@ objs/miyano_pj.o: ../../workspace/miyano_pj/miyano_pj.c \
  ../../asp3/arch/arm_m_gcc/common/core_stddef.h \
  ../../asp3/target/primehub_gcc/target_kernel.h \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
- ../../asp3/arch/arm_m_gcc/common/core_kernel.h \
- ../../asp3/../drivers/include/spike/hub/system.h \
- ../../asp3/../drivers/include/spike/hub/speaker.h \
- ../../asp3/../drivers/include/spike/hub/button.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/button.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/error.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h \
- /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/config.h \
- ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h \
- ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \
- ../../asp3/../drivers/include/spike/hub/display.h \
- ../../asp3/../external/libpybricks/lib/pbio/include/pbio/light_matrix.h \
- ../../workspace/miyano_pj/miyano_pj.h kernel_cfg.h \
- ../../asp3/syssvc/serial.h ../../workspace/miyano_pj/A_MANAGE/manage.h \
- ../../workspace/miyano_pj/M_CTL/ctl_main.h \
- ../../workspace/miyano_pj/M_CTL/linetrace_run.h \
- ../../workspace/miyano_pj/M_CTL/const_run.h \
- ../../workspace/miyano_pj/M_CTL/arm_ctl.h \
- ../../workspace/miyano_pj/M_MEASURE/cal_movement.h \
- ../../workspace/miyano_pj/M_MEASURE/cal_distance.h \
- ../../workspace/miyano_pj/M_MEASURE/rec_color.h \
- ../../workspace/miyano_pj/D_DEVICE/drive_mtr.h \
- ../../workspace/miyano_pj/D_DEVICE/arm_mtr.h \
- ../../workspace/miyano_pj/D_DEVICE/color_snc.h \
- ../../workspace/miyano_pj/D_DEVICE/sonic_snc.h \
- ../../workspace/miyano_pj/D_DEVICE/button.h \
- ../../workspace/miyano_pj/D_DEVICE/comm.h
+ ../../asp3/arch/arm_m_gcc/common/core_kernel.h kernel_cfg.h \
+ ../../asp3/syssvc/serial.h \
+ ../../workspace/miyano_pj/A_MANAGE/debri_remove.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -123,34 +97,6 @@ objs/miyano_pj.o: ../../workspace/miyano_pj/miyano_pj.c \
 ../../asp3/target/primehub_gcc/target_kernel.h:
 ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h:
 ../../asp3/arch/arm_m_gcc/common/core_kernel.h:
-../../asp3/../drivers/include/spike/hub/system.h:
-../../asp3/../drivers/include/spike/hub/speaker.h:
-../../asp3/../drivers/include/spike/hub/button.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/button.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/error.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h:
-/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/config.h:
-../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h:
-../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h:
-../../asp3/../drivers/include/spike/hub/display.h:
-../../asp3/../external/libpybricks/lib/pbio/include/pbio/light_matrix.h:
-../../workspace/miyano_pj/miyano_pj.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
-../../workspace/miyano_pj/A_MANAGE/manage.h:
-../../workspace/miyano_pj/M_CTL/ctl_main.h:
-../../workspace/miyano_pj/M_CTL/linetrace_run.h:
-../../workspace/miyano_pj/M_CTL/const_run.h:
-../../workspace/miyano_pj/M_CTL/arm_ctl.h:
-../../workspace/miyano_pj/M_MEASURE/cal_movement.h:
-../../workspace/miyano_pj/M_MEASURE/cal_distance.h:
-../../workspace/miyano_pj/M_MEASURE/rec_color.h:
-../../workspace/miyano_pj/D_DEVICE/drive_mtr.h:
-../../workspace/miyano_pj/D_DEVICE/arm_mtr.h:
-../../workspace/miyano_pj/D_DEVICE/color_snc.h:
-../../workspace/miyano_pj/D_DEVICE/sonic_snc.h:
-../../workspace/miyano_pj/D_DEVICE/button.h:
-../../workspace/miyano_pj/D_DEVICE/comm.h:
+../../workspace/miyano_pj/A_MANAGE/debri_remove.h:
