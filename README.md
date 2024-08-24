@@ -30,4 +30,4 @@ M_MEASURE
   get_cal_movement_arm_deg( void );    : アーム回転角取得　　　　　　　　　　戻り値でアームの角度[deg]が返ってくる
   reset_cal_movement( void );          : エンコーダカウント値をリセットする　戻り値なし
   /* 物体との距離計測 cal_distance.h */
-　get_cal_distance( void );      　　　 : 物体との距離を算出する 　　　　　　　戻り値で距離[mm]が返ってくる
+　get_cal_distance( void );      　　　 : 物体との距離を算出する 　　　　　　戻り値で距離[mm]が返ってくる
