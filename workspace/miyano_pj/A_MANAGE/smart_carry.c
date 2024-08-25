@@ -16,6 +16,8 @@
 
 #include "smart_carry.h"
 
+#include "../D_DEVICE/comm.h"
+
 /* 適合値 */
 uint16_t x_u16_smart_carry_3_distance = 50;         /* キャリーボトル認識距離[mm] */
 uint16_t x_u16_smart_carry_4_movement = 70;         /* ティポジション通過移動量[mm] */
@@ -27,7 +29,6 @@ uint16_t x_u16_smart_carry_4_spd      = 70;         /* ティポジション通�
 uint16_t x_u16_smart_carry_6_spd      = 300;        /* ランディング速度 */
 uint16_t x_u16_smart_carry_7_spd      = 150;        /* 後進速度 */
 uint16_t x_u16_smart_carry_deg        = 100;        /* スマートキャリー指定角[deg] */
-
 
 /* 外部公開変数 */
 uint16_t g_u16_smart_carry_phase;                   /* スマートキャリーフェイズカウント */
@@ -96,14 +97,11 @@ bool_t cyc_smart_carry( void ){
 
 /* 色認識まで旋回するフェイズ */
 void turn_jdg_color( uint16_t fin_color ){
-    uint16_t color_result;
-
     g_u16_ctl_main_mode = CONST_TURN;
     g_u16_const_run_way = 1;
     g_s16_const_run_spd = 100;
 
-    /* fin_color == color_result カメラで色認識結果 */
-    if( 1 ){
+    if( 1 == g_s32_comm_rx_jdg_red ){           /* カメラで色認識結果 */
         g_u16_smart_carry_phase += 1;
     }
 }

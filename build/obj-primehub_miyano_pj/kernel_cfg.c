@@ -36,19 +36,23 @@ static STK_T _kernel_stack_MAIN_TASK[COUNT_STK_T(STACK_SIZE)];
 static STK_T _kernel_stack_MAIN_2M_TASK[COUNT_STK_T(STACK_SIZE)];
 static STK_T _kernel_stack_MAIN_10M_TASK[COUNT_STK_T(STACK_SIZE)];
 static STK_T _kernel_stack_MAIN_100M_TASK[COUNT_STK_T(STACK_SIZE)];
+static STK_T _kernel_stack_TX_1M_TASK[COUNT_STK_T(STACK_SIZE)];
+static STK_T _kernel_stack_RX_1M_TASK[COUNT_STK_T(STACK_SIZE)];
 const TINIB _kernel_tinib_table[TNUM_TSKID] = {
 	{ (PYBRICKS_TASK_ATR), (EXINF)(0), (TASK)(pb_main_task), INT_PRIORITY(PYBRICKS_PRIORITY), {	(void *)(_kernel_stack_PYBRICKS_TASK), 	((void *)((char *)(_kernel_stack_PYBRICKS_TASK) + (ROUND_STK_T(PYBRICKS_STACK_SIZE)))), }, },
 	{ (TA_ACT), (EXINF)(&tTask_INIB_tab[0]), (TASK)(tTask_start), INT_PRIORITY(3), {	(void *)(_kernel_stack_TSKID_tTask_LogTask_Task), 	((void *)((char *)(_kernel_stack_TSKID_tTask_LogTask_Task) + (ROUND_STK_T(4096)))), }, },
 	{ (TA_ACT), (EXINF)(0), (TASK)(Main), INT_PRIORITY(MAIN_PRIORITY), {	(void *)(_kernel_stack_MAIN_TASK), 	((void *)((char *)(_kernel_stack_MAIN_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
-	{ (TA_NULL), (EXINF)(0), (TASK)(Main_2m), INT_PRIORITY(HIGH_PRIORITY), {	(void *)(_kernel_stack_MAIN_2M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_2M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
-	{ (TA_NULL), (EXINF)(0), (TASK)(Main_10m), INT_PRIORITY(LOW_PRIORITY), {	(void *)(_kernel_stack_MAIN_10M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_10M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
-	{ (TA_NULL), (EXINF)(0), (TASK)(Main_100m), INT_PRIORITY(LOW_PRIORITY + 1), {	(void *)(_kernel_stack_MAIN_100M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_100M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, }
+	{ (TA_NULL), (EXINF)(0), (TASK)(Main_2m), INT_PRIORITY(8), {	(void *)(_kernel_stack_MAIN_2M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_2M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
+	{ (TA_NULL), (EXINF)(0), (TASK)(Main_10m), INT_PRIORITY(9), {	(void *)(_kernel_stack_MAIN_10M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_10M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
+	{ (TA_NULL), (EXINF)(0), (TASK)(Main_100m), INT_PRIORITY(12), {	(void *)(_kernel_stack_MAIN_100M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_100M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
+	{ (TA_NULL), (EXINF)(0), (TASK)(Tx_1m), INT_PRIORITY(11), {	(void *)(_kernel_stack_TX_1M_TASK), 	((void *)((char *)(_kernel_stack_TX_1M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
+	{ (TA_NULL), (EXINF)(0), (TASK)(Rx_1m), INT_PRIORITY(10), {	(void *)(_kernel_stack_RX_1M_TASK), 	((void *)((char *)(_kernel_stack_RX_1M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, }
 };
 
 TCB _kernel_tcb_table[TNUM_TSKID];
 
 const ID _kernel_torder_table[TNUM_TSKID] = { 
-	PYBRICKS_TASK, TSKID_tTask_LogTask_Task, MAIN_TASK, MAIN_2M_TASK, MAIN_10M_TASK, MAIN_100M_TASK
+	PYBRICKS_TASK, TSKID_tTask_LogTask_Task, MAIN_TASK, MAIN_2M_TASK, MAIN_10M_TASK, MAIN_100M_TASK, TX_1M_TASK, RX_1M_TASK
 };
 
 /*
@@ -140,11 +144,25 @@ _kernel_cychdr_MAIN_100M_CYC(EXINF exinf)
 	(void) act_tsk((ID) exinf);
 }
 
+static void
+_kernel_cychdr_TX_1M_CYC(EXINF exinf)
+{
+	(void) act_tsk((ID) exinf);
+}
+
+static void
+_kernel_cychdr_RX_1M_CYC(EXINF exinf)
+{
+	(void) act_tsk((ID) exinf);
+}
+
 const CYCINIB _kernel_cycinib_table[TNUM_CYCID] = {
 	{ (TA_STA), (intptr_t)(0), (NFYHDR)(pbdrv_timer_handler), (1000), (0) },
 	{ (TA_NULL), (intptr_t)(MAIN_2M_TASK), _kernel_cychdr_MAIN_2M_CYC, (2 * 1000), (0) },
 	{ (TA_NULL), (intptr_t)(MAIN_10M_TASK), _kernel_cychdr_MAIN_10M_CYC, (10 * 1000), (1) },
-	{ (TA_NULL), (intptr_t)(MAIN_100M_TASK), _kernel_cychdr_MAIN_100M_CYC, (100 * 1000), (3) }
+	{ (TA_NULL), (intptr_t)(MAIN_100M_TASK), _kernel_cychdr_MAIN_100M_CYC, (100 * 1000), (3) },
+	{ (TA_NULL), (intptr_t)(TX_1M_TASK), _kernel_cychdr_TX_1M_CYC, (1 * 1000), (5) },
+	{ (TA_NULL), (intptr_t)(RX_1M_TASK), _kernel_cychdr_RX_1M_CYC, (1 * 1000), (7) }
 };
 
 CYCCB _kernel_cyccb_table[TNUM_CYCID];

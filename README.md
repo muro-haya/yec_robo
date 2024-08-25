@@ -18,12 +18,13 @@ M_CTL
 M_MEASURE
  /* 色の認識 rec_color.h */
  get_rec_color( void );                 : 下面の色認識 　　　　　　　　　　戻り値で以下の色情報が入ってる
- 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　RESULT_RED     赤:1 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　                              RESULT_GREEN   緑:2
-    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 RESULT_BLUE    青:4
-    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 RESULT_YELLOW  黄:8
-    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 RESULT_WHITE   白:16
-   　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　RESULT_BLACK   黒:32
-   　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　RESULT_NONE    なし:0
+                                                                         RESULT_RED     赤:1
+                                                                         RESULT_GREEN   緑:2
+                                                                         RESULT_BLUE    青:4
+                                                                         RESULT_YELLOW  黄:8
+                                                                         RESULT_WHITE   白:16
+                                                                         RESULT_BLACK   黒:32
+                                                                         RESULT_NONE    なし:0
   /* 移動量の計測 cal_movement.h */
   get_cal_movement( void );            : 走行距離を計測する　　　　　　　　　戻り値で走行距離[mm]が返ってくる
   get_cal_movement_body_deg( void );   : 旋回角を計測する　　　　　　　　　　戻り値で旋回角[deg]が返ってくる

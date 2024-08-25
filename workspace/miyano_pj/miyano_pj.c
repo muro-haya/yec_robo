@@ -59,6 +59,9 @@ void Main(intptr_t exinf){
   sta_cyc(MAIN_10M_CYC);
   /* 100msecタスクの起動 */
   sta_cyc(MAIN_100M_CYC);
+  /* 通信用タスク起動 */
+  sta_cyc(TX_1M_CYC);
+  sta_cyc(RX_1M_CYC);
   
   /* タスク終了 */
   ext_tsk();
@@ -66,7 +69,7 @@ void Main(intptr_t exinf){
 
 /* 2msec周期処理 */
 void Main_2m( intptr_t unused ){
-  cyc_ctl_main();               /* 機体制御周期処理 */
+  cyc_ctl_main();                 /* 機体制御周期処理 */
   /* タスク終了 */
   ext_tsk();
 }
@@ -85,3 +88,16 @@ void Main_100m( intptr_t unused ){
   ext_tsk();
 }
 
+/* 1msec送信処理 */
+void Tx_1m( intptr_t unused ){
+  cyc_tx();
+  /* タスク終了 */
+  ext_tsk();
+}
+
+/* 1msec受信処理 */
+void Rx_1m( intptr_t unused ){
+  cyc_rx();
+  /* タスク終了 */
+  ext_tsk();
+}

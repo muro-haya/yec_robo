@@ -55,7 +55,8 @@ objs/A_MANAGE/smart_carry.o: \
  ../../workspace/miyano_pj/A_MANAGE/../M_CTL/linetrace_run.h \
  ../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h \
  ../../workspace/miyano_pj/A_MANAGE/../M_CTL/arm_ctl.h \
- ../../workspace/miyano_pj/A_MANAGE/smart_carry.h
+ ../../workspace/miyano_pj/A_MANAGE/smart_carry.h \
+ ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -114,3 +115,4 @@ kernel_cfg.h:
 ../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h:
 ../../workspace/miyano_pj/A_MANAGE/../M_CTL/arm_ctl.h:
 ../../workspace/miyano_pj/A_MANAGE/smart_carry.h:
+../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h:

@@ -16,8 +16,70 @@ static char tx_buf[COM_PACKET_SIZE] = "@000:000000\n";
 static char rx_buf[COM_PACKET_SIZE] = "@000:000000\n";
 static uint16_t ercd;
 
+/* 外部公開変数 */
+int32_t g_s32_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+
+/* 外部非公開変数 */
+static int32_t comm_tx_cnt;                            /* 送信確認カウンタ */
+static int32_t comm_rx_cnt;                            /* 受信確認カウンタ */
+
+struct comm_data{
+    uint16_t comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
+    uint16_t comm_cyc;                                  /* 周期(受信では使用しない 一応記載) */
+    uint16_t comm_cmd;                                  /* コマンド */
+    int32_t* comm_data;                                 /* 通信データ */
+};
+
+#define TX_DATA_NUM 2                                   /* 送信データ数 */
+/* 送信情報 */
+struct comm_data tx_datas[] = {
+    {  0, 100, 500, &comm_tx_cnt               },       /* 送信確認カウンタ */
+    {  1, 100, 501, &comm_rx_cnt               },       /* 受信確認返信カウンタ */
+};
+#define RX_DATA_NUM 2                                   /* 受信データ数 */
+/* 受信情報 */
+struct comm_data rx_datas[] = {
+    {  0, 100, 000, &comm_rx_cnt               },       /* 受信確認カウンタ */
+    {  0,  10, 001, &g_s32_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+};
+
 void ini_comm( void ){
   ercd = serial_opn_por(SIO_USB_PORTID);
+
+  g_s32_comm_rx_jdg_red = 0;                            /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+
+  comm_tx_cnt           = 0;                            /* 送信確認カウンタ */
+  comm_rx_cnt           = 0;                            /* 受信確認カウンタ */
+}
+
+void cyc_tx( void ){
+    uint16_t idat;
+
+    for ( idat = 0; idat < TX_DATA_NUM; idat++){
+        if( tx_datas[idat].comm_cyc == tx_datas[idat].comm_cnt ){
+            send_data( tx_datas[idat].comm_cmd, *tx_datas[idat].comm_data );
+            tx_datas[idat].comm_cnt = 0;
+        }
+        tx_datas[idat].comm_cnt += 1;
+    }
+
+    comm_tx_cnt += 1;
+}
+
+void cyc_rx( void ){
+    uint16_t idat;
+    uint16_t cmd;
+    int32_t data;
+
+    while (1){
+        received_data(&cmd, &data);
+        for ( idat = 0; idat < RX_DATA_NUM; idat++){
+            if( cmd == rx_datas[idat].comm_cmd ){
+                *rx_datas[idat].comm_data = data;
+                break;
+            }
+        }
+    }
 }
 
 void send_data(uint16_t tx_cmd, int32_t tx_val){
