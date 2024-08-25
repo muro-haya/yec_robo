@@ -17,9 +17,11 @@
 
 #define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
 #define BSSPD  200                              /* 基本指令値 */
-#define KP     3                                /* Pゲイン[0.1] */
-#define KI     0                                /* Iゲイン[0.01] */
-#define KD     0                                /* Dゲイン[0.1] */
+
+/* 適合値 */
+int16_t  x_u16_linetrace_run_kp = 3;            /* P項ゲイン値[0.1]*/
+int16_t  x_u16_linetrace_run_ki = 0;            /* I項ゲイン値[0.01]*/
+int16_t  x_u16_linetrace_run_kd = 0;            /* D項ゲイン値[0.1]*/
 
 /* 外部公開変数 */
 uint16_t g_u16_linetrace_run_way;               /* ライントレース制御指令方法(0:DUTY 1:回転速度) */
@@ -29,9 +31,6 @@ uint16_t g_u16_linetrace_run_fbPv;              /* FB制御現在値[-] */
 int16_t  g_u16_linetrace_run_p;                 /* P項計算結果[0.1]*/
 int16_t  g_u16_linetrace_run_i;                 /* I項計算結果[0.1]*/
 int16_t  g_u16_linetrace_run_d;                 /* D項計算結果[0.1]*/
-int16_t  g_u16_linetrace_run_kp;                /* P項ゲイン値[0.1]*/
-int16_t  g_u16_linetrace_run_ki;                /* I項ゲイン値[0.01]*/
-int16_t  g_u16_linetrace_run_kd;                /* D項ゲイン値[0.1]*/
 int16_t  g_u16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
 
 /* 外部非公開変数 */
@@ -51,9 +50,6 @@ void ini_linetrace_run( void ){
     g_u16_linetrace_run_p      = 0;             /* P項計算結果[0.1]*/
     g_u16_linetrace_run_i      = 0;             /* I項計算結果[0.1]*/
     g_u16_linetrace_run_d      = 0;             /* D項計算結果[0.1]*/
-    g_u16_linetrace_run_kp     = KP;            /* P項ゲイン値[0.1]*/
-    g_u16_linetrace_run_ki     = KI;            /* I項ゲイン値[0.01]*/
-    g_u16_linetrace_run_kd     = KD;            /* D項ゲイン値[0.1]*/
     g_u16_linetrace_run_fbCmdv = 0;             /* FB制御指令値[-] */
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
@@ -93,13 +89,13 @@ void cyc_linetrace_run( void ){
     get_color_ref(&g_u16_linetrace_run_fbPv);                           /* 現在値取得 */
     /* P項計算 */
     s16_posdlt = g_u16_linetrace_run_fbTgt - g_u16_linetrace_run_fbPv;  /* 位置偏差計算 */
-    g_u16_linetrace_run_p = s16_posdlt * g_u16_linetrace_run_kp;        /* P項計算 */
+    g_u16_linetrace_run_p = s16_posdlt * x_u16_linetrace_run_kp;        /* P項計算 */
     /* I項計算 */
     u16_dlt_sum += s16_posdlt;                                          /* 位置偏差積算 */
-    g_u16_linetrace_run_i = u16_dlt_sum * g_u16_linetrace_run_ki;       /* I項計算 */
+    g_u16_linetrace_run_i = u16_dlt_sum * x_u16_linetrace_run_ki;       /* I項計算 */
     /* D項計算 */
     s16_spddlt = s16_posdlt - s16_posdlt_old;                           /* 速度偏差取得 */
-    g_u16_linetrace_run_d = s16_spddlt * g_u16_linetrace_run_kd;        /* D項計算 */
+    g_u16_linetrace_run_d = s16_spddlt * x_u16_linetrace_run_kd;        /* D項計算 */
 
     /* 指示値算出 */
     g_u16_linetrace_run_fbCmdv = g_u16_linetrace_run_p

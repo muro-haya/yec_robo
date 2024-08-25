@@ -1,4 +1,4 @@
-objs/M_CTL/ctl_main.o: ../../workspace/miyano_pj/M_CTL/ctl_main.c \
+objs/M_CTL/color_chase.o: ../../workspace/miyano_pj/M_CTL/color_chase.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
@@ -46,13 +46,11 @@ objs/M_CTL/ctl_main.o: ../../workspace/miyano_pj/M_CTL/ctl_main.c \
  ../../asp3/target/primehub_gcc/target_kernel.h \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
  ../../asp3/arch/arm_m_gcc/common/core_kernel.h \
- ../../asp3/../drivers/include/spike/hub/speaker.h \
  ../../workspace/miyano_pj/miyano_pj.h kernel_cfg.h \
- ../../asp3/syssvc/serial.h ../../workspace/miyano_pj/M_CTL/ctl_main.h \
- ../../workspace/miyano_pj/M_CTL/linetrace_run.h \
- ../../workspace/miyano_pj/M_CTL/const_run.h \
- ../../workspace/miyano_pj/M_CTL/arm_ctl.h \
- ../../workspace/miyano_pj/M_CTL/color_chase.h
+ ../../asp3/syssvc/serial.h ../../workspace/miyano_pj/M_CTL/color_chase.h \
+ ../../workspace/miyano_pj/M_CTL/../D_DEVICE/drive_mtr.h \
+ ../../workspace/miyano_pj/M_CTL/../D_DEVICE/color_snc.h \
+ ../../workspace/miyano_pj/M_CTL/../D_DEVICE/comm.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -101,12 +99,10 @@ objs/M_CTL/ctl_main.o: ../../workspace/miyano_pj/M_CTL/ctl_main.c \
 ../../asp3/target/primehub_gcc/target_kernel.h:
 ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h:
 ../../asp3/arch/arm_m_gcc/common/core_kernel.h:
-../../asp3/../drivers/include/spike/hub/speaker.h:
 ../../workspace/miyano_pj/miyano_pj.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
-../../workspace/miyano_pj/M_CTL/ctl_main.h:
-../../workspace/miyano_pj/M_CTL/linetrace_run.h:
-../../workspace/miyano_pj/M_CTL/const_run.h:
-../../workspace/miyano_pj/M_CTL/arm_ctl.h:
 ../../workspace/miyano_pj/M_CTL/color_chase.h:
+../../workspace/miyano_pj/M_CTL/../D_DEVICE/drive_mtr.h:
+../../workspace/miyano_pj/M_CTL/../D_DEVICE/color_snc.h:
+../../workspace/miyano_pj/M_CTL/../D_DEVICE/comm.h:

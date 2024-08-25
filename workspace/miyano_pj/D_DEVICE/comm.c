@@ -18,6 +18,7 @@ static uint16_t ercd;
 
 /* 外部公開変数 */
 int32_t g_s32_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+int32_t g_s32_comm_rx_pet_xpos;                        /* カラーチェイス用ペットボトルx軸位置 */
 
 /* 外部非公開変数 */
 static int32_t comm_tx_cnt;                            /* 送信確認カウンタ */
@@ -46,7 +47,8 @@ struct comm_data rx_datas[] = {
 void ini_comm( void ){
   ercd = serial_opn_por(SIO_USB_PORTID);
 
-  g_s32_comm_rx_jdg_red = 0;                            /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+  g_s32_comm_rx_jdg_red  = 0;                            /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+  g_s32_comm_rx_pet_xpos = 0;                            /* カラーチェイス用ペットボトルx軸位置 */
 
   comm_tx_cnt           = 0;                            /* 送信確認カウンタ */
   comm_rx_cnt           = 0;                            /* 受信確認カウンタ */

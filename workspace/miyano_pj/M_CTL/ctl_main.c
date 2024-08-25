@@ -16,6 +16,7 @@
 #include "linetrace_run.h"
 #include "const_run.h"
 #include "arm_ctl.h"
+#include "color_chase.h"
 
 /* 外部公開変数 */
 uint16_t g_u16_ctl_main_mode;       /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
@@ -44,6 +45,9 @@ void cyc_ctl_main( void ){
         break;
     case ARM_CTL:                   /* アーム動作 */
         cyc_arm_ctl();
+        break;
+    case COLOR_CHASE:               /* カラーチェイス */
+        cyc_color_chase();
         break;
     default:
         break;
