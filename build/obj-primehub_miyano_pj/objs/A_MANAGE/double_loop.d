@@ -48,6 +48,12 @@ objs/A_MANAGE/double_loop.o: \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
  ../../asp3/arch/arm_m_gcc/common/core_kernel.h kernel_cfg.h \
  ../../asp3/syssvc/serial.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/ctl_main.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_distance.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_movement.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/rec_color.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/linetrace_run.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h \
  ../../workspace/miyano_pj/A_MANAGE/double_loop.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
@@ -99,4 +105,10 @@ objs/A_MANAGE/double_loop.o: \
 ../../asp3/arch/arm_m_gcc/common/core_kernel.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/ctl_main.h:
+../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_distance.h:
+../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_movement.h:
+../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/rec_color.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/linetrace_run.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h:
 ../../workspace/miyano_pj/A_MANAGE/double_loop.h:
