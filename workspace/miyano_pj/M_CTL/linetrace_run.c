@@ -32,13 +32,13 @@ int16_t  g_u16_linetrace_run_p;                 /* P項計算結果[0.1]*/
 int16_t  g_u16_linetrace_run_i;                 /* I項計算結果[0.1]*/
 int16_t  g_u16_linetrace_run_d;                 /* D項計算結果[0.1]*/
 int16_t  g_u16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
+uint16_t g_u16_linetrace_run_lpos;              /* 左色値 */
+uint16_t g_u16_linetrace_run_rpos;              /* 右色値 */
 
 /* 外部非公開変数 */
 static int16_t s16_posdlt_old;                  /* 位置偏差前回値 */
 static int16_t s16_spddlt_old;                  /* 速度偏差前回値 */
 static uint16_t u16_dlt_sum;                    /* 位置偏差積算値 */
-static uint16_t u16_wpos;                       /* 白色値 */
-static uint16_t u16_bpos;                       /* 黒色値 */
 
 /* ライントレース走行初期化 */
 void ini_linetrace_run( void ){
@@ -51,12 +51,12 @@ void ini_linetrace_run( void ){
     g_u16_linetrace_run_i      = 0;             /* I項計算結果[0.1]*/
     g_u16_linetrace_run_d      = 0;             /* D項計算結果[0.1]*/
     g_u16_linetrace_run_fbCmdv = 0;             /* FB制御指令値[-] */
+    g_u16_linetrace_run_lpos   = 0;             /* 左色値 */
+    g_u16_linetrace_run_rpos   = 0;             /* 右色値 */
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
     s16_spddlt_old             = 0;             /* 速度偏差前回値 */
     u16_dlt_sum                = 0;             /* 位置偏差積算値 */
-    u16_wpos                   = 0;             /* 白色値 */
-    u16_bpos                   = 0;             /* 黒色値 */
 }
 /* ライントレース目標値設定 */
 void set_tgt_linetrace_run( void ){
@@ -65,16 +65,16 @@ void set_tgt_linetrace_run( void ){
     button = get_button( BUTTON_LEFT );
     if( 1 == button ){
         // get_color_rgb(&u16_wpos,0, 0);
-        get_color_ref(&u16_wpos);                /* 現在値取得 */
+        get_color_ref(&g_u16_linetrace_run_lpos);                /* 現在値取得 */
     }
     button = get_button( BUTTON_RIGHT );
     if( 1 == button ){
         // get_color_rgb(&u16_bpos,0, 0);
-        get_color_ref(&u16_bpos);                /* 現在値取得 */
+        get_color_ref(&g_u16_linetrace_run_rpos);                /* 現在値取得 */
     }
     button = get_button( BUTTON_CENTER );
     if( 1 == button ){
-        g_u16_linetrace_run_fbTgt = ( u16_bpos + u16_wpos ) / 2;
+        g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
     }
 }
 
