@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/control.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/control.o: \
  ../../lib/pbio/src/control.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \

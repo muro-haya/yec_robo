@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/light/animation.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/light/animation.o: \
  ../../lib/pbio/src/light/animation.c \
  ../..//lib/pbio/include/pbio/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \

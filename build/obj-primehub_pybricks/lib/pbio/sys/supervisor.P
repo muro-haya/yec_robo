@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/sys/supervisor.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/sys/supervisor.o: \
  ../../lib/pbio/sys/supervisor.c \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  ../..//lib/pbio/include/pbdrv/watchdog.h \

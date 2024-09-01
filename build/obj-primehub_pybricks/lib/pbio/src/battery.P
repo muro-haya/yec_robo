@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/battery.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/battery.o: \
  ../../lib/pbio/src/battery.c ../..//lib/pbio/include/pbio/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/inttypes.h \

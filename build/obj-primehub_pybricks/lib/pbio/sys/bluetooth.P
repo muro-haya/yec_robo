@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/sys/bluetooth.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/sys/bluetooth.o: \
  ../../lib/pbio/sys/bluetooth.c ../..//lib/pbio/include/pbsys/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbsysconfig.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/assert.h \

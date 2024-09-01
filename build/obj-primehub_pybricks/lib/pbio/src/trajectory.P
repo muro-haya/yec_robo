@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/trajectory.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/trajectory.o: \
  ../../lib/pbio/src/trajectory.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/assert.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \

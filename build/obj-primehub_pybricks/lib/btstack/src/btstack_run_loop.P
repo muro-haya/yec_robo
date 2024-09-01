@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/btstack_run_loop.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/btstack_run_loop.o: \
  ../../lib/btstack/src/btstack_run_loop.c \
  ../../lib/btstack/src/btstack_run_loop.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/btstack_config.h \

@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/btstack_linked_list.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/btstack_linked_list.o: \
  ../../lib/btstack/src/btstack_linked_list.c \
  ../../lib/btstack/src/btstack_linked_list.h \
  ../../lib/btstack/src/btstack_bool.h \

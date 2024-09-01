@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/bluetooth_btstack.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/bluetooth_btstack.o: \
  ../../lib/pbio/drv/bluetooth/bluetooth_btstack.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \
@@ -132,7 +132,7 @@
  ../..//lib/btstack/src/btstack_chipset.h \
  ../..//lib/btstack/src/btstack_control.h \
  ../..//lib/btstack/src/btstack_uart_block.h \
- /home/hayato/spike-rt/build/obj-primehub_pybricks/genhdr/pybricks_service.h \
+ /home/fumitake/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h \
  ../../lib/pbio/drv/bluetooth/pybricks_service_server.h \
  ../../lib/pbio/drv/bluetooth/bluetooth.h
  ../../lib/pbio/drv/bluetooth/bluetooth_btstack.c :
@@ -268,6 +268,6 @@
  ../..//lib/btstack/src/btstack_chipset.h :
  ../..//lib/btstack/src/btstack_control.h :
  ../..//lib/btstack/src/btstack_uart_block.h :
- /home/hayato/spike-rt/build/obj-primehub_pybricks/genhdr/pybricks_service.h :
+ /home/fumitake/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h :
  ../../lib/pbio/drv/bluetooth/pybricks_service_server.h :
  ../../lib/pbio/drv/bluetooth/bluetooth.h :

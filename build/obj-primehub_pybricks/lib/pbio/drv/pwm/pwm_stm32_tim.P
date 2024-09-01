@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/pwm/pwm_stm32_tim.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/pwm/pwm_stm32_tim.o: \
  ../../lib/pbio/drv/pwm/pwm_stm32_tim.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \

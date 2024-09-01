@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/pybricks_service_server.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/pybricks_service_server.o: \
  ../../lib/pbio/drv/bluetooth/pybricks_service_server.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \

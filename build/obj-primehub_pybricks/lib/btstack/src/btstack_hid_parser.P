@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/btstack_hid_parser.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/btstack_hid_parser.o: \
  ../../lib/btstack/src/btstack_hid_parser.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/string.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
