@@ -21,5 +21,7 @@ extern int16_t  g_s16_linetrace_run_p;                 /* P項計算結果[-]*/
 extern int16_t  g_s16_linetrace_run_i;                 /* I項計算結果[-]*/
 extern int16_t  g_s16_linetrace_run_d;                 /* D項計算結果[-]*/
 extern int16_t  g_s16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
+extern uint16_t g_u16_linetrace_run_lpos;              /* 左色値 */
+extern uint16_t g_u16_linetrace_run_rpos;              /* 右色値 */
 
 #endif

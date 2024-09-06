@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <kernel.h>
 
 #include <spike/hub/system.h>
@@ -26,46 +25,15 @@
 void Main(intptr_t exinf)
 {
   // ここからプログラムを書く
-  int count;
-  int* rx_data;
-  int* tx_data;
-  int ercd;
-  hub_button_t pressed;
 
-  count = 0;
-  ercd = serial_opn_por(SIO_USB_PORTID);
-  tx_data = &count;
-
-  while (1){
-    // ercd = serial_rea_dat(SIO_USB_PORTID, rx_data, 1);
-
-    hub_button_is_pressed(&pressed);
-
-    // if( sizeof(rx_data) == ercd ){
-    if( (pressed & HUB_BUTTON_CENTER) == HUB_BUTTON_CENTER ){
-      count += 1;
-      switch ((int)&rx_data)
-      {
-      case 0:
-        hub_display_text("0", 1000, 0);
-        break;
-      
-      case 1:
-        hub_display_text("1", 1000, 0);
-        break;
-      
-      case 2:
-        hub_display_text("2", 1000, 0);
-        break;
-      
-      default:
-        break;
-      }
-      hub_display_text("C", 1000, 0);
-      // ercd = serial_wri_dat(SIO_USB_PORTID,tx_data , 1);
-      ercd = serial_wri_dat(SIO_USB_PORTID,count , 8);
-    }
-    hub_display_text("-", 1, 0);
+  while(1){
+    hub_light_on_color(PBIO_COLOR_RED);
+    dly_tsk(1*1000*1000);
+    hub_light_on_color(PBIO_COLOR_GREEN);
+    dly_tsk(1*1000*1000);
+    hub_light_on_color(PBIO_COLOR_BLUE);
+    dly_tsk(1*1000*1000);
   }
+
   exit(0);
 }
