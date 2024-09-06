@@ -34,8 +34,6 @@ void line_jdg_color( uint16_t fin_color );                            /* 色認�
 void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd );     /* 指定距離までR・D走行するフェイズ */
 void DLturn_jdg_deg( uint16_t fin_deg );                                /* 指定角まで旋回するフェイズ */
 
-uint16_t white_side  = g_u16_linetrace_run_lpos;
-uint16_t black_side = g_u16_linetrace_run_rpos;
 
 /* ダブルループ周期処理 */
 bool_t cyc_DoubleLoop( void ){
@@ -52,7 +50,7 @@ bool_t cyc_DoubleLoop( void ){
         line_jdg_color( RESULT_BLUE );
         break;
     case 2:
-        turn_jdg_deg( x_u16_DoubleLoop_deg );
+        DLturn_jdg_deg( x_u16_DoubleLoop_deg );
         break;
     case 3:
         DLrd_jdg_movement( x_u16_DoubleLoop_1_movement, x_u16_DoubleLoop_spd );
@@ -87,18 +85,19 @@ void line_jdg_color( uint16_t fin_color ){
     color_result = get_rec_color();
     if( fin_color == color_result ){
        g_u16_DoubleLoop_phase += 1;
+
          /* ライントレースの左右を反転*/
         if(g_u16_DoubleLoop_phase == 1 || g_u16_DoubleLoop_phase == 4 ){
-            if(g_u16_DoubleLoop_phase == 1){
-                uint16_t white_side  = g_u16_linetrace_run_lpos;
-                uint16_t black_side = g_u16_linetrace_run_rpos;
-            }
-            g_u16_linetrace_run_lpos = white_side;
-            g_u16_linetrace_run_rpos = black_side;
+            uint16_t white_side = g_u16_linetrace_run_lpos;
+            uint16_t black_side = g_u16_linetrace_run_rpos;
+            g_u16_linetrace_run_lpos = black_side;
+            g_u16_linetrace_run_rpos = white_side;
         }
         else{
-            g_u16_linetrace_run_lpos = white_side;
+            uint16_t white_side = g_u16_linetrace_run_rpos;
+            uint16_t black_side = g_u16_linetrace_run_lpos;
             g_u16_linetrace_run_rpos = black_side;
+            g_u16_linetrace_run_lpos = white_side;
         }  
     } 
 
