@@ -27,7 +27,7 @@ void ini_ctl_main( void ){
     ini_const_run();                /* 一定出力走行初期化 */
     ini_arm_ctl();                  /* アーム制御初期化 */
 
-    g_u16_ctl_main_mode = CONST_RUN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+    g_u16_ctl_main_mode = LINETRACE_RUN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
 }
 
 /* 機体制御周期処理 */
@@ -35,7 +35,12 @@ void cyc_ctl_main( void ){
     switch (g_u16_ctl_main_mode)
     {
     case LINETRACE_RUN:             /* ライントレース走行 */
-        cyc_linetrace_run();
+        if( 0 == g_u16_linetrace_run_fbTgt ){
+            set_tgt_linetrace_run();
+        }
+        else{
+            cyc_linetrace_run();
+        }
         break;
     case CONST_RUN:                 /* 一定出力走行 */
         cyc_const_run();

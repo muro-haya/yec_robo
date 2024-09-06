@@ -3,11 +3,14 @@
 #include <kernel.h>
 
 #include <spike/hub/system.h>
+#include "spike/hub/speaker.h"
 
 #include <pbio/color.h>
 
 #include "kernel_cfg.h"
 #include "syssvc/serial.h"
+
+#include "../M_CTL/linetrace_run.h"
 
 #include "comm.h"
 
@@ -15,6 +18,8 @@
 static char tx_buf[COM_PACKET_SIZE] = "@000:000000\n";
 static char rx_buf[COM_PACKET_SIZE] = "@000:000000\n";
 static uint16_t ercd;
+
+uint16_t vlume;
 
 /* 外部公開変数 */
 int32_t g_s32_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
@@ -31,17 +36,40 @@ struct comm_data{
     int32_t* comm_data;                                 /* 通信データ */
 };
 
-#define TX_DATA_NUM 2                                   /* 送信データ数 */
+#define TX_DATA_NUM 13                                  /* 送信データ数 */
 /* 送信情報 */
 struct comm_data tx_datas[] = {
     {  0, 100, 500, &comm_tx_cnt               },       /* 送信確認カウンタ */
     {  1, 100, 501, &comm_rx_cnt               },       /* 受信確認返信カウンタ */
+    {  2, 100, 502, &vlume                     },       /* 受信確認返信カウンタ */
+    
+    {  0, 100, 600, &g_u16_linetrace_run_bsV   },       /* 計測値0 */
+    {  1, 100, 601, &g_u16_linetrace_run_fbTgt },       /* 計測値1 */
+    {  2, 100, 602, &g_u16_linetrace_run_fbPv  },       /* 計測値2 */
+    {  3, 100, 603, &g_s16_linetrace_run_fbCmdv},       /* 計測値3 */
+    {  4, 100, 604, &vlume                     },       /* 計測値4 */
+    {  5, 100, 605, &vlume                     },       /* 計測値5 */
+    {  6, 100, 606, &vlume                     },       /* 計測値6 */
+    {  7, 100, 607, &vlume                     },       /* 計測値7 */
+    {  8, 100, 608, &vlume                     },       /* 計測値8 */
+    {  9, 100, 609, &vlume                     },       /* 計測値9 */
 };
-#define RX_DATA_NUM 2                                   /* 受信データ数 */
+#define RX_DATA_NUM 12                                   /* 受信データ数 */
 /* 受信情報 */
 struct comm_data rx_datas[] = {
     {  0, 100, 000, &comm_rx_cnt               },       /* 受信確認カウンタ */
     {  0,  10, 001, &g_s32_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+    
+    {  0,  10, 100, &x_u16_linetrace_run_kp     },       /* 適合値0 */
+    {  0,  10, 101, &x_u16_linetrace_run_ki     },       /* 適合値1 */
+    {  0,  10, 102, &x_u16_linetrace_run_kd     },       /* 適合値2 */
+    {  0,  10, 103, &vlume                      },       /* 適合値3 */
+    {  0,  10, 104, &vlume                      },       /* 適合値4 */
+    {  0,  10, 105, &vlume                      },       /* 適合値5 */
+    {  0,  10, 106, &vlume                      },       /* 適合値6 */
+    {  0,  10, 107, &vlume                      },       /* 適合値7 */
+    {  0,  10, 108, &vlume                      },       /* 適合値8 */
+    {  0,  10, 109, &vlume                      },       /* 適合値9 */
 };
 
 void ini_comm( void ){
@@ -52,6 +80,8 @@ void ini_comm( void ){
 
   comm_tx_cnt           = 0;                            /* 送信確認カウンタ */
   comm_rx_cnt           = 0;                            /* 受信確認カウンタ */
+
+  vlume = 50;
 }
 
 void cyc_tx( void ){
@@ -66,6 +96,10 @@ void cyc_tx( void ){
     }
 
     comm_tx_cnt += 1;
+    
+    hub_speaker_set_volume(vlume);
+    // hub_speaker_set_volume(30);
+    hub_speaker_play_tone(2000, 2);
 }
 
 void cyc_rx( void ){

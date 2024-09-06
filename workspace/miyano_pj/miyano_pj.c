@@ -60,8 +60,8 @@ void Main(intptr_t exinf){
   /* 100msecタスクの起動 */
   sta_cyc(MAIN_100M_CYC);
   /* 通信用タスク起動 */
-  sta_cyc(TX_1M_CYC);
-  sta_cyc(RX_1M_CYC);
+  // sta_cyc(TX_1M_CYC);
+  // sta_cyc(RX_1M_CYC);
   
   /* タスク終了 */
   ext_tsk();
