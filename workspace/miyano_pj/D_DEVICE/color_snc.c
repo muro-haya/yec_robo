@@ -24,13 +24,13 @@ void ini_color_snc( void ){
 }
 
 /* RGB値取得 */
-void get_color_rgb( uint16_t* r_valu, uint16_t* g_valu, uint16_t* b_valu ){
-  pup_color_rgb_t rgb;
+void get_color_rgb( uint16_t *r_valu, uint16_t *g_valu, uint16_t *b_valu ){
+  pup_color_rgb_t rgbcolor;
   
-  rgb = pup_color_sensor_rgb(colorS);
-  *r_valu = rgb.r;
-  *g_valu = rgb.g;
-  *b_valu = rgb.b;
+  rgbcolor = pup_color_sensor_rgb(colorS);
+  *r_valu = rgbcolor.r;
+  *g_valu = rgbcolor.g;
+  *b_valu = rgbcolor.b;
 }
 
 /* 反射光取得 */

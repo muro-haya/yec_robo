@@ -68,7 +68,7 @@ void cyc_color_chase( void ){
     int16_t s16_RVulue;                         /* 右モータ指示値 */
     
     /* P項計算 */
-    s16_posdlt = g_u16_color_chase_fbTgt - g_s32_comm_rx_pet_xpos  ;  /* 位置偏差計算 */
+    s16_posdlt = g_u16_color_chase_fbTgt - g_u16_comm_rx_pet_xpos  ;  /* 位置偏差計算 */
     g_u16_color_chase_p = s16_posdlt * x_u16_color_chase_kp;        /* P項計算 */
     /* I項計算 */
     u16_dlt_sum += s16_posdlt;                                          /* 位置偏差積算 */

@@ -101,7 +101,7 @@ void turn_jdg_color( uint16_t fin_color ){
     g_u16_const_run_way = 1;
     g_s16_const_run_spd = 100;
 
-    if( 1 == g_s32_comm_rx_jdg_red ){           /* カメラで色認識結果 */
+    if( 1 == g_u16_comm_rx_jdg_red ){           /* カメラで色認識結果 */
         g_u16_smart_carry_phase += 1;
     }
 }

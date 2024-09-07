@@ -16,6 +16,7 @@
 #include "../D_DEVICE/button.h"
 
 #include "spike/hub/speaker.h"
+#include "../D_DEVICE/comm.h"
 
 #define FB_WAY 0                                /* FB制御指令方法(0:DUTY 1:回転速度) */
 #define BSSPD  70                              /* 基本指令値 */
@@ -49,10 +50,10 @@ void ini_linetrace_run( void ){
     g_u16_linetrace_run_bsV    = BSSPD;         /* FB制御基本値[-] */
     g_u16_linetrace_run_fbTgt  = 0;             /* FB制御目標値[-] */
     g_u16_linetrace_run_fbPv   = 0;             /* FB制御現在値[-] */
-    g_u16_linetrace_run_p      = 0;             /* P項計算結果[0.1]*/
-    g_u16_linetrace_run_i      = 0;             /* I項計算結果[0.1]*/
-    g_u16_linetrace_run_d      = 0;             /* D項計算結果[0.1]*/
-    g_u16_linetrace_run_fbCmdv = 0;             /* FB制御指令値[-] */
+    g_s16_linetrace_run_p      = 0;             /* P項計算結果[0.1]*/
+    g_s16_linetrace_run_i      = 0;             /* I項計算結果[0.1]*/
+    g_s16_linetrace_run_d      = 0;             /* D項計算結果[0.1]*/
+    g_s16_linetrace_run_fbCmdv = 0;             /* FB制御指令値[-] */
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
     s16_spddlt_old             = 0;             /* 速度偏差前回値 */
@@ -64,18 +65,22 @@ void set_tgt_linetrace_run( void ){
 
     button = get_button( BUTTON_LEFT );
     if( 1 == button ){
-        get_color_rgb(0, &u16_wpos, 0);
-        // get_color_ref(&u16_wpos);                /* 現在値取得 */
+        get_color_rgb(0, &g_u16_linetrace_run_lpos, 0);
+        // get_color_ref(&g_u16_linetrace_run_lpos);                /* 現在値取得 */
     }
+    button = 0;
     button = get_button( BUTTON_RIGHT );
     if( 1 == button ){
-        get_color_rgb(0, &u16_bpos, 0);
-        // get_color_ref(&u16_bpos);                /* 現在値取得 */
+        get_color_rgb(0, &g_u16_linetrace_run_rpos, 0);
+        // get_color_ref(&g_u16_linetrace_run_rpos);                /* 現在値取得 */
     }
+    button = 0;
     button = get_button( BUTTON_CENTER );
     if( 1 == button ){
         g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
     }
+    // send_data(77,g_u16_linetrace_run_lpos);
+    // send_data(88,g_u16_linetrace_run_rpos);
 }
 
 /* ライントレース走行周期処理 */
