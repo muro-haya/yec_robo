@@ -8,9 +8,11 @@ extern void set_tgt_linetrace_run( void );  /* ライントレース目標値設
 extern void cyc_linetrace_run( void );      /* ライントレース走行周期処理 */
 
 /* 適合値 */
-extern int16_t  x_u16_linetrace_run_kp;                 /* P項ゲイン値[0.01]*/
-extern int16_t  x_u16_linetrace_run_ki;                 /* I項ゲイン値[0.001]*/
-extern int16_t  x_u16_linetrace_run_kd;                 /* D項ゲイン値[0.01]*/
+extern uint16_t  x_u16_linetrace_run_kp;                 /* P項ゲイン値[0.01]*/
+extern uint16_t  x_u16_linetrace_run_ki;                 /* I項ゲイン値[0.001]*/
+extern uint16_t  x_u16_linetrace_run_kd;                 /* D項ゲイン値[0.01]*/
+extern int16_t  x_s16_linetrace_limit_i;                 /* I項上限値*/
+
 
 /* 外部参照変数 */
 extern uint16_t g_u16_linetrace_run_way;               /* ライントレース制御指令方法(0:DUTY 1:回転速度) */

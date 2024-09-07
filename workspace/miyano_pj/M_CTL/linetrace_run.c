@@ -18,12 +18,13 @@
 #include "spike/hub/speaker.h"
 
 #define FB_WAY 0                                /* FB制御指令方法(0:DUTY 1:回転速度) */
-#define BSSPD  70                              /* 基本指令値 */
+#define BSSPD  100                              /* 基本指令値 */
 
 /* 適合値 */
-int16_t  x_u16_linetrace_run_kp = 50;            /* P項ゲイン値[0.001]*/
-int16_t  x_u16_linetrace_run_ki = 0;            /* I項ゲイン値[0.001]*/
-int16_t  x_u16_linetrace_run_kd = 0;            /* D項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kp = 350;            /* P項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_ki = 0;            /* I項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kd = 3000;            /* D項ゲイン値[0.001]*/
+int16_t  x_s16_linetrace_limit_i = 100;        /* I項上限値*/
 
 /* 外部公開変数 */
 uint16_t g_u16_linetrace_run_way;               /* ライントレース制御指令方法(0:DUTY 1:回転速度) */
@@ -38,7 +39,7 @@ int16_t  g_s16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
 /* 外部非公開変数 */
 static int16_t s16_posdlt_old;                  /* 位置偏差前回値 */
 static int16_t s16_spddlt_old;                  /* 速度偏差前回値 */
-static uint16_t u16_dlt_sum;                    /* 位置偏差積算値 */
+static int16_t s16_dlt_sum;                    /* 位置偏差積算値 */
 static uint16_t u16_wpos;                       /* 白色値 */
 static uint16_t u16_bpos;                       /* 黒色値 */
 
@@ -56,7 +57,7 @@ void ini_linetrace_run( void ){
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
     s16_spddlt_old             = 0;             /* 速度偏差前回値 */
-    u16_dlt_sum                = 0;             /* 位置偏差積算値 */
+    s16_dlt_sum                = 0;             /* 位置偏差積算値 */
     u16_wpos                   = 0;             /* 白色値 */
     u16_bpos                   = 0;             /* 黒色値 */
 }
@@ -94,8 +95,10 @@ void cyc_linetrace_run( void ){
     s16_posdlt = g_u16_linetrace_run_fbTgt - g_u16_linetrace_run_fbPv;  /* 位置偏差計算 */
     g_s16_linetrace_run_p = s16_posdlt * x_u16_linetrace_run_kp /1000;        /* P項計算 */
     /* I項計算 */
-    u16_dlt_sum += s16_posdlt;                                          /* 位置偏差積算 */
-    g_s16_linetrace_run_i = u16_dlt_sum * x_u16_linetrace_run_ki /1000;       /* I項計算 */
+    if(s16_dlt_sum<x_s16_linetrace_limit_i){
+        s16_dlt_sum += s16_posdlt;                                      /* 位置偏差積算 */
+    }
+    g_s16_linetrace_run_i = s16_dlt_sum * x_u16_linetrace_run_ki /1000;       /* I項計算 */
     /* D項計算 */
     s16_spddlt = s16_posdlt_old - s16_posdlt;                           /* 速度偏差取得 */
     g_s16_linetrace_run_d = s16_spddlt * x_u16_linetrace_run_kd /1000;        /* D項計算 */
