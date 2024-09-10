@@ -7,8 +7,8 @@
 #define SIO_TEST_PORTID       4
 
 /* 外部公開変数 */
-extern int32_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-extern int32_t g_u16_comm_rx_pet_xpos;                        /* カラーチェイス用ペットボトルx軸位置 */
+extern uint16_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+extern uint16_t g_u16_comm_rx_pet_xpos;                        /* カラーチェイス用ペットボトルx軸位置 */
 
 /* 外部参照関数 */
 extern void ini_comm( void );                                 /* 通信初期化処理 */
