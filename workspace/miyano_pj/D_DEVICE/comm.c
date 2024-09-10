@@ -48,7 +48,7 @@ struct comm_data tx_datas[] = {
     {  2, 100, 602, (uint16_t*)&g_u16_linetrace_run_fbPv  },       /* 計測値2 */
     {  3, 100, 603, (uint16_t*)&g_s16_linetrace_run_fbCmdv},       /* 計測値3 */
     {  4, 100, 604, (uint16_t*)&g_u16_linetrace_run_lpos  },       /* 計測値4 */
-    {  5, 100, 605, (uint16_t*)&g_u16_linetrace_ruAn_rpos  },       /* 計測値5 */
+    {  5, 100, 605, (uint16_t*)&g_u16_linetrace_run_rpos  },       /* 計測値5 */
     {  6, 100, 606, (uint16_t*)&vlume                     },       /* 計測値6 */
     {  7, 100, 607, (uint16_t*)&vlume                     },       /* 計測値7 */
     {  8, 100, 608, (uint16_t*)&vlume                     },       /* 計測値8 */
