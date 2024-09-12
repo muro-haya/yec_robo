@@ -18,13 +18,13 @@
 #include "spike/hub/speaker.h"
 #include "../D_DEVICE/comm.h"
 
-#define FB_WAY 0                                /* FB制御指令方法(0:DUTY 1:回転速度) */
+#define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
 #define BSSPD  100                              /* 基本指令値 */
 
 /* 適合値 */
-uint16_t  x_u16_linetrace_run_kp = 350;            /* P項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kp = 345;            /* P項ゲイン値[0.001]*/
 uint16_t  x_u16_linetrace_run_ki = 0;            /* I項ゲイン値[0.001]*/
-uint16_t  x_u16_linetrace_run_kd = 3000;            /* D項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kd = 335;            /* D項ゲイン値[0.001]*/
 int16_t  x_s16_linetrace_limit_i = 100;        /* I項上限値*/
 
 /* 外部公開変数 */
@@ -64,6 +64,8 @@ void ini_linetrace_run( void ){
 void set_tgt_linetrace_run( void ){
     uint16_t button;
 
+    // set_drive_mtr_spd(0, 0);
+
     button = get_button( BUTTON_LEFT );
     if( 1 == button ){
         get_color_rgb(0, &g_u16_linetrace_run_lpos, 0);
@@ -80,8 +82,6 @@ void set_tgt_linetrace_run( void ){
     if( 1 == button ){
         g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
     }
-    // send_data(77,g_u16_linetrace_run_lpos);
-    // send_data(88,g_u16_linetrace_run_rpos);
 }
 
 /* ライントレース走行周期処理 */
@@ -91,7 +91,14 @@ void cyc_linetrace_run( void ){
     int16_t s16_LVulue;                         /* 左モータ指示値 */
     int16_t s16_RVulue;                         /* 右モータ指示値 */
     int16_t s16_run_fbCmdv;
+    uint16_t button;
     
+    button = get_button( BUTTON_BT );
+    if( 1 == button ){
+        g_u16_linetrace_run_fbTgt = 0;
+        set_drive_mtr_spd(0, 0);
+    }
+
     get_color_rgb(0, &g_u16_linetrace_run_fbPv, 0);
     // get_color_ref(&g_u16_linetrace_run_fbPv);                           /* 現在値取得 */
     /* P項計算 */

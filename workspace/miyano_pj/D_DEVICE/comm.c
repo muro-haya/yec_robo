@@ -11,6 +11,7 @@
 #include "syssvc/serial.h"
 
 #include "../M_CTL/linetrace_run.h"
+#include "../M_CTL/const_run.h"
 
 #include "comm.h"
 
@@ -49,9 +50,9 @@ struct comm_data tx_datas[] = {
     {  3, 100, 603, (uint16_t*)&g_s16_linetrace_run_fbCmdv},       /* 計測値3 */
     {  4, 100, 604, (uint16_t*)&g_u16_linetrace_run_lpos  },       /* 計測値4 */
     {  5, 100, 605, (uint16_t*)&g_u16_linetrace_run_rpos  },       /* 計測値5 */
-    {  6, 100, 606, (uint16_t*)&vlume                     },       /* 計測値6 */
-    {  7, 100, 607, (uint16_t*)&vlume                     },       /* 計測値7 */
-    {  8, 100, 608, (uint16_t*)&vlume                     },       /* 計測値8 */
+    {  6, 100, 606, (uint16_t*)&g_s16_linetrace_run_p     },       /* 計測値6 */
+    {  7, 100, 607, (uint16_t*)&g_s16_linetrace_run_i     },       /* 計測値7 */
+    {  8, 100, 608, (uint16_t*)&g_s16_linetrace_run_d     },       /* 計測値8 */
     {  9, 100, 609, (uint16_t*)&vlume                     },       /* 計測値9 */
 };
 #define RX_DATA_NUM 12                                   /* 受信データ数 */
@@ -63,7 +64,7 @@ struct comm_data rx_datas[] = {
     {  0,  10, 100, (uint16_t*)&x_u16_linetrace_run_kp    },       /* 適合値0 */
     {  0,  10, 101, (uint16_t*)&x_u16_linetrace_run_ki    },       /* 適合値1 */
     {  0,  10, 102, (uint16_t*)&x_u16_linetrace_run_kd    },       /* 適合値2 */
-    {  0,  10, 103, (uint16_t*)&vlume                     },       /* 適合値3 */
+    {  0,  10, 103, (uint16_t*)&g_u16_linetrace_run_bsV   },       /* 適合値3 */
     {  0,  10, 104, (uint16_t*)&vlume                     },       /* 適合値4 */
     {  0,  10, 105, (uint16_t*)&vlume                     },       /* 適合値5 */
     {  0,  10, 106, (uint16_t*)&vlume                     },       /* 適合値6 */
@@ -81,7 +82,7 @@ void ini_comm( void ){
   comm_tx_cnt           = 0;                            /* 送信確認カウンタ */
   comm_rx_cnt           = 0;                            /* 受信確認カウンタ */
 
-  vlume = 0;
+  vlume = 20;
 }
 
 void cyc_tx( void ){
