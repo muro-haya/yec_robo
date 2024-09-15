@@ -26,8 +26,9 @@ void ini_ctl_main( void ){
     ini_linetrace_run();            /* ライントレース走行初期化 */
     ini_const_run();                /* 一定出力走行初期化 */
     ini_arm_ctl();                  /* アーム制御初期化 */
+    ini_color_chase();              /* カラーチェイス 初期化処理 */
 
-    g_u16_ctl_main_mode = LINETRACE_RUN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+    g_u16_ctl_main_mode = COLOR_CHASE;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
 }
 
 /* 機体制御周期処理 */
