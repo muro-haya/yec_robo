@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/contiki-core/lib/memb.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/contiki-core/lib/memb.o: \
  ../../lib/contiki-core/lib/memb.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/string.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \

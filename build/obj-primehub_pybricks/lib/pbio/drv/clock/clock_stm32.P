@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/clock/clock_stm32.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/clock/clock_stm32.o: \
  ../../lib/pbio/drv/clock/clock_stm32.c ../..//lib/contiki-core/contiki.h \
  ../..//lib/contiki-core/contiki-version.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/contiki-conf.h \

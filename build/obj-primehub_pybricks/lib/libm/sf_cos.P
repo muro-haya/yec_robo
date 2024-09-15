@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/libm/sf_cos.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/libm/sf_cos.o: \
  ../../micropython/lib/libm/sf_cos.c ../../micropython/lib/libm/fdlibm.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/math.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h \

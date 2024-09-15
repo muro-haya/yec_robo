@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/btstack_memory_pool.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/btstack_memory_pool.o: \
  ../../lib/btstack/src/btstack_memory_pool.c \
  ../../lib/btstack/src/btstack_memory_pool.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \

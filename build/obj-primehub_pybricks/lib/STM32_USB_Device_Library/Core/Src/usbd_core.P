@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/STM32_USB_Device_Library/Core/Src/usbd_core.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/STM32_USB_Device_Library/Core/Src/usbd_core.o: \
  ../../lib/STM32_USB_Device_Library/Core/Src/usbd_core.c \
  ../..//lib/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../..//lib/pbio/drv/usb/stm32_usbd/usbd_conf.h \

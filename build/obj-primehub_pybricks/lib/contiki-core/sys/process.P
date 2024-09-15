@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/contiki-core/sys/process.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/contiki-core/sys/process.o: \
  ../../lib/contiki-core/sys/process.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdio.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \

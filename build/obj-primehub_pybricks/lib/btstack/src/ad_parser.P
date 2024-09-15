@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/ad_parser.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/ad_parser.o: \
  ../../lib/btstack/src/ad_parser.c \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h \

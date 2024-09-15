@@ -83,7 +83,7 @@ void Main_10m( intptr_t unused ){
 
 /* 100msec周期処理 */
 void Main_100m( intptr_t unused ){
-
+  
   /* タスク終了 */
   ext_tsk();
 }

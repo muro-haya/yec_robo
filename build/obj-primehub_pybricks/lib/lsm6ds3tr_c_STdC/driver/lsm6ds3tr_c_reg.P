@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/lsm6ds3tr_c_STdC/driver/lsm6ds3tr_c_reg.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/lsm6ds3tr_c_STdC/driver/lsm6ds3tr_c_reg.o: \
  ../../lib/lsm6ds3tr_c_STdC/driver/lsm6ds3tr_c_reg.c \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \

@@ -1,4 +1,4 @@
-/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/motor/servo_settings.o: \
+/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/motor/servo_settings.o: \
  ../../lib/pbio/src/motor/servo_settings.c \
  ../..//lib/pbio/include/pbio/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \
