@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/platform/prime_hub_spike-rt/platform.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/platform/prime_hub_spike-rt/platform.o: \
  ../../lib/pbio/platform/prime_hub_spike-rt/platform.c \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  ../..//lib/btstack/chipset/cc256x/btstack_chipset_cc256x.h \

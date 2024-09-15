@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/bluetooth_btstack_uart_block_stm32_hal.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/bluetooth_btstack_uart_block_stm32_hal.o: \
  ../../lib/pbio/drv/bluetooth/bluetooth_btstack_uart_block_stm32_hal.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \

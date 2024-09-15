@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/drivebase.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/drivebase.o: \
  ../../lib/pbio/src/drivebase.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \

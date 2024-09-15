@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o: \
  ../../micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c \
  ../../micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/stm32f4xx_hal_conf.h \

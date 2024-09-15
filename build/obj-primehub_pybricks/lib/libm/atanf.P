@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/libm/atanf.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/libm/atanf.o: \
  ../../micropython/lib/libm/atanf.c ../../micropython/lib/libm/libm.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h \
