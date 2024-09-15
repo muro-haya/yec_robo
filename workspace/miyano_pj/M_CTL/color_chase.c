@@ -13,24 +13,27 @@
 #include "../D_DEVICE/drive_mtr.h"
 #include "../D_DEVICE/color_snc.h"
 #include "../D_DEVICE/comm.h"
+#include "../D_DEVICE/button.h"
 
 #define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
 #define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
-int16_t  x_u16_color_chase_kp = 3;            /* P項ゲイン値[0.1]*/
+int16_t  x_u16_color_chase_kp = 30;            /* P項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_ki = 0;            /* I項ゲイン値[0.01]*/
-int16_t  x_u16_color_chase_kd = 0;            /* D項ゲイン値[0.1]*/
+int16_t  x_u16_color_chase_kd = 0;            /* D項ゲイン値[0.01]*/
 
 /* 外部公開変数 */
 uint16_t g_u16_color_chase_way;               /* ライントレース制御指令方法(0:DUTY 1:回転速度) */
 uint16_t g_u16_color_chase_bsV;               /* FB制御基本値[-] */
 uint16_t g_u16_color_chase_fbTgt;             /* FB制御目標値[-] */
 uint16_t g_u16_color_chase_fbPv;              /* FB制御現在値[-] */
-int16_t  g_u16_color_chase_p;                 /* P項計算結果[0.1]*/
-int16_t  g_u16_color_chase_i;                 /* I項計算結果[0.1]*/
-int16_t  g_u16_color_chase_d;                 /* D項計算結果[0.1]*/
-int16_t  g_u16_color_chase_fbCmdv;            /* FB制御指令値[-] */
+int16_t  g_s16_color_chase_p;                 /* P項計算結果[0.1]*/
+int16_t  g_s16_color_chase_i;                 /* I項計算結果[0.1]*/
+int16_t  g_s16_color_chase_d;                 /* D項計算結果[0.1]*/
+int16_t  g_s16_color_chase_fbCmdv;            /* FB制御指令値[-] */
+
+int16_t  g_s16_color_chase_debug;
 
 /* 外部非公開変数 */
 static int16_t s16_posdlt_old;                  /* 位置偏差前回値 */
@@ -45,13 +48,13 @@ static uint16_t u16_bpos;                       /* 黒色値 */
 void ini_color_chase( void ){
 
     g_u16_color_chase_way    = FB_WAY;          /* FB制御指令方法(0:DUTY 1:回転速度) */
-    g_u16_color_chase_bsV    = BSSPD;           /* FB制御基本値[-] */
-    g_u16_color_chase_fbTgt  = 0;               /* FB制御目標値[-] */
+    g_u16_color_chase_bsV    = 50;              /* FB制御基本値[-] */
+    g_u16_color_chase_fbTgt  = 50;              /* FB制御目標値[-] */
     g_u16_color_chase_fbPv   = 0;               /* FB制御現在値[-] */
-    g_u16_color_chase_p      = 0;               /* P項計算結果[0.1]*/
-    g_u16_color_chase_i      = 0;               /* I項計算結果[0.1]*/
-    g_u16_color_chase_d      = 0;               /* D項計算結果[0.1]*/
-    g_u16_color_chase_fbCmdv = 0;               /* FB制御指令値[-] */
+    g_s16_color_chase_p      = 0;              /* P項計算結果[0.01]*/
+    g_s16_color_chase_i      = 0;               /* I項計算結果[0.01]*/
+    g_s16_color_chase_d      = 0;               /* D項計算結果[0.01]*/
+    g_s16_color_chase_fbCmdv = 0;               /* FB制御指令値[-] */
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
     s16_spddlt_old             = 0;             /* 速度偏差前回値 */
@@ -68,23 +71,28 @@ void cyc_color_chase( void ){
     int16_t s16_RVulue;                         /* 右モータ指示値 */
     
     /* P項計算 */
-    s16_posdlt = g_u16_color_chase_fbTgt - g_s32_comm_rx_pet_xpos  ;  /* 位置偏差計算 */
-    g_u16_color_chase_p = s16_posdlt * x_u16_color_chase_kp;        /* P項計算 */
+    s16_posdlt = g_u16_comm_rx_pet_xpos - g_u16_color_chase_fbTgt;  /* 位置偏差計算 */
+    g_s16_color_chase_p = s16_posdlt * x_u16_color_chase_kp;        /* P項計算 */
     /* I項計算 */
     u16_dlt_sum += s16_posdlt;                                          /* 位置偏差積算 */
-    g_u16_color_chase_i = u16_dlt_sum * x_u16_color_chase_ki;       /* I項計算 */
+    g_s16_color_chase_i = u16_dlt_sum * x_u16_color_chase_ki;       /* I項計算 */
     /* D項計算 */
     s16_spddlt = s16_posdlt - s16_posdlt_old;                           /* 速度偏差取得 */
-    g_u16_color_chase_d = s16_spddlt * x_u16_color_chase_kd;        /* D項計算 */
+    g_s16_color_chase_d = s16_spddlt * x_u16_color_chase_kd;        /* D項計算 */
 
     /* 指示値算出 */
-    g_u16_color_chase_fbCmdv =    g_u16_color_chase_p
-                                + g_u16_color_chase_i
-                                + g_u16_color_chase_d;
+    g_s16_color_chase_fbCmdv =    g_s16_color_chase_p/100
+                                + g_s16_color_chase_i/100
+                                + g_s16_color_chase_d/100;
+    // if( g_s16_color_chase_fbCmdv < 40 ){
+    //     g_s16_color_chase_fbCmdv = 40;
+    // }
 
-    s16_LVulue = g_u16_color_chase_bsV - g_u16_color_chase_fbCmdv;  /* 左モータ指示値計算 */
-    s16_RVulue = g_u16_color_chase_bsV + g_u16_color_chase_fbCmdv;  /* 右モータ指示値計算 */
-
+    s16_LVulue = (int16_t)g_u16_color_chase_bsV - g_s16_color_chase_fbCmdv;  /* 左モータ指示値計算 */
+    s16_RVulue = (int16_t)g_u16_color_chase_bsV + g_s16_color_chase_fbCmdv;  /* 右モータ指示値計算 */
+    g_s16_color_chase_debug = s16_LVulue;
+    // s16_LVulue = 100;
+    // s16_RVulue = 100;
     /* モータ駆動指示 */
     if( 0 == g_u16_color_chase_way ){            /* DUTY指示 */
         set_drive_mtr_duty(s16_LVulue, s16_RVulue);
