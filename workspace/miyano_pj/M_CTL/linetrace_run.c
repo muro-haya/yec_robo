@@ -16,7 +16,7 @@
 #include "../D_DEVICE/button.h"
 
 #define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
-#define BSSPD  200                              /* 基本指令値 */
+#define BSSPD  50                              /* 基本指令値 */
 
 /* 適合値 */
 int16_t  x_u16_linetrace_run_kp = 3;            /* P項ゲイン値[0.1]*/
