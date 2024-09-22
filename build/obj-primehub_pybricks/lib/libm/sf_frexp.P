@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/libm/sf_frexp.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/libm/sf_frexp.o: \
  ../../micropython/lib/libm/sf_frexp.c \
  ../../micropython/lib/libm/fdlibm.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/math.h \

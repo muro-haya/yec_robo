@@ -25,7 +25,10 @@ uint16_t vlume;
 
 /* 外部公開変数 */
 uint16_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-uint16_t g_u16_comm_rx_pet_xpos;                        /* カラーチェイス用ペットボトルx軸位置 */
+uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチェイス用赤ペットボトルx軸位置 */
+uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
+uint16_t g_u16_comm_rx_pet_flg;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
+uint16_t g_u16_comm_rx_pet_srt;                         /* カラーチェイス開始(1:開始) */
 
 /* 外部非公開変数 */
 static uint16_t comm_tx_cnt;                            /* 送信確認カウンタ */
@@ -45,7 +48,7 @@ struct comm_data tx_datas[] = {
     {  1, 100, 501, (uint16_t*)&comm_rx_cnt               },       /* 受信確認返信カウンタ */
     {  2, 100, 502, (uint16_t*)&vlume                     },       /* 受信確認返信カウンタ */
     
-    {  0, 100, 600, (uint16_t*)&g_u16_comm_rx_pet_xpos    },       /* 計測値0 */
+    {  0, 100, 600, (uint16_t*)&vlume                     },       /* 計測値0 */
     {  1, 100, 601, (uint16_t*)&g_s16_color_chase_fbCmdv  },       /* 計測値1 */
     {  2, 100, 602, (uint16_t*)&g_s16_color_chase_p       },       /* 計測値2 */
     {  3, 100, 603, (uint16_t*)&g_s16_color_chase_i       },       /* 計測値3 */
@@ -61,7 +64,7 @@ struct comm_data tx_datas[] = {
 struct comm_data rx_datas[] = {
     {  0, 100, 000, (uint16_t*)&comm_rx_cnt               },       /* 受信確認カウンタ */
     {  0,  10, 001, (uint16_t*)&g_u16_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-    {  0,  10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos    },       /* カラーチェイス用ペットボトルx軸位置 */
+    {  0,  10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* カラーチェイス用ペットボトルx軸位置 */
     
     {  0,  10, 100, (uint16_t*)&x_u16_linetrace_run_kp    },       /* 適合値0 */
     {  0,  10, 101, (uint16_t*)&x_u16_linetrace_run_ki    },       /* 適合値1 */
@@ -79,7 +82,7 @@ void ini_comm( void ){
   ercd = serial_opn_por(SIO_USB_PORTID);
 
   g_u16_comm_rx_jdg_red  = 0;                            /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-  g_u16_comm_rx_pet_xpos = 50;                           /* カラーチェイス用ペットボトルx軸位置 */
+  g_u16_comm_rx_pet_xpos_red = 50;                       /* カラーチェイス用ペットボトルx軸位置 */
 
   comm_tx_cnt           = 0;                            /* 送信確認カウンタ */
   comm_rx_cnt           = 0;                            /* 受信確認カウンタ */

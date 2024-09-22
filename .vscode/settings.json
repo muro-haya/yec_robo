@@ -11,6 +11,8 @@
         "cal_distance.h": "c",
         "serial.h": "c",
         "color_snc.h": "c",
-        "arm_mtr.h": "c"
+        "arm_mtr.h": "c",
+        "rec_color.h": "c",
+        "const_run.h": "c"
     }
 }

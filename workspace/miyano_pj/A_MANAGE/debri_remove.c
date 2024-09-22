@@ -26,7 +26,7 @@ uint16_t pattern_nom = 0;                //パターン番号（0～4）
 
 int16_t D_straight = 200;                //直進量適合値_デブリボトル運搬[mm]
 int16_t D_spd = 300;                     //直進速度適合値_デブリボトル運搬
-int16_t R_straight = -200;               //後退量適合値_デブリボトル運搬後[mm]
+int16_t R_straight = 200;               //後退量適合値_デブリボトル運搬後[mm]
 int16_t R_spd = -300;                    //後退速度適合値_デブリボトル運搬後
 
 int16_t turn_pattern[5][5] = {           //回転角適合値[deg]
@@ -48,34 +48,35 @@ int16_t chase_straight_pattern[5][5] = { //直進量適合値_ボトル判定迄
 int16_t chase_straight_spd = 200;        //直進速度適合値_ボトル判定迄
 
 int16_t last_turn_pattern[5][5] = {      //回転角適合値_最終回転[deg]（攻略終了地点に向けた回転）
-        {0, 0, 3, 4, 5},                 //パターン0
-        {0, 0, 8, 9, 10},                //パターン1
-        {0, 0, 13, 14, 15},              //パターン2
-        {0, 0, 18, 19, 20},              //パターン3
-        {0, 0, 23, 24, 25},              //パターン4
+        {0, 0, 45, 90, 135},                 //パターン0
+        {0, 0, 90, 135, 45},                //パターン1
+        {0, 0, 135, 45, 90},              //パターン2
+        {0, 0, -45, -90, -135},              //パターン3
+        {0, 0, -90, -135, -45},              //パターン4
         };
 
 int16_t last_straight_pattern[5][5] = {  //直進量適合値_最終直進[mm]（攻略終了地点に向けた直進）
-        {0, 0, 3, 4, 5},                 //パターン0
-        {0, 0, 8, 9, 10},                //パターン1
-        {0, 0, 13, 14, 15},              //パターン2
-        {0, 0, 18, 19, 20},              //パターン3
-        {0, 0, 23, 24, 25},              //パターン4
+        {0, 0, 50, 100, 150},                 //パターン0
+        {0, 0, 100, 150, 200},                //パターン1
+        {0, 0, 150, 200, 250},              //パターン2
+        {0, 0, 200, 250, 50},              //パターン3
+        {0, 0, 250, 50, 100},              //パターン4
         };
 
 int16_t last_straight_spd = 200;                //直進速度適合値_最終直進
 int16_t last_straight_color_search_spd = 200;   //直進速度適合値_最終直進色認識迄
 
 int16_t assist_turn_pattern[5][5] = {    //回転角適合値_ライントレース前の補正[deg]
-        {0, 0, 3, 4, 5},                 //パターン0
-        {0, 0, 8, 9, 10},                //パターン1
-        {0, 0, 13, 14, 15},              //パターン2
-        {0, 0, 18, 19, 20},              //パターン3
-        {0, 0, 23, 24, 25},              //パターン4
+        {0, 0, 10, 15, 20},                 //パターン0
+        {0, 0, 20, 15, 10},                //パターン1
+        {0, 0, 30, 45, 90},              //パターン2
+        {0, 0, 90, 45, 30},              //パターン3
+        {0, 0, -30, -45, -90},              //パターン4
         };
 
 int16_t dr_edge_side = 0;                //ライントレースのエッジ（左右判定）
 
+int16_t color_karioki[4] = {0, 1, 0, 1}; //仮置き色判定用適合値（後に削除）
 
 /* 外部公開変数 */
 uint16_t g_u16_debri_remove_phase;       /* デブリリムーバルフェイズカウント */
@@ -116,14 +117,12 @@ bool_t cyc_debri_remove( void ){
     case 0:  //ボトルの方に回転
         dr_turn_jdg_deg( turn_pattern[pattern_nom][g_u16_bottle_count] );
         break;
-    /*
     case 1:  //ボトル迄直進
         dr_chase_jdg_movement( chase_straight_pattern[pattern_nom][g_u16_bottle_count], chase_straight_spd );
         break;    
     case 2:  //ボトルカウント＆ボトル色判定（青ならcase+1, 赤ならcase=0）
         dr_jdg_color();
         break;
-    */
     case 3:  //デブリボトル運搬（直進）
         dr_rd_jdg_movement( D_straight, D_spd );
         break;
@@ -188,7 +187,6 @@ void dr_turn_jdg_deg( int16_t target_deg ){
 }
 
 /* ボトルに向かって直進するフェイズ */
-/*
 void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
     int16_t movement_result;
 
@@ -197,7 +195,7 @@ void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
         dr_reset_flg = 1;
     }
     else{
-        //g_u16_ctl_main_mode = CONST_RUN;
+        g_u16_ctl_main_mode = CONST_RUN;  //変更要
         g_u16_const_run_way = 1;
         g_s16_const_run_spd = run_spd;
         
@@ -208,16 +206,14 @@ void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
         }
     }
 }
-*/
 
 /* ボトルカウント＆ボトルの色判定フェイズ */
-/*
 void dr_jdg_color( void ){
     uint16_t color_result;
     uint16_t RED = 0;
     uint16_t BLUE = 1;
 
-    color_result = get_front_color();  //正面の色を取得する機能欲しい 赤なら0, 青なら1を返したい
+    color_result = color_karioki[g_u16_bottle_count]; //☆要変更　get_front_color();  //正面の色を取得する機能欲しい 赤なら0, 青なら1を返したい
     if( RED == color_result ){  //赤ならデンジャボトルのカウントを+1, フェイズを0に戻す
         g_u16_danger_count += 1;
         g_u16_debri_remove_phase = 0;
@@ -227,7 +223,6 @@ void dr_jdg_color( void ){
         g_u16_debri_remove_phase += 1;
     }
 }
-*/
 
 /* 指定距離までR・D走行するフェイズ */
 void dr_rd_jdg_movement( int16_t target_movement, int16_t run_spd ){
@@ -243,7 +238,7 @@ void dr_rd_jdg_movement( int16_t target_movement, int16_t run_spd ){
         g_s16_const_run_spd = run_spd;
         
         movement_result = get_cal_movement();
-        if( abs( target_movement ) < abs( movement_result ) ){
+        if( target_movement < movement_result ){
             g_u16_debri_remove_phase += 1;
             dr_reset_flg = 0;
         }

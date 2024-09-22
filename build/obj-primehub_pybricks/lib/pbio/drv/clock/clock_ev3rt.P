@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/clock/clock_ev3rt.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/clock/clock_ev3rt.o: \
  ../../lib/pbio/drv/clock/clock_ev3rt.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h

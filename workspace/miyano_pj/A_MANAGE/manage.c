@@ -24,7 +24,7 @@ void ini_manage( void ){
     ini_debri_remove();
     ini_smart_carry();
 
-    g_u16_manage_cnt = 0;
+    g_u16_manage_cnt = 2;
 }
 
 /* 競技攻略周期処理 */
@@ -39,7 +39,7 @@ void cyc_manage( void ){
     case DEBRI_REMOVE:
         bdat = cyc_debri_remove();
         if( 1 == bdat ){
-            g_u16_manage_cnt += 1;
+            //g_u16_manage_cnt += 1;
         }
         break;
     case SMART_CARRY:

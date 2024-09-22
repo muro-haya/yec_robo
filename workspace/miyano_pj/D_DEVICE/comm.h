@@ -8,7 +8,10 @@
 
 /* 外部公開変数 */
 extern uint16_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-extern uint16_t g_u16_comm_rx_pet_xpos;                        /* カラーチェイス用ペットボトルx軸位置 */
+extern uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチェイス用赤ペットボトルx軸位置 */
+extern uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
+extern uint16_t g_u16_comm_rx_pet_flg;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
+extern uint16_t g_u16_comm_rx_pet_srt;                         /* カラーチェイス開始(1:開始) */
 
 /* 外部参照関数 */
 extern void ini_comm( void );                                 /* 通信初期化処理 */

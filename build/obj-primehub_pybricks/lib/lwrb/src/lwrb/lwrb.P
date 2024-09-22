@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/lwrb/src/lwrb/lwrb.o: \
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/lwrb/src/lwrb/lwrb.o: \
  ../../lib/lwrb/src/lwrb/lwrb.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/assert.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \

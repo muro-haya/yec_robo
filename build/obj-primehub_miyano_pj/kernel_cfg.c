@@ -42,7 +42,7 @@ const TINIB _kernel_tinib_table[TNUM_TSKID] = {
 	{ (PYBRICKS_TASK_ATR), (EXINF)(0), (TASK)(pb_main_task), INT_PRIORITY(PYBRICKS_PRIORITY), {	(void *)(_kernel_stack_PYBRICKS_TASK), 	((void *)((char *)(_kernel_stack_PYBRICKS_TASK) + (ROUND_STK_T(PYBRICKS_STACK_SIZE)))), }, },
 	{ (TA_ACT), (EXINF)(&tTask_INIB_tab[0]), (TASK)(tTask_start), INT_PRIORITY(3), {	(void *)(_kernel_stack_TSKID_tTask_LogTask_Task), 	((void *)((char *)(_kernel_stack_TSKID_tTask_LogTask_Task) + (ROUND_STK_T(4096)))), }, },
 	{ (TA_ACT), (EXINF)(0), (TASK)(Main), INT_PRIORITY(MAIN_PRIORITY), {	(void *)(_kernel_stack_MAIN_TASK), 	((void *)((char *)(_kernel_stack_MAIN_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
-	{ (TA_NULL), (EXINF)(0), (TASK)(Main_2m), INT_PRIORITY(8), {	(void *)(_kernel_stack_MAIN_2M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_2M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
+	{ (TA_NULL), (EXINF)(0), (TASK)(Main_2m), INT_PRIORITY(4), {	(void *)(_kernel_stack_MAIN_2M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_2M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
 	{ (TA_NULL), (EXINF)(0), (TASK)(Main_10m), INT_PRIORITY(9), {	(void *)(_kernel_stack_MAIN_10M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_10M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
 	{ (TA_NULL), (EXINF)(0), (TASK)(Main_100m), INT_PRIORITY(12), {	(void *)(_kernel_stack_MAIN_100M_TASK), 	((void *)((char *)(_kernel_stack_MAIN_100M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
 	{ (TA_NULL), (EXINF)(0), (TASK)(Tx_1m), INT_PRIORITY(11), {	(void *)(_kernel_stack_TX_1M_TASK), 	((void *)((char *)(_kernel_stack_TX_1M_TASK) + (ROUND_STK_T(STACK_SIZE)))), }, },
