@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/src/light/color_light.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/light/color_light.o: \
  ../../lib/pbio/src/light/color_light.c \
  ../..//lib/pbio/include/pbio/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \

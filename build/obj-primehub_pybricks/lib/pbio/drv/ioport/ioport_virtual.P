@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/ioport/ioport_virtual.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/ioport/ioport_virtual.o: \
  ../../lib/pbio/drv/ioport/ioport_virtual.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h

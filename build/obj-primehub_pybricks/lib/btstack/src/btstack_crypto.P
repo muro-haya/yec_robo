@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/btstack_crypto.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/btstack_crypto.o: \
  ../../lib/btstack/src/btstack_crypto.c \
  ../../lib/btstack/src/btstack_crypto.h \
  ../../lib/btstack/src/btstack_defines.h \

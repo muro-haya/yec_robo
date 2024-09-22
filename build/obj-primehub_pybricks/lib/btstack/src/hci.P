@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/hci.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/hci.o: \
  ../../lib/btstack/src/hci.c \
  ../..//lib/pbio/platform/prime_hub_spike-rt/btstack_config.h \
  ../../lib/btstack/src/gap.h ../../lib/btstack/src/btstack_defines.h \

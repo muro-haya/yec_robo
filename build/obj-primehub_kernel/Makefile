@@ -64,7 +64,7 @@ endif
 #
 #  ソースファイルのディレクトリの定義
 #
-SRCDIR = /home/hayato/spike-rt/asp3
+SRCDIR = ../../asp3
 
 #
 #  オブジェクトファイル名の拡張子の設定

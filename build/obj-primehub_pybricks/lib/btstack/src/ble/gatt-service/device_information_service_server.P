@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/ble/gatt-service/device_information_service_server.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/ble/gatt-service/device_information_service_server.o: \
  ../../lib/btstack/src/ble/gatt-service/device_information_service_server.c \
  ../..//lib/btstack/src/btstack_defines.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \

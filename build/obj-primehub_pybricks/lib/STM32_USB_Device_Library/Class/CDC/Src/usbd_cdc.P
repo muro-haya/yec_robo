@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o: \
  ../../lib/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c \
  ../..//lib/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
  ../..//lib/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \

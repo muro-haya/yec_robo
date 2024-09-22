@@ -9,6 +9,7 @@
 
 #include "kernel_cfg.h"
 #include "syssvc/serial.h"
+#include "drive_mtr.h"
 
 #include "../M_CTL/linetrace_run.h"
 
@@ -43,6 +44,7 @@ struct comm_data tx_datas[] = {
     {  1, 100, 501, &comm_rx_cnt               },       /* 受信確認返信カウンタ */
     {  2, 100, 502, &vlume                     },       /* 受信確認返信カウンタ */
     
+<<<<<<< Updated upstream
     {  0, 100, 600, &g_u16_linetrace_run_bsV   },       /* 計測値0 */
     {  1, 100, 601, &g_u16_linetrace_run_fbTgt },       /* 計測値1 */
     {  2, 100, 602, &g_u16_linetrace_run_fbPv  },       /* 計測値2 */
@@ -53,6 +55,18 @@ struct comm_data tx_datas[] = {
     {  7, 100, 607, &vlume                     },       /* 計測値7 */
     {  8, 100, 608, &vlume                     },       /* 計測値8 */
     {  9, 100, 609, &vlume                     },       /* 計測値9 */
+=======
+    {  0, 100, 600, (uint16_t*)&s16_drive_cntL       },       /* 計測値0 */
+    {  1, 100, 601, (uint16_t*)&u16_drive_cntL_buf_index   },       /* 計測値1 */
+    {  2, 100, 602, (uint16_t*)&s16_drive_dltbufL   },       /* 計測値2 */
+    {  3, 100, 603, (uint16_t*)&s16_drive_dltL   },       /* 計測値3 */
+    {  4, 100, 604, (uint16_t*)&s16_drive_rpmL   },       /* 計測値4 */
+    {  5, 100, 605, (uint16_t*)&g_s16_const_run_spd          },       /* 計測値5 */
+    {  6, 100, 606, (uint16_t*)&s16_drive_rpmL_dlt          },       /* 計測値6 */
+    {  7, 100, 607, (uint16_t*)&s16_drive_rpmR         },       /* 計測値7 */
+    {  8, 100, 608, (uint16_t*)&s16_drive_cntL},       /* 計測値8 */
+    {  9, 100, 609, (uint16_t*)&s16_drive_cntR},       /* 計測値9 */
+>>>>>>> Stashed changes
 };
 #define RX_DATA_NUM 12                                   /* 受信データ数 */
 /* 受信情報 */
@@ -60,6 +74,7 @@ struct comm_data rx_datas[] = {
     {  0, 100, 000, &comm_rx_cnt               },       /* 受信確認カウンタ */
     {  0,  10, 001, &g_s32_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
     
+<<<<<<< Updated upstream
     {  0,  10, 100, &x_u16_linetrace_run_kp     },       /* 適合値0 */
     {  0,  10, 101, &x_u16_linetrace_run_ki     },       /* 適合値1 */
     {  0,  10, 102, &x_u16_linetrace_run_kd     },       /* 適合値2 */
@@ -70,6 +85,18 @@ struct comm_data rx_datas[] = {
     {  0,  10, 107, &vlume                      },       /* 適合値7 */
     {  0,  10, 108, &vlume                      },       /* 適合値8 */
     {  0,  10, 109, &vlume                      },       /* 適合値9 */
+=======
+    {  0,  10, 100, (uint16_t*)&g_s16_const_run_spd    },       /* 適合値0 */
+    {  0,  10, 101, (uint16_t*)&x_u16_drive_mtr_rpmL_kp    },       /* 適合値1 */
+    {  0,  10, 102, (uint16_t*)&x_u16_drive_mtr_rpmL_ki   },       /* 適合値2 */
+    {  0,  10, 103, (uint16_t*)&x_u16_drive_mtr_rpmL_kd   },       /* 適合値3 */
+    {  0,  10, 104, (uint16_t*)&vlume   },       /* 適合値4 */
+    {  0,  10, 105, (uint16_t*)&vlume   },       /* 適合値5 */
+    {  0,  10, 106, (uint16_t*)&vlume                     },       /* 適合値6 */
+    {  0,  10, 107, (uint16_t*)&vlume                     },       /* 適合値7 */
+    {  0,  10, 108, (uint16_t*)&vlume                     },       /* 適合値8 */
+    {  0,  10, 109, (uint16_t*)&vlume                     },       /* 適合値9 */
+>>>>>>> Stashed changes
 };
 
 void ini_comm( void ){

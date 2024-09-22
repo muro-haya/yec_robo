@@ -5,5 +5,5 @@
 /*  36 "./gen/tmp_C_src.c" */
 typedef struct { int dummy; } va_list;
 
-/*  1 "/home/hayato/spike-rt/asp3/target/primehub_gcc/primehub.h" 1 */
+/*  1 "../../asp3/target/primehub_gcc/primehub.h" 1 */
 /*  39 "./gen/tmp_C_src.c" 2 */

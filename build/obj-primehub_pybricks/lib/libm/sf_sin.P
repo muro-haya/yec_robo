@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/libm/sf_sin.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/libm/sf_sin.o: \
  ../../micropython/lib/libm/sf_sin.c ../../micropython/lib/libm/fdlibm.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/math.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h \

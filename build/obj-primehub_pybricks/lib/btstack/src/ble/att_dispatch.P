@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/ble/att_dispatch.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/ble/att_dispatch.o: \
  ../../lib/btstack/src/ble/att_dispatch.c \
  ../../lib/btstack/src/ble/att_dispatch.h \
  ../..//lib/btstack/src/btstack_util.h \

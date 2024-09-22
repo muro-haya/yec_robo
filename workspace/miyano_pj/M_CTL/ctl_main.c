@@ -27,7 +27,11 @@ void ini_ctl_main( void ){
     ini_const_run();                /* 一定出力走行初期化 */
     ini_arm_ctl();                  /* アーム制御初期化 */
 
+<<<<<<< Updated upstream
     g_u16_ctl_main_mode = LINETRACE_RUN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+=======
+    g_u16_ctl_main_mode = CONST_RUN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+>>>>>>> Stashed changes
 }
 
 /* 機体制御周期処理 */

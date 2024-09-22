@@ -5,12 +5,12 @@
 /*  36 "./gen/tmp_C_src.c" */
 typedef struct { int dummy; } va_list;
 
-/*  1 "/home/hayato/spike-rt/asp3/syssvc/syslog.h" 1 */
-/*  53 "/home/hayato/spike-rt/asp3/syssvc/syslog.h" */
-/*  1 "/home/hayato/spike-rt/asp3/include/t_stddef.h" 1 */
-/*  65 "/home/hayato/spike-rt/asp3/include/t_stddef.h" */
-/*  1 "/home/hayato/spike-rt/asp3/target/primehub_gcc/target_stddef.h" 1 */
-/*  63 "/home/hayato/spike-rt/asp3/target/primehub_gcc/target_stddef.h" */
+/*  1 "../../asp3/syssvc/syslog.h" 1 */
+/*  53 "../../asp3/syssvc/syslog.h" */
+/*  1 "../../asp3/include/t_stddef.h" 1 */
+/*  65 "../../asp3/include/t_stddef.h" */
+/*  1 "../../asp3/target/primehub_gcc/target_stddef.h" 1 */
+/*  63 "../../asp3/target/primehub_gcc/target_stddef.h" */
 /*  1 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h" 1 3 4 */
 /*  9 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h" 3 4 */
 /*  1 "/usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h" 1 3 4 */
@@ -208,10 +208,10 @@ typedef __uint_least64_t uint_least64_t;
   typedef long long int int_fast64_t;
   typedef long long unsigned int uint_fast64_t;
 /*  10 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h" 2 3 4 */
-/*  64 "/home/hayato/spike-rt/asp3/target/primehub_gcc/target_stddef.h" 2 */
+/*  64 "../../asp3/target/primehub_gcc/target_stddef.h" 2 */
 
-/*  1 "/home/hayato/spike-rt/asp3/arch/gcc/tool_stddef.h" 1 */
-/*  81 "/home/hayato/spike-rt/asp3/arch/gcc/tool_stddef.h" */
+/*  1 "../../asp3/arch/gcc/tool_stddef.h" 1 */
+/*  81 "../../asp3/arch/gcc/tool_stddef.h" */
 /*  1 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h" 1 3 4 */
 /*  143 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h" 3 4 */
 typedef int ptrdiff_t;
@@ -225,7 +225,7 @@ typedef struct {
   long double __max_align_ld ;
 /*  426 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h" 3 4 */
 } max_align_t;
-/*  82 "/home/hayato/spike-rt/asp3/arch/gcc/tool_stddef.h" 2 */
+/*  82 "../../asp3/arch/gcc/tool_stddef.h" 2 */
 /*  1 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h" 1 3 4 */
 /*  34 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h" 3 4 */
 /*  1 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/syslimits.h" 1 3 4 */
@@ -253,21 +253,21 @@ typedef struct {
 /*  196 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h" 2 3 4 */
 /*  8 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/syslimits.h" 2 3 4 */
 /*  35 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h" 2 3 4 */
-/*  83 "/home/hayato/spike-rt/asp3/arch/gcc/tool_stddef.h" 2 */
-/*  66 "/home/hayato/spike-rt/asp3/target/primehub_gcc/target_stddef.h" 2 */
+/*  83 "../../asp3/arch/gcc/tool_stddef.h" 2 */
+/*  66 "../../asp3/target/primehub_gcc/target_stddef.h" 2 */
 
 
 
 
-/*  1 "/home/hayato/spike-rt/asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_stddef.h" 1 */
-/*  59 "/home/hayato/spike-rt/asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_stddef.h" */
-/*  1 "/home/hayato/spike-rt/asp3/arch/arm_m_gcc/common/core_stddef.h" 1 */
-/*  60 "/home/hayato/spike-rt/asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_stddef.h" 2 */
-/*  71 "/home/hayato/spike-rt/asp3/target/primehub_gcc/target_stddef.h" 2 */
-/*  66 "/home/hayato/spike-rt/asp3/include/t_stddef.h" 2 */
-/*  84 "/home/hayato/spike-rt/asp3/include/t_stddef.h" */
+/*  1 "../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_stddef.h" 1 */
+/*  59 "../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_stddef.h" */
+/*  1 "../../asp3/arch/arm_m_gcc/common/core_stddef.h" 1 */
+/*  60 "../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_stddef.h" 2 */
+/*  71 "../../asp3/target/primehub_gcc/target_stddef.h" 2 */
+/*  66 "../../asp3/include/t_stddef.h" 2 */
+/*  84 "../../asp3/include/t_stddef.h" */
 
-/*  84 "/home/hayato/spike-rt/asp3/include/t_stddef.h" */
+/*  84 "../../asp3/include/t_stddef.h" */
 struct TOPPERS_dummy_t { int TOPPERS_dummy_field; };
 typedef void (*TOPPERS_fp_t)(struct TOPPERS_dummy_t);
 
@@ -324,9 +324,9 @@ typedef struct acvct {
  ACPTN acptn3;
  ACPTN acptn4;
 } ACVCT;
-/*  54 "/home/hayato/spike-rt/asp3/syssvc/syslog.h" 2 */
-/*  1 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 1 */
-/*  71 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  54 "../../asp3/syssvc/syslog.h" 2 */
+/*  1 "../../asp3/include/t_syslog.h" 1 */
+/*  71 "../../asp3/include/t_syslog.h" */
 /*  1 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h" 1 3 4 */
 /*  40 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h" 3 4 */
 
@@ -338,10 +338,10 @@ typedef
                          __gnuc_va_list;
 /*  99 "/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h" 3 4 */
 typedef __gnuc_va_list va_list;
-/*  72 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 2 */
-/*  122 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  72 "../../asp3/include/t_syslog.h" 2 */
+/*  122 "../../asp3/include/t_syslog.h" */
 
-/*  122 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  122 "../../asp3/include/t_syslog.h" */
 typedef struct {
  uint_t logtype;
  HRTCNT logtim;
@@ -355,7 +355,7 @@ typedef struct {
 
 
 extern ER syslog_wri_log(uint_t prio, const SYSLOG *p_syslog) ;
-/*  144 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  144 "../../asp3/include/t_syslog.h" */
 static inline void
 t_syslog_0(uint_t prio, uint_t type)
 {
@@ -455,27 +455,27 @@ syslog(uint_t prio, const char *format, ...)
  SYSLOG logbuf;
 
  
-/*  242 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 3 4 */
+/*  242 "../../asp3/include/t_syslog.h" 3 4 */
 __builtin_va_start(
-/*  242 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  242 "../../asp3/include/t_syslog.h" */
 ap
-/*  242 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 3 4 */
+/*  242 "../../asp3/include/t_syslog.h" 3 4 */
 ,
-/*  242 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  242 "../../asp3/include/t_syslog.h" */
 format
-/*  242 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 3 4 */
+/*  242 "../../asp3/include/t_syslog.h" 3 4 */
 )
-/*  242 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  242 "../../asp3/include/t_syslog.h" */
                     ;
  tt_syslog(&logbuf, format, ap);
  
-/*  244 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 3 4 */
+/*  244 "../../asp3/include/t_syslog.h" 3 4 */
 __builtin_va_end(
-/*  244 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  244 "../../asp3/include/t_syslog.h" */
 ap
-/*  244 "/home/hayato/spike-rt/asp3/include/t_syslog.h" 3 4 */
+/*  244 "../../asp3/include/t_syslog.h" 3 4 */
 )
-/*  244 "/home/hayato/spike-rt/asp3/include/t_syslog.h" */
+/*  244 "../../asp3/include/t_syslog.h" */
           ;
  ((void) syslog_wri_log(prio, &logbuf));
 }
@@ -494,8 +494,8 @@ t_perror(uint_t prio, const char *file, int_t line, const char *expr, ER ercd)
  tt_perror(&logbuf, file, line, expr, ercd);
  ((void) syslog_wri_log(prio, &logbuf));
 }
-/*  55 "/home/hayato/spike-rt/asp3/syssvc/syslog.h" 2 */
-/*  65 "/home/hayato/spike-rt/asp3/syssvc/syslog.h" */
+/*  55 "../../asp3/syssvc/syslog.h" 2 */
+/*  65 "../../asp3/syssvc/syslog.h" */
 typedef struct t_syslog_rlog {
  uint_t count;
  uint_t lost;

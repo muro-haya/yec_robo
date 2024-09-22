@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/btstack_memory.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/btstack_memory.o: \
  ../../lib/btstack/src/btstack_memory.c \
  ../../lib/btstack/src/btstack_memory.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/btstack_config.h \

@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/sys/command.o: \
+/home/eaglraune/robo24_local/yec_robo/build/obj-primehub_pybricks/lib/pbio/sys/command.o: \
  ../../lib/pbio/sys/command.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/assert.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
