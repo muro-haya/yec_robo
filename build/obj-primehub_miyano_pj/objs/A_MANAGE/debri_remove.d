@@ -32,11 +32,11 @@ objs/A_MANAGE/debri_remove.o: \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/sched.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/types.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h \
- ../../asp3/include/kernel.h ../../asp3/include/t_stddef.h \
- ../../asp3/target/primehub_gcc/target_stddef.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/_intsup.h \
+ ../../asp3/include/kernel.h ../../asp3/include/t_stddef.h \
+ ../../asp3/target/primehub_gcc/target_stddef.h \
  ../../asp3/arch/gcc/tool_stddef.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/syslimits.h \
@@ -48,7 +48,15 @@ objs/A_MANAGE/debri_remove.o: \
  ../../asp3/arch/arm_m_gcc/stm32f4xx_stm32cube/chip_kernel.h \
  ../../asp3/arch/arm_m_gcc/common/core_kernel.h kernel_cfg.h \
  ../../asp3/syssvc/serial.h \
- ../../workspace/miyano_pj/A_MANAGE/debri_remove.h
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/ctl_main.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_distance.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_movement.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/rec_color.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/linetrace_run.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h \
+ ../../workspace/miyano_pj/A_MANAGE/../M_CTL/arm_ctl.h \
+ ../../workspace/miyano_pj/A_MANAGE/debri_remove.h \
+ ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -81,12 +89,12 @@ objs/A_MANAGE/debri_remove.o: \
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/sched.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/types.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h:
-../../asp3/include/kernel.h:
-../../asp3/include/t_stddef.h:
-../../asp3/target/primehub_gcc/target_stddef.h:
 /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/_intsup.h:
+../../asp3/include/kernel.h:
+../../asp3/include/t_stddef.h:
+../../asp3/target/primehub_gcc/target_stddef.h:
 ../../asp3/arch/gcc/tool_stddef.h:
 /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
 /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include-fixed/syslimits.h:
@@ -99,4 +107,12 @@ objs/A_MANAGE/debri_remove.o: \
 ../../asp3/arch/arm_m_gcc/common/core_kernel.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/ctl_main.h:
+../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_distance.h:
+../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/cal_movement.h:
+../../workspace/miyano_pj/A_MANAGE/../M_MEASURE/rec_color.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/linetrace_run.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h:
+../../workspace/miyano_pj/A_MANAGE/../M_CTL/arm_ctl.h:
 ../../workspace/miyano_pj/A_MANAGE/debri_remove.h:
+../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h:

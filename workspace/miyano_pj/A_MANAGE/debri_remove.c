@@ -84,7 +84,7 @@ uint16_t g_u16_danger_count;             /* デンジャーボトルカウント
 uint16_t g_u16_bottle_count;             /* 総ボトルカウント */
 
 /* 外部非公開変数 */
-uint16_t reset_flg;                      /* リセットフラグ */
+uint16_t dr_reset_flg;                      /* リセットフラグ */
 
 /* 外部非公開関数 */
 void dr_turn_jdg_deg( int16_t target_deg );                              /* 指定角まで旋回するフェイズ */
@@ -101,7 +101,7 @@ void ini_debri_remove( void ){
     g_u16_debri_count = 0;
     g_u16_danger_count = 0;
     g_u16_bottle_count = 0;
-    reset_flg = 0;
+    dr_reset_flg = 0;
 }
 
 /* デブリリムーバル周期処理 */
@@ -163,9 +163,9 @@ bool_t cyc_debri_remove( void ){
 void dr_turn_jdg_deg( int16_t target_deg ){
     int16_t deg_result;
 
-    if( 0 == reset_flg ){
+    if( 0 == dr_reset_flg ){
         reset_cal_movement();
-        reset_flg = 1;
+        dr_reset_flg = 1;
     }
     else{
         g_u16_ctl_main_mode = CONST_TURN;
@@ -182,7 +182,7 @@ void dr_turn_jdg_deg( int16_t target_deg ){
         deg_result = get_cal_movement_body_deg();
         if( abs(target_deg) < abs(deg_result) ){
             g_u16_debri_remove_phase += 1;
-            reset_flg = 0;
+            dr_reset_flg = 0;
         }
     }
 }
@@ -192,9 +192,9 @@ void dr_turn_jdg_deg( int16_t target_deg ){
 void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
     int16_t movement_result;
 
-    if( 0 == reset_flg ){
+    if( 0 == dr_reset_flg ){
         reset_cal_movement();
-        reset_flg = 1;
+        dr_reset_flg = 1;
     }
     else{
         //g_u16_ctl_main_mode = CONST_RUN;
@@ -204,7 +204,7 @@ void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
         movement_result = get_cal_movement();
         if( target_movement < movement_result ){
             g_u16_debri_remove_phase += 1;
-            reset_flg = 0;
+            dr_reset_flg = 0;
         }
     }
 }
@@ -233,9 +233,9 @@ void dr_jdg_color( void ){
 void dr_rd_jdg_movement( int16_t target_movement, int16_t run_spd ){
     int16_t movement_result;
 
-    if( 0 == reset_flg ){
+    if( 0 == dr_reset_flg ){
         reset_cal_movement();
-        reset_flg = 1;
+        dr_reset_flg = 1;
     }
     else{
         g_u16_ctl_main_mode = CONST_RUN;
@@ -245,7 +245,7 @@ void dr_rd_jdg_movement( int16_t target_movement, int16_t run_spd ){
         movement_result = get_cal_movement();
         if( abs( target_movement ) < abs( movement_result ) ){
             g_u16_debri_remove_phase += 1;
-            reset_flg = 0;
+            dr_reset_flg = 0;
         }
     }
 }
