@@ -141,9 +141,10 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
   s16_drive_cntR_buf[u16_drive_cntL_buf_index] = s16_drive_cntR;
   s16_drive_rpmR_dlt_old = (spdR - s16_drive_rpmR);
 
-
-  pup_motor_set_power(motorL, g_s16_drive_mtr_spdL);                  // パワーを設定
-  pup_motor_set_power(motorR, g_s16_drive_mtr_spdR);                  // パワーを設定
+pup_motor_set_power(motorL, spdL);                  // パワーを設定
+pup_motor_set_power(motorR, spdR);                  // パワーを設定
+  // pup_motor_set_power(motorL, g_s16_drive_mtr_spdL);                  // パワーを設定
+  // pup_motor_set_power(motorR, g_s16_drive_mtr_spdR);                  // パワーを設定
 }
 
 /* 駆動モータエンコーダカウントリセット */

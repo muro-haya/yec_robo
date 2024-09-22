@@ -56,7 +56,20 @@ objs/A_MANAGE/debri_remove.o: \
  ../../workspace/miyano_pj/A_MANAGE/../M_CTL/const_run.h \
  ../../workspace/miyano_pj/A_MANAGE/../M_CTL/arm_ctl.h \
  ../../workspace/miyano_pj/A_MANAGE/debri_remove.h \
- ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h
+ ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h \
+ ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/drive_mtr.h \
+ ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/button.h \
+ ../../asp3/../drivers/include/spike/hub/system.h \
+ ../../asp3/../drivers/include/spike/hub/button.h \
+ ../../asp3/../external/libpybricks/lib/pbio/include/pbio/button.h \
+ ../../asp3/../external/libpybricks/lib/pbio/include/pbio/error.h \
+ ../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h \
+ /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+ ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/config.h \
+ ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \
+ ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h \
+ ../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h \
+ ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -116,3 +129,16 @@ kernel_cfg.h:
 ../../workspace/miyano_pj/A_MANAGE/../M_CTL/arm_ctl.h:
 ../../workspace/miyano_pj/A_MANAGE/debri_remove.h:
 ../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/comm.h:
+../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/drive_mtr.h:
+../../workspace/miyano_pj/A_MANAGE/../D_DEVICE/button.h:
+../../asp3/../drivers/include/spike/hub/system.h:
+../../asp3/../drivers/include/spike/hub/button.h:
+../../asp3/../external/libpybricks/lib/pbio/include/pbio/button.h:
+../../asp3/../external/libpybricks/lib/pbio/include/pbio/error.h:
+../../asp3/../external/libpybricks/lib/pbio/include/pbio/port.h:
+/usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
+../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/config.h:
+../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h:
+../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h:
+../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h:
+../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h:
