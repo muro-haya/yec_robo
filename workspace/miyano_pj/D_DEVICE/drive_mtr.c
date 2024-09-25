@@ -13,17 +13,12 @@
 
 #include "drive_mtr.h"
 
-<<<<<<< Updated upstream
-=======
 #define MOTOR_CNT_BUF 20
 
->>>>>>> Stashed changes
 // PUPモータデバイスポインタ
 pup_motor_t *motorL;
 pup_motor_t *motorR;
 
-<<<<<<< Updated upstream
-=======
 /*  適合値*/
 uint16_t x_u16_drive_mtr_rpmL_kp = 10;
 uint16_t x_u16_drive_mtr_rpmL_ki = 5;
@@ -65,9 +60,9 @@ int16_t s16_drive_rpmL_dlt;
 int16_t s16_drive_rpmR_dlt;
 int16_t s16_drive_dltL;
 int16_t s16_drive_dltR;
+uint16_t u16_drive_cntL_buf_index;
+int16_t s16_drive_dltbufL;
 
-
->>>>>>> Stashed changes
 /* 駆動モータ初期化 */
 void ini_drive_mtr( void ){
   // PUPモータデバイスポインタを取得
@@ -81,8 +76,6 @@ void ini_drive_mtr( void ){
   // 駆動モータの角度をリセット
   pup_motor_reset_count(motorL);
   pup_motor_reset_count(motorR);
-<<<<<<< Updated upstream
-=======
 
   u16_drive_cntL_buf_index  = 0;
   u16_drive_cntR_buf_index  = 0;
@@ -101,7 +94,6 @@ void ini_drive_mtr( void ){
   s16_drive_rpmR_i = 0;
   s16_drive_rpmR_d = 0;
   s16_drive_rpmR_dlt_old = 0;
->>>>>>> Stashed changes
 }
 
 /* 駆動モータDUty設定 */
@@ -112,10 +104,6 @@ void set_drive_mtr_duty( int16_t dutyL, int16_t dutyR ){
 
 /* 駆動モータ回転速度設定 */
 void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
-<<<<<<< Updated upstream
-  pup_motor_set_speed(motorL, spdL);              // 速度を設定
-  pup_motor_set_speed(motorR, spdR);              // 速度を設定
-=======
   
   get_drive_mtr_cnt(&s16_drive_cntL,&s16_drive_cntR);
   
@@ -181,7 +169,6 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
   //pup_motor_set_speed(motorR, spdR);                  // スピードを設定
   pup_motor_set_power(motorL, 80);                  // パワーを設定
   pup_motor_set_power(motorR, 80);                  // パワーを設定
->>>>>>> Stashed changes
 }
 
 /* 駆動モータエンコーダカウントリセット */

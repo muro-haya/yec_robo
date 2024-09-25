@@ -27,13 +27,8 @@ int16_t  button_state_flag;
 
 /* 一定出力走行初期化 */
 void ini_const_run( void ){
-<<<<<<< Updated upstream
     g_u16_const_run_way  = 0;           /* 一定出力制御指令方法(0:DUTY 1:回転速度) */
     g_s16_const_run_spd  = 300;           /* 設定速度 */
-=======
-    g_u16_const_run_way  = 1;           /* 一定出力制御指令方法(0:DUTY 1:回転速度) */
-    g_s16_const_run_spd  = 360;           /* 設定速度 150*/
->>>>>>> Stashed changes
     g_s16_const_run_duty = 100;           /* 設定DUTY */
     button_state = 0;
     button_state_prev = 0;

@@ -3,9 +3,6 @@ extern void ini_drive_mtr( void );                                              
 extern void set_drive_mtr_duty( int16_t dutyL, int16_t dutyR );                 /* 駆動モータDUTY設定 */
 extern void set_drive_mtr_spd( int16_t spdL, int16_t spdR );                    /* 駆動モータ回転速度設定 */
 extern void rst_drive_mtr_cnt( void );                                          /* 駆動モータエンコーダカウントリセット */
-<<<<<<< Updated upstream
-extern void get_drive_mtr_cnt( int16_t* drive_cntL, int16_t* drive_cntR );      /* 駆動モータエンコーダカウント取得 */
-=======
 extern void get_drive_mtr_cnt( int16_t* drive_cntL, int16_t* drive_cntR );      /* 駆動モータエンコーダカウント取得 */
 
 /* 外部公開変数 */
@@ -39,4 +36,3 @@ extern int16_t s16_drive_dltL;
 extern int16_t s16_drive_dltR;
 extern int16_t s16_drive_dltbufL;
 extern uint16_t u16_drive_cntL_buf_index;
->>>>>>> Stashed changes
