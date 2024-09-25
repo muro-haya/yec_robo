@@ -19,7 +19,7 @@
 #define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
-int16_t  x_u16_color_chase_kp = 30;            /* P項ゲイン値[0.01]*/
+int16_t  x_u16_color_chase_kp = 80;            /* P項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_ki = 0;            /* I項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_kd = 0;            /* D項ゲイン値[0.01]*/
 
@@ -70,14 +70,26 @@ void cyc_color_chase( void ){
     int16_t s16_LVulue;                         /* 左モータ指示値 */
     int16_t s16_RVulue;                         /* 右モータ指示値 */
     
+    /* 偏差計算 */
+    if(1 == g_u16_comm_rx_jdg_pet){             /* 赤色検出時 */
+        s16_posdlt = g_u16_comm_rx_pet_xpos_red - g_u16_color_chase_fbTgt;  /* 位置偏差計算 */
+    }
+    else if (2 == g_u16_comm_rx_jdg_pet){       /* 青色検出時 */
+        s16_posdlt = g_u16_comm_rx_pet_xpos_bl  - g_u16_color_chase_fbTgt;   /* 位置偏差計算 */
+    }
+    else{                                       /* 未検出 */
+        s16_posdlt     = 0;
+        s16_posdlt_old = 0;
+        u16_dlt_sum    = 0;
+        s16_spddlt     = 0;
+    }
     /* P項計算 */
-    s16_posdlt = g_u16_comm_rx_pet_xpos - g_u16_color_chase_fbTgt;  /* 位置偏差計算 */
     g_s16_color_chase_p = s16_posdlt * x_u16_color_chase_kp;        /* P項計算 */
     /* I項計算 */
-    u16_dlt_sum += s16_posdlt;                                          /* 位置偏差積算 */
+    u16_dlt_sum += s16_posdlt;                                      /* 位置偏差積算 */
     g_s16_color_chase_i = u16_dlt_sum * x_u16_color_chase_ki;       /* I項計算 */
     /* D項計算 */
-    s16_spddlt = s16_posdlt - s16_posdlt_old;                           /* 速度偏差取得 */
+    s16_spddlt = s16_posdlt - s16_posdlt_old;                       /* 速度偏差取得 */
     g_s16_color_chase_d = s16_spddlt * x_u16_color_chase_kd;        /* D項計算 */
 
     /* 指示値算出 */

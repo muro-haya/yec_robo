@@ -34,7 +34,7 @@ uint16_t x_u16_smart_carry_deg        = 100;        /* スマートキャリー�
 uint16_t g_u16_smart_carry_phase;                   /* スマートキャリーフェイズカウント */
 
 /* 外部非公開変数 */
-uint16_t reset_flg;                                 /* リセットフラグ */
+uint16_t u16_smart_carry_reset_flg;                 /* リセットフラグ */
 
 /* 外部非公開関数 */
 void turn_jdg_color( uint16_t fin_color );                          /* 色認識まで旋回するフェイズ */
@@ -46,8 +46,8 @@ void line_jdg_movement( uint16_t fin_movement );                    /* 指定距
 
 /* スマートキャリー初期化処理 */
 void ini_smart_carry( void ){
-    g_u16_smart_carry_phase = 1;
-    reset_flg = 0;
+    g_u16_smart_carry_phase   = 1;
+    u16_smart_carry_reset_flg = 0;
 }
 
 /* スマートキャリー周期処理 */
@@ -99,19 +99,22 @@ bool_t cyc_smart_carry( void ){
 void turn_jdg_color( uint16_t fin_color ){
     g_u16_ctl_main_mode = CONST_TURN;
     g_u16_const_run_way = 1;
-    g_s16_const_run_spd = 100;
+    g_s16_const_run_spd = 200;
+
+    g_u16_comm_rx_pet_srt = 1;                  /* ペットボトル判定開始(1:開始) */
 
     if( 1 == g_u16_comm_rx_jdg_red ){           /* カメラで色認識結果 */
         g_u16_smart_carry_phase += 1;
+        g_u16_comm_rx_pet_srt = 0;              /* ペットボトル判定開始(0:終了) */
     }
 }
 /* 指定角まで旋回するフェイズ */
 void turn_jdg_deg( uint16_t fin_deg ){
     uint16_t deg_result;
 
-    if( 0 == reset_flg ){
+    if( 0 == u16_smart_carry_reset_flg ){
         reset_cal_movement();
-        reset_flg = 1;
+        u16_smart_carry_reset_flg = 1;
     }
     else{
         g_u16_ctl_main_mode = CONST_TURN;
@@ -121,7 +124,7 @@ void turn_jdg_deg( uint16_t fin_deg ){
         deg_result = get_cal_movement_body_deg();
         if( fin_deg < deg_result ){
             g_u16_smart_carry_phase += 1;
-            reset_flg = 0;
+            u16_smart_carry_reset_flg = 0;
         }
     }
 }
@@ -142,9 +145,9 @@ void rd_jdg_color( uint16_t fin_color ){
 void rd_jdg_movement( uint16_t fin_movement, int16_t run_spd ){
     uint16_t movement_result;
 
-    if( 0 == reset_flg ){
+    if( 0 == u16_smart_carry_reset_flg ){
         reset_cal_movement();
-        reset_flg = 1;
+        u16_smart_carry_reset_flg = 1;
     }
     else{
         g_u16_ctl_main_mode = CONST_RUN;
@@ -154,7 +157,7 @@ void rd_jdg_movement( uint16_t fin_movement, int16_t run_spd ){
         movement_result = get_cal_movement();
         if( fin_movement < movement_result ){
             g_u16_smart_carry_phase += 1;
-            reset_flg = 0;
+            u16_smart_carry_reset_flg = 0;
         }
     }
 }
@@ -175,9 +178,9 @@ void line_jdg_obj( uint16_t fin_distance ){
 void line_jdg_movement( uint16_t fin_movement ){
     uint16_t movement_result;
 
-    if( 0 == reset_flg ){
+    if( 0 == u16_smart_carry_reset_flg ){
         reset_cal_movement();
-        reset_flg = 1;
+        u16_smart_carry_reset_flg = 1;
     }
     else{
         g_u16_ctl_main_mode = LINETRACE_RUN;
@@ -187,7 +190,7 @@ void line_jdg_movement( uint16_t fin_movement ){
         movement_result = get_cal_movement();
         if( fin_movement < movement_result ){
             g_u16_smart_carry_phase += 1;
-            reset_flg = 0;
+            u16_smart_carry_reset_flg = 0;
         }
     }
 }

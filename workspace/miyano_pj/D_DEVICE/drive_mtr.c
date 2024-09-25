@@ -15,7 +15,7 @@
 
 #include "drive_mtr.h"
 
-#define MOTOR_CNT_BUF 50
+#define MOTOR_CNT_BUF 20
 
 // PUPモータデバイスポインタ
 pup_motor_t *motorL;
@@ -25,11 +25,17 @@ pup_motor_t *motorR;
 uint16_t x_u16_drive_mtr_spdL_namashi = 40;
 uint16_t x_u16_drive_mtr_spdR_namashi = 3;
 
+// uint16_t x_u16_drive_mtr_rpmL_kp = 40;
+// uint16_t x_u16_drive_mtr_rpmL_kd = 50;
 uint16_t x_u16_drive_mtr_rpmL_kp = 40;
 uint16_t x_u16_drive_mtr_rpmL_kd = 50;
 
-uint16_t x_u16_drive_mtr_rpmR_kp = 46;
-uint16_t x_u16_drive_mtr_rpmR_kd = 52;
+// uint16_t x_u16_drive_mtr_rpmR_kp = 46;
+// uint16_t x_u16_drive_mtr_rpmR_kd = 52;
+uint16_t x_u16_drive_mtr_rpmR_kp = 18;
+uint16_t x_u16_drive_mtr_rpmR_kd = 0;
+uint16_t x_u16_drive_mtr_rpmR_ki = 0;
+
 
 /* 外部公開変数 */
 int16_t g_s16_drive_mtr_spdL;
@@ -50,6 +56,8 @@ int16_t s16_drive_rpmL_dlt_old;
 int16_t s16_drive_rpmR_p;
 int16_t s16_drive_rpmR_d;
 int16_t s16_drive_rpmR_dlt_old;
+int16_t s16_drive_rpmR_i;
+int16_t s16_drive_rpmR_i_sum;
 
 /* 駆動モータ初期化 */
 void ini_drive_mtr( void ){
@@ -82,6 +90,8 @@ void ini_drive_mtr( void ){
   s16_drive_rpmR_p = 0;
   s16_drive_rpmR_d = 0;
   s16_drive_rpmR_dlt_old = 0;
+  s16_drive_rpmR_i = 0;
+  s16_drive_rpmR_i_sum = 0;
 }
 
 /* 駆動モータDUty設定 */
@@ -109,20 +119,20 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
   }
   else{
     u16_drive_cntL_buf_re_flg = 1;
-    u16_drive_cntL_buf_index = 0;
+    u16_drive_cntL_buf_index  = 0;
   }
   s16_drive_dlt    = s16_drive_cntL - s16_drive_cntL_buf[u16_drive_cntL_buf_index];
   s16_drive_rpmL   = (int16_t)((int32_t)s16_drive_dlt *1000*60/ (360 * MOTOR_CNT_BUF * 2));
   s16_drive_rpml_p = ( (spdL - s16_drive_rpmL) * x_u16_drive_mtr_rpmL_kp ) / 100;
   s16_drive_rpml_d = (((spdL - s16_drive_rpmL) - s16_drive_rpmL_dlt_old) * x_u16_drive_mtr_rpmL_kd) / 100;
   g_s16_drive_mtr_spdL = s16_drive_rpml_p - s16_drive_rpml_d;
-  if( 50 <= g_s16_drive_mtr_spdL ){
-    g_s16_drive_mtr_spdL = 50;
+  if( 70 <= g_s16_drive_mtr_spdL ){
+    g_s16_drive_mtr_spdL = 70;
   }
-  else if( -20 >= g_s16_drive_mtr_spdL ){
-    g_s16_drive_mtr_spdL = -20;
+  else if( -70 >= g_s16_drive_mtr_spdL ){
+    g_s16_drive_mtr_spdL = -70;
   }
-  g_s16_drive_mtr_spdL += 50;
+  // g_s16_drive_mtr_spdL += 50;
   s16_drive_cntL_buf[u16_drive_cntL_buf_index] = s16_drive_cntL;
   s16_drive_rpmL_dlt_old = (spdL - s16_drive_rpmL);
 
@@ -130,14 +140,16 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
   s16_drive_rpmR = (int16_t)((int32_t)s16_drive_dlt *1000*60/ (360 * MOTOR_CNT_BUF * 2));
   s16_drive_rpmR_p = ( (spdR - s16_drive_rpmR) * x_u16_drive_mtr_rpmR_kp ) / 100;
   s16_drive_rpmR_d = (((spdR - s16_drive_rpmR) - s16_drive_rpmR_dlt_old) * x_u16_drive_mtr_rpmR_kd) / 100;
-  g_s16_drive_mtr_spdR = s16_drive_rpmR_p - s16_drive_rpmR_d;
-  if( 50 <= g_s16_drive_mtr_spdR ){
-    g_s16_drive_mtr_spdR = 50;
+  s16_drive_rpmR_i_sum += (spdR - s16_drive_rpmR);
+  s16_drive_rpmR_i = s16_drive_rpmR_i_sum * x_u16_drive_mtr_rpmR_ki/1000;
+  g_s16_drive_mtr_spdR = s16_drive_rpmR_p - s16_drive_rpmR_d + s16_drive_rpmR_i;
+  if( 70 <= g_s16_drive_mtr_spdR ){
+    g_s16_drive_mtr_spdR = 70;
   }
   else if( -20 >= g_s16_drive_mtr_spdR ){
-    g_s16_drive_mtr_spdR = -20;
+    g_s16_drive_mtr_spdR = -70;
   }
-  g_s16_drive_mtr_spdR += 50;
+  // g_s16_drive_mtr_spdR += 50;
   s16_drive_cntR_buf[u16_drive_cntL_buf_index] = s16_drive_cntR;
   s16_drive_rpmR_dlt_old = (spdR - s16_drive_rpmR);
 

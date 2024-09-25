@@ -17,6 +17,7 @@
 #include "const_run.h"
 #include "arm_ctl.h"
 #include "color_chase.h"
+#include "../D_DEVICE/comm.h"
 
 /* 外部公開変数 */
 uint16_t g_u16_ctl_main_mode;       /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
@@ -28,7 +29,7 @@ void ini_ctl_main( void ){
     ini_arm_ctl();                  /* アーム制御初期化 */
     ini_color_chase();              /* カラーチェイス 初期化処理 */
 
-    g_u16_ctl_main_mode = COLOR_CHASE;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+    g_u16_ctl_main_mode = LINETRACE_RUN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
 }
 
 /* 機体制御周期処理 */

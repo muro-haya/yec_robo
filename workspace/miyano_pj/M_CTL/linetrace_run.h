@@ -26,4 +26,7 @@ extern int16_t  g_s16_linetrace_run_fbCmdv;            /* FB制御指令値[-] *
 extern uint16_t g_u16_linetrace_run_lpos;              /* 左色値 */
 extern uint16_t g_u16_linetrace_run_rpos;              /* 右色値 */
 
+extern uint16_t g_u16_linetrace_run_r;
+extern uint16_t g_u16_linetrace_run_g;
+extern uint16_t g_u16_linetrace_run_b;
 #endif
