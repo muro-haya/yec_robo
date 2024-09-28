@@ -15,14 +15,14 @@
 
 #include "drive_mtr.h"
 
-#define MOTOR_CNT_BUF 20
+#define MA_WINDOW_SIZE 50 //移動平均の窓サイズ
 
 // PUPモータデバイスポインタ
 pup_motor_t *motorL;
 pup_motor_t *motorR;
 
 /*  適合値*/
-uint16_t x_u16_drive_mtr_rpmL_kp = 10;
+uint16_t x_u16_drive_mtr_rpmL_kp = 12;
 uint16_t x_u16_drive_mtr_rpmL_kd = 0;
 uint16_t x_u16_drive_mtr_rpmL_ki = 0;
 
@@ -46,6 +46,18 @@ int16_t s16_drive_rpmR_i;
 int16_t s16_drive_rpmR_d;
 int16_t s16_drive_rpmR_err_old;
 int16_t s16_drive_rpmR_err_cumsum;
+
+int16_t MovingAve_SizeL;
+int16_t MovingAve_indexL;
+int16_t MovingAve_sumL;
+int16_t MovingAve_countL;
+int16_t err_windowL[MA_WINDOW_SIZE];
+
+int16_t MovingAve_SizeR;
+int16_t MovingAve_indexR;
+int16_t MovingAve_sumR;
+int16_t MovingAve_countR;
+int16_t err_windowR[MA_WINDOW_SIZE];
 
 /*ロギング用にglobalで定義*/
 int16_t s16_drive_cntL;
@@ -82,6 +94,20 @@ void ini_drive_mtr( void ){
   s16_drive_rpmR_i = 0;
   s16_drive_rpmR_d = 0;
   s16_drive_rpmR_err_old = 0;
+
+  //移動平均計算用変数
+    for (int i = 0; i < MovingAve_SizeL; i++)
+    {
+    err_windowR[i] = 0; // 配列をゼロで初期化
+    err_windowR[i] = 0; // 配列をゼロで初期化
+    }
+    MovingAve_indexL = 0; // インデックスをリセット
+    MovingAve_indexR = 0; // インデックスをリセット
+    MovingAve_sumL = 0; // 合計をリセット
+    MovingAve_sumR = 0; // 合計をリセット
+    MovingAve_countL = 0; // 入力された誤差の数をリセット
+    MovingAve_countR = 0; // 入力された誤差の数をリセット
+
 }
 
 /* 駆動モータDUty設定 */
@@ -91,25 +117,56 @@ void set_drive_mtr_duty( int16_t dutyL, int16_t dutyR ){
 }
 
 /* 駆動モータ回転速度設定 */
-void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
-  
+void set_drive_mtr_spd( int16_t spdL, int16_t spdR )
+{  
+  int16_t g_s16_drive_mtr_spdL_FF;
+  int16_t g_s16_drive_mtr_spdR_FF;
+  int16_t g_s16_drive_mtr_powerL;
+  int16_t g_s16_drive_mtr_powerR;
+
+
+  //FF直達項　
+  if(spdL < 0){
+    g_s16_drive_mtr_spdL_FF = spdL*5/72-25;
+  }else if(spdL == 0){
+    g_s16_drive_mtr_spdL_FF = 0;
+  }else{
+    g_s16_drive_mtr_spdL_FF = spdL*5/72+25;
+  }
+
+  if(spdR < 0){
+    g_s16_drive_mtr_spdR_FF = spdR*5/72-25;
+  }else if(spdR == 0){
+    g_s16_drive_mtr_spdR_FF = 0;
+  }else{
+    g_s16_drive_mtr_spdR_FF = spdR*5/72 + 25;
+  }
+
+  //FB項
   s16_drive_rpmL = pup_motor_get_speed(motorL);
   s16_drive_rpmL_err = (spdL - s16_drive_rpmL);
-  s16_drive_rpmL_p = ( s16_drive_rpmL_err * x_u16_drive_mtr_rpmL_kp ) / 100;
-  s16_drive_rpmL_d = (( s16_drive_rpmL_err - s16_drive_rpmL_err_old ) * x_u16_drive_mtr_rpmL_kd ) / 100;
-  if(s16_drive_rpmL_i <= 100)
+  if(s16_drive_rpmL_err != s16_drive_rpmL_err_old)
   {
-    s16_drive_rpmL_err_cumsum += s16_drive_rpmL_err;  
+    s16_drive_rpmL_p = ( s16_drive_rpmL_err * x_u16_drive_mtr_rpmL_kp ) / 100;
+    s16_drive_rpmL_d = (( s16_drive_rpmL_err - s16_drive_rpmL_err_old ) * x_u16_drive_mtr_rpmL_kd ) / 100;
+    if(s16_drive_rpmL_i <= 100)
+    {
+      s16_drive_rpmL_err_cumsum += s16_drive_rpmL_err;  
+    }
+    s16_drive_rpmL_i = s16_drive_rpmL_err_cumsum*0.002 * x_u16_drive_mtr_rpmL_ki/100;
+    g_s16_drive_mtr_spdL = s16_drive_rpmL_p + s16_drive_rpmL_i - s16_drive_rpmL_d;
   }
-  s16_drive_rpmL_i = s16_drive_rpmL_err_cumsum*0.002 * x_u16_drive_mtr_rpmL_ki/100;
-  g_s16_drive_mtr_spdL = s16_drive_rpmL_p + s16_drive_rpmL_i - s16_drive_rpmL_d;
   if( 100 < g_s16_drive_mtr_spdL ){
     g_s16_drive_mtr_spdL = 100;
     s16_drive_rpmL_err_cumsum = 0;
+    hub_speaker_set_volume(30);
+    hub_speaker_play_tone(4000, 2);
   }
   else if( -100 > g_s16_drive_mtr_spdL ){
     g_s16_drive_mtr_spdL = -100;
     s16_drive_rpmL_err_cumsum = 0;
+    hub_speaker_set_volume(30);
+    hub_speaker_play_tone(4000, 2);
   }
 
   s16_drive_rpmR = pup_motor_get_speed(motorR);
@@ -125,19 +182,36 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR ){
   if( 100 < g_s16_drive_mtr_spdR ){
     g_s16_drive_mtr_spdR = 100;
     s16_drive_rpmR_err_cumsum = 0;
+    hub_speaker_set_volume(30);
+    hub_speaker_play_tone(2000, 1);
   }
   else if( -100 > g_s16_drive_mtr_spdR ){
     g_s16_drive_mtr_spdR = -100;
     s16_drive_rpmR_err_cumsum = 0;
+    hub_speaker_set_volume(30);
+    hub_speaker_play_tone(2000, 1);
   }
+  
+/* 移動平均
+  MovingAve_sumR -= err_windowR[MovingAve_indexR];// 古い誤差を引いて合計を更新
+  err_windowR[MovingAve_indexR] = g_s16_drive_mtr_spdR;  // 新しい誤差を配列に追加
+  MovingAve_sumR += g_s16_drive_mtr_spdR;    // 合計を更新
+  MovingAve_indexR = (MovingAve_indexR + 1) % MA_WINDOW_SIZE;     // インデックスを更新
+  if (MovingAve_countR < MA_WINDOW_SIZE) {    // ウィンドウが満たされていない場合、カウントを増やす
+      MovingAve_countR++;
+  }
+  g_s16_drive_mtr_spdR = MovingAve_sumR / MovingAve_countR;
+*/
+  g_s16_drive_mtr_powerL = g_s16_drive_mtr_spdL_FF + g_s16_drive_mtr_spdL;
+  g_s16_drive_mtr_powerR = g_s16_drive_mtr_spdR_FF + g_s16_drive_mtr_spdR;
+
+  pup_motor_set_power(motorL, g_s16_drive_mtr_powerL);
+  pup_motor_set_power(motorR, g_s16_drive_mtr_powerR);  // パワーを設定
+  //pup_motor_set_speed(motorL, spdL);                  // スピードを設定
+  //pup_motor_set_speed(motorR, spdR);                  // スピードを設定
   
   s16_drive_rpmL_err_old = s16_drive_rpmL_err;
   s16_drive_rpmR_err_old = s16_drive_rpmR_err;
-
-  pup_motor_set_power(motorL, g_s16_drive_mtr_spdL);  // パワーを設定 g_s16_drive_mtr_spdL
-  pup_motor_set_power(motorR, g_s16_drive_mtr_spdR);  // パワーを設定
-  //pup_motor_set_speed(motorL, spdL);                  // スピードを設定
-  //pup_motor_set_speed(motorR, spdR);                  // スピードを設定
 }
 
 /* 駆動モータエンコーダカウントリセット */
