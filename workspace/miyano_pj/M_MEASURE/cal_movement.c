@@ -16,7 +16,7 @@
 #define ONE_LAP_PLS     360                       // タイヤ一周のパルス数
 #define TIRE_DIAMETER   100                       // タイヤ直径[mm]
 #define PI              3                         // 円周率[-]
-#define TREAD           126                      // 左右輪の幅 [mm]
+#define TREAD           126                       // 左右輪の幅 [mm]
 
 /* 外部非公開変数 */
 

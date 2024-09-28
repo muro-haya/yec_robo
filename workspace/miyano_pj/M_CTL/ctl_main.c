@@ -29,7 +29,8 @@ void ini_ctl_main( void ){
     ini_arm_ctl();                  /* アーム制御初期化 */
     ini_color_chase();              /* カラーチェイス 初期化処理 */
 
-    g_u16_ctl_main_mode = CONST_TURN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+    // g_u16_ctl_main_mode = CONST_TURN;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
+    g_u16_ctl_main_mode = 5;        /* 機体制御モード(0:ライントレース 1:一定出力走行 2:アームモータ) */
 }
 
 /* 機体制御周期処理 */

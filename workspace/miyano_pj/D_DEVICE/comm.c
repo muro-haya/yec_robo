@@ -13,10 +13,9 @@
 
 #include "../M_CTL/linetrace_run.h"
 #include "../M_CTL/const_run.h"
-<<<<<<< HEAD
+
 #include "../M_CTL/color_chase.h"
-=======
->>>>>>> to_miyano
+
 
 #include "comm.h"
 
@@ -37,6 +36,8 @@ uint16_t g_u16_comm_rx_pet_srt;                         /* ペットボトル判
 /* 外部非公開変数 */
 static uint16_t comm_tx_cnt;                            /* 送信確認カウンタ */
 static uint16_t comm_rx_cnt;                            /* 受信確認カウンタ */
+static uint16_t comm_watch_cnt;                         /* 通信監視カウンタ */
+static uint16_t comm_reset_flg;                         /* 通信リセットフラグ(0:正常 1:リセット中) */
 
 struct comm_data{
     uint16_t  comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
@@ -96,12 +97,37 @@ void ini_comm( void ){
 
   comm_tx_cnt                = 0;                                   /* 送信確認カウンタ */
   comm_rx_cnt                = 0;                                   /* 受信確認カウンタ */
+  comm_watch_cnt             = 0;                                   /* 通信監視カウンタ */
+  comm_reset_flg             = 0;                                   /* 通信リセットフラグ(0:正常 1:リセット中) */
 
   vlume = 10;
 }
 
+void cyc_watch_comm( void ){
+    if( 0 == comm_reset_flg ){
+        if( 10 < comm_watch_cnt ){
+            serial_cls_por(SIO_USB_PORTID);                         /* ポートクローズ */
+            comm_watch_cnt = 0;                                     /* カウンタリセット */
+            comm_reset_flg = 1;                                     /* 通信リセットフラグ(0:正常 1:リセット中) */
+        }
+    }
+    else{
+        if( 1 < comm_watch_cnt ){                                   /* 時間経過 */
+            serial_opn_por(SIO_USB_PORTID);                          /* ポートオープン */
+            comm_watch_cnt = 0;                                      /* カウンタリセット */
+            comm_reset_flg = 0;                                      /* 通信リセットフラグ(0:正常 1:リセット中) */
+        }
+    }
+    comm_watch_cnt += 1;
+}
+
 void cyc_tx( void ){
     uint16_t idat;
+
+    if( 1 == comm_reset_flg ){
+        return;
+        /* リセット中のため以下の処理は実施しない */
+    }
 
     for ( idat = 0; idat < TX_DATA_NUM; idat++){
         if( tx_datas[idat].comm_cyc == tx_datas[idat].comm_cnt ){
@@ -112,9 +138,11 @@ void cyc_tx( void ){
     }
 
     comm_tx_cnt += 1;
-    
-    hub_speaker_set_volume(vlume);
+
+    hub_speaker_set_volume(20);
     hub_speaker_play_tone(2000, 2);
+
+    comm_watch_cnt = 0;                         /* カウンタクリア */
 }
 
 void cyc_rx( void ){
@@ -122,18 +150,22 @@ void cyc_rx( void ){
     uint16_t cmd;
     uint16_t data;
 
-    while (1){
-        received_data(&cmd, &data);
-        for ( idat = 0; idat < RX_DATA_NUM; idat++){
-            if( cmd == rx_datas[idat].comm_cmd ){
-                *rx_datas[idat].comm_data = data;
-                break;
-            }
+    if( 1 == comm_reset_flg ){
+        return;
+        /* リセット中のため以下の処理は実施しない */
+    }
+    
+    received_data(&cmd, &data);
+    for ( idat = 0; idat < RX_DATA_NUM; idat++){
+        if( cmd == rx_datas[idat].comm_cmd ){
+            *rx_datas[idat].comm_data = data;
+            break;
         }
     }
 }
 
 void send_data(uint16_t tx_cmd, uint16_t tx_val){
+    int16_t ercode;
 
     tx_buf[3] = '0' + tx_cmd % 10; tx_cmd /= 10;
     tx_buf[2] = '0' + tx_cmd % 10; tx_cmd /= 10;
@@ -146,7 +178,7 @@ void send_data(uint16_t tx_cmd, uint16_t tx_val){
     tx_buf[6]  = '0' + tx_val % 10; tx_val /= 10;
     tx_buf[5]  = '0' + tx_val % 10; tx_val /= 10;
     
-    serial_wri_dat(SIO_USB_PORTID, tx_buf, COM_PACKET_SIZE-1);
+    ercode = serial_wri_dat(SIO_USB_PORTID, tx_buf, COM_PACKET_SIZE-1);
 }
 
 
