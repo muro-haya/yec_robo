@@ -18,7 +18,7 @@
 
 /* 外部公開変数 */
 uint16_t g_u16_const_run_way;           /* 一定出力制御指令方法(0:DUTY 1:回転速度) */
-int16_t  g_s16_const_run_spd;           /* 設定速度 */
+uint16_t  g_s16_const_run_spd;           /* 設定速度 */
 int16_t  g_s16_const_run_duty;          /* 設定DUTY */
 int16_t  button_state;
 int16_t  button_state_prev;
@@ -27,9 +27,9 @@ int16_t  button_state_flag;
 
 /* 一定出力走行初期化 */
 void ini_const_run( void ){
-    g_u16_const_run_way  = 0;           /* 一定出力制御指令方法(0:DUTY 1:回転速度) */
-    g_s16_const_run_spd  = 300;           /* 設定速度 */
-    g_s16_const_run_duty = 100;           /* 設定DUTY */
+    g_u16_const_run_way  = 1;           /* 一定出力制御指令方法(0:DUTY 1:回転速度) */
+    g_s16_const_run_spd  = 1080;           /* 設定速度 */
+    g_s16_const_run_duty = 50;           /* 設定DUTY */
     button_state = 0;
     button_state_prev = 0;
     button_state_flag = 0;
