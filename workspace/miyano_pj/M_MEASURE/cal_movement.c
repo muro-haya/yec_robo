@@ -14,8 +14,8 @@
 #include "D_DEVICE/arm_mtr.h"
 
 #define ONE_LAP_PLS     360                       // タイヤ一周のパルス数
-#define TIRE_DIAMETER   100                       // タイヤ直径[mm]
-#define PI              3                         // 円周率[-]
+#define TIRE_DIAMETER   99                        // タイヤ直径[mm]
+#define PI              314                       // 円周率*100[-]
 #define TREAD           126                      // 左右輪の幅 [mm]
 
 /* 外部非公開変数 */
@@ -32,10 +32,14 @@ int16_t get_cal_movement( void ){
     int16_t s16_distanceL;
     int16_t s16_distanceR;
     int16_t s16_distance;
+    int32_t s32_distanceL;
+    int32_t s32_distanceR;
 
     get_drive_mtr_cnt(&s16_cnt_l, &s16_cnt_r);
-    s16_distanceL = (int16_t)((int32_t)TIRE_DIAMETER * PI * s16_cnt_l / ONE_LAP_PLS );    // 左車輪移動距離[mm]
-    s16_distanceR = (int16_t)((int32_t)TIRE_DIAMETER * PI * s16_cnt_r / ONE_LAP_PLS );    // 右車輪移動距離[mm]
+    s32_distanceL = (int32_t)(((int32_t)TIRE_DIAMETER * PI * s16_cnt_l / ONE_LAP_PLS ) / 100 );    // 左車輪移動距離[mm]
+    s32_distanceR = (int32_t)(((int32_t)TIRE_DIAMETER * PI * s16_cnt_r / ONE_LAP_PLS ) / 100 );    // 右車輪移動距離[mm]
+    s16_distanceL = (int16_t)(s32_distanceL);
+    s16_distanceR = (int16_t)(s32_distanceR);
     s16_distance  = (s16_distanceL + s16_distanceR)/2;                                      // 左右輪の平均を算出
 
     return s16_distance;
@@ -46,16 +50,21 @@ int16_t get_cal_movement( void ){
 int16_t get_cal_movement_body_deg( void ){
     int16_t s16_cnt_l;
     int16_t s16_cnt_r;
-    int16_t s16_distanceL;
-    int16_t s16_distanceR;
+    //int16_t s16_distanceL;
+    //int16_t s16_distanceR;
+    int32_t s32_distanceL;
+    int32_t s32_distanceR;
     int32_t s32_diff;
     int16_t s16_body_deg;
+    int32_t s32_body_deg;
 
     get_drive_mtr_cnt(&s16_cnt_l, &s16_cnt_r);
-    s16_distanceL = (int16_t)((int32_t)TIRE_DIAMETER * PI * s16_cnt_l / ONE_LAP_PLS );      // 左車輪移動距離[mm]
-    s16_distanceR = (int16_t)((int32_t)TIRE_DIAMETER * PI * s16_cnt_r / ONE_LAP_PLS );      // 右車輪移動距離[mm]
-    s32_diff      = (int32_t)s16_distanceL - s16_distanceR;                                 // 左右車輪差分
-    s16_body_deg  = (int16_t)(s32_diff*360/(2*PI*TREAD));                                   // 旋回角計算
+    s32_distanceL = (int32_t)((int32_t)TIRE_DIAMETER * PI * s16_cnt_l / ONE_LAP_PLS /100 );      // 左車輪移動距離[mm]
+    s32_distanceR = (int32_t)((int32_t)TIRE_DIAMETER * PI * s16_cnt_r / ONE_LAP_PLS /100 );      // 右車輪移動距離[mm]
+    s32_diff      = (int32_t)(s32_distanceL - s32_distanceR);                                 // 左右車輪差分
+    s32_body_deg  = (int32_t)(s32_diff*360*100/(2*PI*TREAD));                                   // 旋回角計算
+    s16_body_deg  = (int16_t)(s32_body_deg);
+
 
     return s16_body_deg;
 }

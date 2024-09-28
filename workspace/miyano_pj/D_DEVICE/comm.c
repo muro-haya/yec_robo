@@ -14,6 +14,8 @@
 #include "../M_CTL/const_run.h"
 #include "../M_CTL/color_chase.h"
 
+#include "../A_MANAGE/debri_remove.h"
+
 #include "comm.h"
 
 #define COM_PACKET_SIZE (sizeof("@000:000000\n"))
@@ -27,7 +29,7 @@ uint16_t vlume;
 uint16_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
 uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチェイス用赤ペットボトルx軸位置 */
 uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
-uint16_t g_u16_comm_rx_pet_flg;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
+uint16_t g_u16_comm_rx_jdg_pet;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
 uint16_t g_u16_comm_rx_pet_srt;                         /* カラーチェイス開始(1:開始) */
 
 /* 外部非公開変数 */
@@ -47,7 +49,8 @@ struct comm_data tx_datas[] = {
     {  0, 100, 500, (uint16_t*)&comm_tx_cnt               },       /* 送信確認カウンタ */
     {  1, 100, 501, (uint16_t*)&comm_rx_cnt               },       /* 受信確認返信カウンタ */
     {  2, 100, 502, (uint16_t*)&vlume                     },       /* 受信確認返信カウンタ */
-    
+    {  3, 100, 503, (uint16_t*)&g_u16_comm_rx_pet_srt     },       /* ペットボトル判定開始(1:開始) */  
+
     {  0, 100, 600, (uint16_t*)&vlume                     },       /* 計測値0 */
     {  1, 100, 601, (uint16_t*)&g_s16_color_chase_fbCmdv  },       /* 計測値1 */
     {  2, 100, 602, (uint16_t*)&g_s16_color_chase_p       },       /* 計測値2 */
@@ -55,16 +58,18 @@ struct comm_data tx_datas[] = {
     {  4, 100, 604, (uint16_t*)&g_s16_color_chase_d       },       /* 計測値4 */
     {  5, 100, 605, (uint16_t*)&g_s16_color_chase_debug   },       /* 計測値5 */
     {  6, 100, 606, (uint16_t*)&g_s16_linetrace_run_p     },       /* 計測値6 */
-    {  7, 100, 607, (uint16_t*)&g_s16_linetrace_run_i     },       /* 計測値7 */
-    {  8, 100, 608, (uint16_t*)&g_s16_linetrace_run_d     },       /* 計測値8 */
-    {  9, 100, 609, (uint16_t*)&vlume                     },       /* 計測値9 */
+    {  7, 100, 607, (uint16_t*)&vlume     },       /* 計測値7 */
+    {  8, 100, 608, (uint16_t*)&g_u16_bottle_count        },       /* 計測値8 */
+    {  9, 100, 609, (uint16_t*)&g_u16_debri_remove_phase  },       /* 計測値9 */
 };
-#define RX_DATA_NUM 13                                   /* 受信データ数 */
+#define RX_DATA_NUM 15                                   /* 受信データ数 */
 /* 受信情報 */
 struct comm_data rx_datas[] = {
     {  0, 100, 000, (uint16_t*)&comm_rx_cnt               },       /* 受信確認カウンタ */
     {  0,  10, 001, (uint16_t*)&g_u16_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-    {  0,  10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* カラーチェイス用ペットボトルx軸位置 */
+    {  0,  10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* カラーチェイス用赤ペットボトルx軸位置 */
+    {  0,  10, 003, (uint16_t*)&g_u16_comm_rx_pet_xpos_bl },       /* カラーチェイス用青ペットボトルx軸位置 */
+    {  0,  10, 004, (uint16_t*)&g_u16_comm_rx_jdg_pet     },       /* ペットボトル色判定(1:赤 2:青 0:無) */
     
     {  0,  10, 100, (uint16_t*)&x_u16_linetrace_run_kp    },       /* 適合値0 */
     {  0,  10, 101, (uint16_t*)&x_u16_linetrace_run_ki    },       /* 適合値1 */

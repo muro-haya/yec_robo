@@ -19,7 +19,7 @@
 #define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
-int16_t  x_u16_color_chase_kp = 30;            /* P項ゲイン値[0.01]*/
+int16_t  x_u16_color_chase_kp = 100;          /* P項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_ki = 0;            /* I項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_kd = 0;            /* D項ゲイン値[0.01]*/
 

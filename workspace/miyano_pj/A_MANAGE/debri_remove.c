@@ -12,6 +12,7 @@
 #include "../M_MEASURE/cal_movement.h"
 #include "../M_MEASURE/rec_color.h"
 #include "../M_CTL/linetrace_run.h"
+#include "../M_CTL/color_chase.h"
 #include "../M_CTL/const_run.h"
 #include "../M_CTL/arm_ctl.h"
 
@@ -26,67 +27,69 @@
 /* 適合値 */
 
 //左右切り替えの適合値も必要か　左右切り替えた場合、角度とライントレースだけ反対にすればよい（*-1か）
-uint16_t pattern_nom = 4;                //パターン番号（0～4）
+uint16_t pattern_nom = 4;               //パターン番号（0～4）
+int16_t layout = 1;                    //レイアウト変更（L:1, R:-1）
 
-int16_t D_straight = 200;                //直進量適合値_デブリボトル運搬[mm]
-int16_t D_spd = 30;                     //直進速度適合値_デブリボトル運搬
-int16_t R_straight = 200;               //後退量適合値_デブリボトル運搬後[mm]
-int16_t R_spd = -30;                    //後退速度適合値_デブリボトル運搬後
+int16_t D_straight = 150;               //直進量適合値_デブリボトル運搬[mm]
+int16_t D_spd = 150;                     //直進速度適合値_デブリボトル運搬
+int16_t R_straight = 150;               //後退量適合値_デブリボトル運搬後[mm]
+int16_t R_spd = -150;                    //後退速度適合値_デブリボトル運搬後
 
 int16_t turn_pattern[5][5] = {           //回転角適合値[deg]
-        {45, -45, 90, -90, 45},          //パターン0
-        {90, -90, 45, -45, 90},          //パターン1
-        {-45, 45, -90, 90, 45},          //パターン2
-        {-90, 90, -45, 45, 90},          //パターン3
-        {180, -180, 90, 90, 180},           //パターン4
+        {45, 45, -135, -60, 0},          //パターン0
+        {90, -90, 45, -45, 0},          //3パターン1
+        {-45, 45, -90, 90, 0},          //3パターン2
+        {-90, 90, -45, 45, 0},          //3パターン3
+        {0, 130, -90, -80, 0},//{90, 90, -90, -90, 0},           //パターン4
         };
 
 int16_t chase_straight_pattern[5][5] = { //直進量適合値_ボトル判定迄[mm]
-        {100, 50, 150, 200, 300},        //パターン0
-        {50, 100, 200, 150, 1000},       //パターン1
-        {200, 150, 50, 100, 400},        //パターン2
-        {150, 200, 100, 50, 300},        //パターン3
-        {300, 300, 400, 500, 50},        //パターン4
+        {424, 424, 600, 671, 0},        //パターン0
+        {50, 100, 200, 150, 0},       //3パターン1
+        {200, 150, 50, 100, 0},        //3パターン2
+        {150, 200, 100, 50, 0},        //3パターン3
+        {650, 400, 250, 880, 0},//{200, 200, 200, 200, 0},        //パターン4
         };
 
-int16_t chase_straight_spd = 50;        //直進速度適合値_ボトル判定迄
+int16_t chase_straight_spd = 150;        //直進速度適合値_ボトル判定迄
 
 int16_t last_turn_pattern[5][5] = {      //回転角適合値_最終回転[deg]（攻略終了地点に向けた回転）
-        {0, 0, 45, 90, 135},                 //パターン0
-        {0, 0, 90, 135, 45},                //パターン1
-        {0, 0, 135, 45, 90},              //パターン2
-        {0, 0, -45, -90, -135},              //パターン3
-        {0, 0, -90, -135, 45},              //パターン4
+        {0, 0, -120, 90, 135},                 //3パターン0
+        {0, 0, 90, 135, 45},                //3パターン1
+        {0, 0, 135, 45, 90},              //3パターン2
+        {0, 0, -45, -90, -135},              //3パターン3
+        {0, 0, -105, -20, 115},              //パターン4
         };
 
 int16_t last_straight_pattern[5][5] = {  //直進量適合値_最終直進[mm]（攻略終了地点に向けた直進）
-        {0, 0, 50, 100, 150},                 //パターン0
-        {0, 0, 100, 150, 200},                //パターン1
-        {0, 0, 150, 200, 250},              //パターン2
-        {0, 0, 200, 250, 50},              //パターン3
-        {0, 0, 250, 50, 1000},              //パターン4
+        {0, 0, 50, 100, 150},                 //3パターン0
+        {0, 0, 100, 150, 200},                //3パターン1
+        {0, 0, 150, 200, 250},              //3パターン2
+        {0, 0, 200, 250, 50},              //3パターン3
+        {0, 0, 820, 550, 700},              //パターン4
         };
 
-int16_t last_straight_spd = 75;                //直進速度適合値_最終直進
-int16_t last_straight_color_search_spd = 30;   //直進速度適合値_最終直進色認識迄
+int16_t last_straight_spd = 200;                //直進速度適合値_最終直進
+int16_t last_straight_color_search_spd = 150;   //直進速度適合値_最終直進色認識迄
 
 int16_t assist_turn_pattern[5][5] = {    //回転角適合値_ライントレース前の補正[deg]
-        {0, 0, 10, 15, 20},                 //パターン0
-        {0, 0, 20, 15, 10},                //パターン1
-        {0, 0, 30, 45, 90},              //パターン2
-        {0, 0, 90, 45, 30},              //パターン3
-        {0, 0, -30, -45, -90},              //パターン4
+        {0, 0, 10, 15, 20},                 //3パターン0
+        {0, 0, 20, 15, 10},                //3パターン1
+        {0, 0, 30, 45, 90},              //3パターン2
+        {0, 0, 90, 45, 30},              //3パターン3
+        {0, 0, 60, 75, -90},              //パターン4
         };
 
 int16_t dr_edge_side = 0;                //ライントレースのエッジ（左右判定）
 
-int16_t color_karioki[4] = {0, 1, 0, 1}; //仮置き色判定用適合値（後に削除）
+int16_t color_karioki[4] = {1, 2, 1, 2}; //仮置き色判定用適合値（後に削除）
 
 /* 外部公開変数 */
 uint16_t g_u16_debri_remove_phase;       /* デブリリムーバルフェイズカウント */
 uint16_t g_u16_debri_count;              /* デブリボトルカウント */
 uint16_t g_u16_danger_count;             /* デンジャーボトルカウント */
 uint16_t g_u16_bottle_count;             /* 総ボトルカウント */
+//uint16_t deg;
 //テスト用ボタン処理
 uint16_t dr_button;
 uint16_t dr_start_button;
@@ -122,10 +125,12 @@ bool_t cyc_debri_remove( void ){
     flg_dr_end = 0;
     g_u16_bottle_count = g_u16_debri_count + g_u16_danger_count;
     
-    dr_button = get_button( BUTTON_BT );
+    dr_button = get_button( BUTTON_LEFT );
     if( 1 == dr_button ){
         g_u16_debri_remove_phase = 99;
-        set_drive_mtr_spd(0, 0);
+        g_u16_ctl_main_mode = CONST_RUN;
+        g_u16_const_run_way = 1;
+        g_s16_const_run_spd = 0;
     }
 
     switch (g_u16_debri_remove_phase)
@@ -167,12 +172,15 @@ bool_t cyc_debri_remove( void ){
         flg_dr_end = 1;
         break;
     case 99: //テスト用ボタンフェイズ
-        set_drive_mtr_spd(0, 0);
+        g_u16_ctl_main_mode = CONST_RUN;
+        g_u16_const_run_way = 1;
+        g_s16_const_run_spd = 0;
+        //set_drive_mtr_spd(0, 0);
         g_u16_debri_count = 0;
         g_u16_danger_count = 0;
         g_u16_bottle_count = 0;
         dr_reset_flg = 0;
-        dr_start_button = get_button( BUTTON_LEFT );
+        dr_start_button = get_button( BUTTON_CENTER );
         if( 1 == dr_start_button ){
             g_u16_debri_remove_phase = 0;
         }  
@@ -197,14 +205,15 @@ void dr_turn_jdg_deg( int16_t target_deg ){
         g_u16_const_run_way = 1;
         /* 指定角度が正なら時計回り */
         if( target_deg >= 0 ){
-            g_s16_const_run_spd = 100;
+            g_s16_const_run_spd = 150;
         }
         /* 指定角度が負なら反時計回り */
         else{
-            g_s16_const_run_spd = -100;
+            g_s16_const_run_spd = -150;
         }
 
         deg_result = get_cal_movement_body_deg();
+        //deg = deg_result;
         if( abs(target_deg) < abs(deg_result) ){
             g_u16_debri_remove_phase += 1;
             dr_reset_flg = 0;
@@ -221,14 +230,21 @@ void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
         dr_reset_flg = 1;
     }
     else{
-        g_u16_ctl_main_mode = CONST_RUN;  //変更要
-        g_u16_const_run_way = 1;
-        g_s16_const_run_spd = run_spd;
+        //g_u16_ctl_main_mode = CONST_RUN; //COLOR_CHASE;  //変更要
+        //g_u16_const_run_way = 1;
+        //g_s16_const_run_spd = run_spd;
+
+        g_u16_ctl_main_mode = COLOR_CHASE;
+        g_u16_color_chase_way = 1;
+        g_u16_color_chase_bsV = run_spd;
+        g_u16_comm_rx_pet_srt = 1;
         
         movement_result = get_cal_movement();
         if( target_movement < movement_result ){
             g_u16_debri_remove_phase += 1;
             dr_reset_flg = 0;
+            g_u16_comm_rx_pet_srt = 0;
+            g_s16_const_run_spd = 0;
         }
     }
 }
@@ -236,10 +252,10 @@ void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
 /* ボトルカウント＆ボトルの色判定フェイズ */
 void dr_jdg_color( void ){
     uint16_t dr_color_result;
-    uint16_t RED = 0;
-    uint16_t BLUE = 1;
+    uint16_t RED = 1;
+    uint16_t BLUE = 2;
 
-    dr_color_result = color_karioki[g_u16_bottle_count]; //☆要変更　get_front_color();  //正面の色を取得する機能欲しい 赤なら0, 青なら1を返したい
+    dr_color_result = g_u16_comm_rx_jdg_pet;//color_karioki[g_u16_bottle_count]; //☆要変更　get_front_color();  //正面の色を取得する機能欲しい 赤なら0, 青なら1を返したい
     if( RED == dr_color_result ){  //赤ならデンジャボトルのカウントを+1, フェイズを0に戻す
         g_u16_danger_count += 1;
         g_u16_debri_remove_phase = 0;
@@ -287,9 +303,9 @@ void dr_jdg_bottle_count( void ){
 void dr_rd_jdg_color( uint16_t target_color , int16_t run_spd ){
     uint16_t color_result;
 
-    set_drive_mtr_spd(0, 0);
-    g_u16_debri_remove_phase += 1;
-/*
+//    set_drive_mtr_spd(0, 0);
+//    g_u16_debri_remove_phase += 1;
+
 
     g_u16_ctl_main_mode = CONST_RUN;
     g_u16_const_run_way = 1;
@@ -299,7 +315,6 @@ void dr_rd_jdg_color( uint16_t target_color , int16_t run_spd ){
     if( target_color == color_result ){
         g_u16_debri_remove_phase += 1;
     }
-*/
 }
 
 /* 色認識までライントレースするフェイズ */ //左右どうするか

@@ -21,6 +21,7 @@ extern uint16_t g_u16_debri_remove_phase;         /* デブリリムーバルフ
 extern uint16_t g_u16_debri_count;                /* デブリボトルカウント */
 extern uint16_t g_u16_danger_count;               /* デンジャーボトルカウント */
 extern uint16_t g_u16_bottle_count;               /* 総ボトルカウント */
+extern uint16_t deg;              
 
 /* 外部公開関数 */
 extern void ini_debri_remove( void );             /* デブリリムーバル初期化処理 */
