@@ -161,14 +161,10 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR )
   if( 100 < g_s16_drive_mtr_spdL ){
     g_s16_drive_mtr_spdL = 100;
     s16_drive_rpmL_err_cumsum = 0;
-    hub_speaker_set_volume(30);
-    hub_speaker_play_tone(4000, 2);
   }
   else if( -100 > g_s16_drive_mtr_spdL ){
     g_s16_drive_mtr_spdL = -100;
     s16_drive_rpmL_err_cumsum = 0;
-    hub_speaker_set_volume(30);
-    hub_speaker_play_tone(4000, 2);
   }
 
   s16_drive_rpmR = pup_motor_get_speed(motorR);
@@ -184,14 +180,10 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR )
   if( 100 < g_s16_drive_mtr_spdR ){
     g_s16_drive_mtr_spdR = 100;
     s16_drive_rpmR_err_cumsum = 0;
-    hub_speaker_set_volume(30);
-    hub_speaker_play_tone(2000, 1);
   }
   else if( -100 > g_s16_drive_mtr_spdR ){
     g_s16_drive_mtr_spdR = -100;
     s16_drive_rpmR_err_cumsum = 0;
-    hub_speaker_set_volume(30);
-    hub_speaker_play_tone(2000, 1);
   }
   
 /* 移動平均
