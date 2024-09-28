@@ -12,3 +12,23 @@ extern int16_t g_s16_drive_mtr_spdR;
 /*  適合値*/
 extern uint16_t x_u16_drive_mtr_spdL_namashi;
 extern uint16_t x_u16_drive_mtr_spdR_namashi;
+extern uint16_t x_u16_drive_mtr_rpmL_kp;
+extern uint16_t x_u16_drive_mtr_rpmL_ki;
+extern uint16_t x_u16_drive_mtr_rpmL_kd;
+extern uint16_t x_u16_drive_mtr_rpmR_kp;
+extern uint16_t x_u16_drive_mtr_rpmR_ki;
+extern uint16_t x_u16_drive_mtr_rpmR_kd;
+
+/*ロギング用にglobalで定義*/
+extern int16_t s16_drive_cntL;
+extern int16_t s16_drive_cntR;
+extern int16_t s16_drive_rpmL;
+extern int16_t s16_drive_rpmR;
+extern int16_t s16_drive_rpmL_err;
+extern int16_t s16_drive_rpmR_err;
+extern int16_t s16_drive_rpmL_p;
+extern int16_t s16_drive_rpmL_i;
+extern int16_t s16_drive_rpmL_d;
+extern int16_t s16_drive_rpmR_p;
+extern int16_t s16_drive_rpmR_i;
+extern int16_t s16_drive_rpmR_d;

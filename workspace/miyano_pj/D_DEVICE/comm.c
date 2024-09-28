@@ -9,10 +9,14 @@
 
 #include "kernel_cfg.h"
 #include "syssvc/serial.h"
+#include "drive_mtr.h"
 
 #include "../M_CTL/linetrace_run.h"
 #include "../M_CTL/const_run.h"
+<<<<<<< HEAD
 #include "../M_CTL/color_chase.h"
+=======
+>>>>>>> to_miyano
 
 #include "comm.h"
 
