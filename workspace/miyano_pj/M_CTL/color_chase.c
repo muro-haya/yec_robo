@@ -71,11 +71,8 @@ void cyc_color_chase( void ){
     int16_t s16_RVulue;                         /* 右モータ指示値 */
     
     /* 偏差計算 */
-    if(1 == g_u16_comm_rx_jdg_pet){             /* 赤色検出時 */
+    if(0 != g_u16_comm_rx_jdg_pet){             /* ペットボトル検出時 */
         s16_posdlt = g_u16_comm_rx_pet_xpos_red - g_u16_color_chase_fbTgt;  /* 位置偏差計算 */
-    }
-    else if (2 == g_u16_comm_rx_jdg_pet){       /* 青色検出時 */
-        s16_posdlt = g_u16_comm_rx_pet_xpos_bl  - g_u16_color_chase_fbTgt;   /* 位置偏差計算 */
     }
     else{                                       /* 未検出 */
         s16_posdlt     = 0;
@@ -96,15 +93,11 @@ void cyc_color_chase( void ){
     g_s16_color_chase_fbCmdv =    g_s16_color_chase_p/100
                                 + g_s16_color_chase_i/100
                                 + g_s16_color_chase_d/100;
-    // if( g_s16_color_chase_fbCmdv < 40 ){
-    //     g_s16_color_chase_fbCmdv = 40;
-    // }
 
     s16_LVulue = (int16_t)g_u16_color_chase_bsV - g_s16_color_chase_fbCmdv;  /* 左モータ指示値計算 */
     s16_RVulue = (int16_t)g_u16_color_chase_bsV + g_s16_color_chase_fbCmdv;  /* 右モータ指示値計算 */
     g_s16_color_chase_debug = s16_LVulue;
-    // s16_LVulue = 100;
-    // s16_RVulue = 100;
+    
     /* モータ駆動指示 */
     if( 0 == g_u16_color_chase_way ){            /* DUTY指示 */
         set_drive_mtr_duty(s16_LVulue, s16_RVulue);
