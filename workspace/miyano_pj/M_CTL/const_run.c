@@ -38,18 +38,18 @@ void ini_const_run( void ){
 /* R・D走行周期処理 */
 void cyc_const_run( void ){
        
-    button_state = get_button(BUTTON_BT);
+    // button_state = get_button(BUTTON_BT);
 
-    if(button_state != button_state_prev)
-    {
-        button_state_flag = 1;
-    }
+    // if(button_state != button_state_prev)
+    // {
+    //     button_state_flag = 1;
+    // }
 
-    if(button_state_flag == 0)
-    {
-        set_drive_mtr_duty(0, 0);
-    }
-    else{
+    // if(button_state_flag == 0)
+    // {
+    //     set_drive_mtr_duty(0, 0);
+    // }
+    // else{
         /* モータ駆動指示 */
         if( 0 == g_u16_const_run_way ){     /* DUTY指示 */
             set_drive_mtr_duty(g_s16_const_run_duty, g_s16_const_run_duty);
@@ -57,7 +57,7 @@ void cyc_const_run( void ){
         else{                               /* 回転速度指示 */
             set_drive_mtr_spd(g_s16_const_run_spd, g_s16_const_run_spd);
         }
-    }
+    // }
     
     button_state_prev = button_state; 
 

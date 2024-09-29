@@ -23,7 +23,7 @@ uint16_t g_u16_manage_cnt;          /* 難所カウント */
 void ini_manage( void ){
     ini_smart_carry();
 
-    g_u16_manage_cnt = 0;
+    g_u16_manage_cnt = SMART_CARRY;
 }
 
 /* 競技攻略周期処理 */

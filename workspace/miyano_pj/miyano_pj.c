@@ -15,6 +15,7 @@
 #include "syssvc/serial.h"
 
 #include "A_MANAGE/manage.h"
+#include "M_CTL/song.h"
 #include "M_CTL/ctl_main.h"
 #include "M_CTL/linetrace_run.h"
 #include "M_CTL/const_run.h"
@@ -47,6 +48,7 @@ void Main(intptr_t exinf){
   ini_cal_distance();
   ini_cal_movement();
   ini_rec_color();
+  ini_song();
   /* アプリ層 */
   ini_manage();
 
@@ -62,6 +64,8 @@ void Main(intptr_t exinf){
   /* 通信用タスク起動 */
   sta_cyc(TX_1M_CYC);
   sta_cyc(RX_1M_CYC);
+  /* サブタスク起動 */
+  sta_cyc(SUB_500M_CYC);
   
   /* タスク終了 */
   ext_tsk();
@@ -84,6 +88,13 @@ void Main_10m( intptr_t unused ){
 /* 100msec周期処理 */
 void Main_100m( intptr_t unused ){
   cyc_watch_comm();
+
+  if(1 < cnt){
+    cyc_song();
+    cnt = 0;
+  }
+  cnt += 1;
+  
   /* タスク終了 */
   ext_tsk();
 }
@@ -98,6 +109,12 @@ void Tx_1m( intptr_t unused ){
 /* 1msec受信処理 */
 void Rx_1m( intptr_t unused ){
   cyc_rx();
+  /* タスク終了 */
+  ext_tsk();
+}
+
+/* 500msecサブタスク */
+void Sub_500m( intptr_t unused ){
   /* タスク終了 */
   ext_tsk();
 }

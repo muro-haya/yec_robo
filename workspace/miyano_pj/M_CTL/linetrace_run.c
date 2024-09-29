@@ -94,6 +94,7 @@ void set_tgt_linetrace_run( void ){
         g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
     }
     get_color_rgb(&g_u16_linetrace_run_r, &g_u16_linetrace_run_g, &g_u16_linetrace_run_b);
+    g_u16_linetrace_run_fbTgt = ( 400 + 50 ) / 2;
 }
 
 /* ライントレース走行周期処理 */
@@ -151,10 +152,10 @@ void cyc_linetrace_run( void ){
         set_drive_mtr_spd(s16_LVulue, s16_RVulue);
     }
 
-    if( 0 < s16_run_fbCmdv ){
-        hub_speaker_set_volume(30);
-        hub_speaker_play_tone(2000, 2);
-    }
+    // if( 0 < s16_run_fbCmdv ){
+    //     hub_speaker_set_volume(30);
+    //     hub_speaker_play_tone(2000, 2);
+    // }
     g_s16_linetrace_run_fbCmdv = s16_run_fbCmdv;
 
     s16_posdlt_old = s16_posdlt;                /* 前回値保存 */

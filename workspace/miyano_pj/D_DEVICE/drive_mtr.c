@@ -26,7 +26,7 @@ uint16_t x_u16_drive_mtr_rpmL_kp = 12;
 uint16_t x_u16_drive_mtr_rpmL_kd = 0;
 uint16_t x_u16_drive_mtr_rpmL_ki = 0;
 
-uint16_t x_u16_drive_mtr_rpmR_kp = 11;//46
+uint16_t x_u16_drive_mtr_rpmR_kp = 12;//46
 uint16_t x_u16_drive_mtr_rpmR_kd = 0;//52
 uint16_t x_u16_drive_mtr_rpmR_ki = 0;//52
 

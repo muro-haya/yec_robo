@@ -13,8 +13,8 @@
 
 #include "../M_CTL/linetrace_run.h"
 #include "../M_CTL/const_run.h"
-
 #include "../M_CTL/color_chase.h"
+#include "../A_MANAGE/smart_carry.h"
 
 
 #include "comm.h"
@@ -27,6 +27,7 @@ static uint16_t ercd;
 uint16_t vlume;
 
 /* 外部公開変数 */
+uint16_t g_u16_comm_rx_flg;                             /* 通信中フラグ(1:通信中) */
 uint16_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
 uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチェイス用赤ペットボトルx軸位置 */
 uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
@@ -54,8 +55,8 @@ struct comm_data tx_datas[] = {
     {  2, 100, 502, (uint16_t*)&vlume                     },       /* 受信確認返信カウンタ */
     {  3, 100, 503, (uint16_t*)&g_u16_comm_rx_pet_srt     },       /* ペットボトル判定開始(1:開始) */
     
-    {  0, 100, 600, (uint16_t*)&g_u16_comm_rx_jdg_red     },       /* 計測値0 */
-    {  1, 100, 601, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* 計測値1 */
+    {  0, 100, 600, (uint16_t*)&g_u16_smart_carry_phase   },       /* 計測値0 */
+    {  1, 100, 601, (uint16_t*)&g_u16_smart_carry_debug   },       /* 計測値1 */
     {  2, 100, 602, (uint16_t*)&g_u16_comm_rx_pet_xpos_bl },       /* 計測値2 */
     {  3, 100, 603, (uint16_t*)&g_u16_comm_rx_jdg_pet     },       /* 計測値3 */
     {  4, 100, 604, (uint16_t*)&vlume                     },       /* 計測値4 */
@@ -139,8 +140,9 @@ void cyc_tx( void ){
 
     comm_tx_cnt += 1;
 
-    hub_speaker_set_volume(20);
-    hub_speaker_play_tone(2000, 2);
+    g_u16_comm_rx_flg = 1;
+    // hub_speaker_set_volume(20);
+    // hub_speaker_play_tone(2000, 2);
 
     comm_watch_cnt = 0;                         /* カウンタクリア */
 }
