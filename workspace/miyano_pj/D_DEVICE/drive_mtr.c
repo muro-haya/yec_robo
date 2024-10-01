@@ -22,11 +22,11 @@ pup_motor_t *motorL;
 pup_motor_t *motorR;
 
 /*  適合値*/
-uint16_t x_u16_drive_mtr_rpmL_kp = 12;
+uint16_t x_u16_drive_mtr_rpmL_kp = 36;  //robo1 12, robo2 14
 uint16_t x_u16_drive_mtr_rpmL_kd = 0;
 uint16_t x_u16_drive_mtr_rpmL_ki = 0;
 
-uint16_t x_u16_drive_mtr_rpmR_kp = 11;//46
+uint16_t x_u16_drive_mtr_rpmR_kp = 11;//46 //robo1 12, robo2 11
 uint16_t x_u16_drive_mtr_rpmR_kd = 0;//52
 uint16_t x_u16_drive_mtr_rpmR_ki = 0;//52
 
@@ -78,6 +78,8 @@ void ini_drive_mtr( void ){
   pup_motor_setup(motorL, PUP_DIRECTION_COUNTERCLOCKWISE, true);
   pup_motor_setup(motorR, PUP_DIRECTION_CLOCKWISE, true);
   
+  pup_motor_set_power(motorL, 0);
+  pup_motor_set_power(motorR, 0);
   // 駆動モータの角度をリセット
   pup_motor_reset_count(motorL);
   pup_motor_reset_count(motorR);
@@ -159,14 +161,10 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR )
   if( 100 < g_s16_drive_mtr_spdL ){
     g_s16_drive_mtr_spdL = 100;
     s16_drive_rpmL_err_cumsum = 0;
-    //hub_speaker_set_volume(30);
-    //hub_speaker_play_tone(4000, 2);
   }
   else if( -100 > g_s16_drive_mtr_spdL ){
     g_s16_drive_mtr_spdL = -100;
     s16_drive_rpmL_err_cumsum = 0;
-    //hub_speaker_set_volume(30);
-    //hub_speaker_play_tone(4000, 2);
   }
 
   s16_drive_rpmR = pup_motor_get_speed(motorR);
@@ -182,14 +180,10 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR )
   if( 100 < g_s16_drive_mtr_spdR ){
     g_s16_drive_mtr_spdR = 100;
     s16_drive_rpmR_err_cumsum = 0;
-    //hub_speaker_set_volume(30);
-    //hub_speaker_play_tone(2000, 1);
   }
   else if( -100 > g_s16_drive_mtr_spdR ){
     g_s16_drive_mtr_spdR = -100;
     s16_drive_rpmR_err_cumsum = 0;
-    //hub_speaker_set_volume(30);
-    //hub_speaker_play_tone(2000, 1);
   }
   
 /* 移動平均
@@ -220,7 +214,7 @@ void rst_drive_mtr_cnt( void ){
   pup_motor_reset_count(motorR);                  // 右駆動モータの角度をリセット
 }
 
-/* アームモータエンコーダカウント取得 */
+/* 駆動モータエンコーダカウント取得 */
 void get_drive_mtr_cnt( int16_t* drive_cntL, int16_t* drive_cntR ){
   int32_t ldat;
   ldat = pup_motor_get_count(motorL);           // 右駆動モータエンコーダカウント取得
