@@ -3,11 +3,18 @@
 #include <kernel.h>
 
 #include <spike/hub/system.h>
+#include "spike/hub/speaker.h"
 
 #include <pbio/color.h>
 
 #include "kernel_cfg.h"
 #include "syssvc/serial.h"
+#include "drive_mtr.h"
+
+#include "../M_CTL/linetrace_run.h"
+#include "../M_CTL/const_run.h"
+#include "../A_MANAGE/double_loop.h"
+#include "../D_DEVICE/color_snc.h"
 
 #include "comm.h"
 
@@ -20,52 +27,56 @@ uint16_t vlume;
 
 /* 外部公開変数 */
 uint16_t g_u16_comm_rx_jdg_red;                         /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-uint16_t g_u16_comm_rx_pet_xpos;                        /* カラーチェイス用ペットボトルx軸位置 */
+uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチェイス用赤ペットボトルx軸位置 */
+uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
+uint16_t g_u16_comm_rx_jdg_pet;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
+uint16_t g_u16_comm_rx_pet_srt;                         /* ペットボトル判定開始(1:開始) */
 
 /* 外部非公開変数 */
 static uint16_t comm_tx_cnt;                            /* 送信確認カウンタ */
 static uint16_t comm_rx_cnt;                            /* 受信確認カウンタ */
+static uint16_t comm_watch_cnt;                         /* 通信監視カウンタ */
+static uint16_t comm_reset_flg;                         /* 通信リセットフラグ(0:正常 1:リセット中) */
 
 struct comm_data{
-    uint16_t  comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
-    uint16_t  comm_cyc;                                  /* 周期(受信では使用しない 一応記載) */
-    uint16_t  comm_cmd;                                  /* コマンド */
-    uint16_t* comm_data;                                 /* 通信データ */
+    uint16_t comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
+    uint16_t comm_cyc;                                  /* 周期(受信では使用しない 一応記載) */
+    uint16_t comm_cmd;                                  /* コマンド */
+    int32_t* comm_data;                                 /* 通信データ */
 };
 
 #define TX_DATA_NUM 13                                  /* 送信データ数 */
 /* 送信情報 */
 struct comm_data tx_datas[] = {
-    {  0, 100, 500, (uint16_t*)&comm_tx_cnt               },       /* 送信確認カウンタ */
-    {  1, 100, 501, (uint16_t*)&comm_rx_cnt               },       /* 受信確認返信カウンタ */
-    {  2, 100, 502, (uint16_t*)&vlume                     },       /* 受信確認返信カウンタ */
+    {  0, 100, 500, &comm_tx_cnt               },       /* 送信確認カウンタ */
+    {  1, 100, 501, &comm_rx_cnt               },       /* 受信確認返信カウンタ */
+    {  2, 100, 502, &vlume                     },       /* 受信確認返信カウンタ */
     
-    {  0, 100, 600, (uint16_t*)&g_u16_comm_rx_pet_xpos    },       /* 計測値0 */
-    {  1, 100, 601, (uint16_t*)&g_s16_color_chase_fbCmdv  },       /* 計測値1 */
-    {  2, 100, 602, (uint16_t*)&g_s16_color_chase_p       },       /* 計測値2 */
-    {  3, 100, 603, (uint16_t*)&g_s16_color_chase_i       },       /* 計測値3 */
-    {  4, 100, 604, (uint16_t*)&g_s16_color_chase_d       },       /* 計測値4 */
-    {  5, 100, 605, (uint16_t*)&g_s16_color_chase_debug   },       /* 計測値5 */
-    {  6, 100, 606, (uint16_t*)&g_s16_linetrace_run_p     },       /* 計測値6 */
-    {  7, 100, 607, (uint16_t*)&g_s16_linetrace_run_i     },       /* 計測値7 */
-    {  8, 100, 608, (uint16_t*)&g_s16_linetrace_run_d     },       /* 計測値8 */
-    {  9, 100, 609, (uint16_t*)&vlume                     },       /* 計測値9 */
+    {  0, 100, 600, (uint16_t*)&g_u16_movefin     },       /* 計測値0 */
+    {  1, 100, 601, (uint16_t*)&g_u16_DLmove      },       /* 計測値1 */
+    {  2, 100, 602, (uint16_t*)&g16_snc_r             },       /* 計測値2 */
+    {  3, 100, 603, (uint16_t*)&g16_snc_g             },       /* 計測値3 */
+    {  4, 100, 604, (uint16_t*)&g16_snc_b             },       /* 計測値4 */
+    {  5, 100, 605, (uint16_t*)&g_u16_DoubleLoop_phase             },       /* 計測値5 */
+    {  6, 100, 606, (uint16_t*)&g_16_DLdeg        },       /* 計測値6 */
+    {  7, 100, 607, (uint16_t*)&g_u16_degfin      },       /* 計測値7 */
+    {  8, 100, 608, (uint16_t*)&vlume             },       /* 計測値8 */
+    {  9, 100, 609, (uint16_t*)&g_u16_DoubleLoop_phase},       /* 計測値9 */
 };
-#define RX_DATA_NUM 13                                   /* 受信データ数 */
+#define RX_DATA_NUM 12                                   /* 受信データ数 */
 /* 受信情報 */
 struct comm_data rx_datas[] = {
-    {  0, 100, 000, (uint16_t*)&comm_rx_cnt               },       /* 受信確認カウンタ */
-    {  0,  10, 001, (uint16_t*)&g_u16_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-    {  0,  10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos    },       /* カラーチェイス用ペットボトルx軸位置 */
+    {  0, 100, 000, &comm_rx_cnt               },       /* 受信確認カウンタ */
+    {  0,  10, 001, &g_u16_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
     
-    {  0,  10, 100, (uint16_t*)&x_u16_linetrace_run_kp    },       /* 適合値0 */
-    {  0,  10, 101, (uint16_t*)&x_u16_linetrace_run_ki    },       /* 適合値1 */
-    {  0,  10, 102, (uint16_t*)&x_u16_linetrace_run_kd    },       /* 適合値2 */
-    {  0,  10, 103, (uint16_t*)&g_u16_linetrace_run_bsV   },       /* 適合値3 */
-    {  0,  10, 104, (uint16_t*)&vlume                     },       /* 適合値4 */
-    {  0,  10, 105, (uint16_t*)&vlume                     },       /* 適合値5 */
-    {  0,  10, 106, (uint16_t*)&vlume                     },       /* 適合値6 */
-    {  0,  10, 107, (uint16_t*)&vlume                     },       /* 適合値7 */
+    {  0,  10, 100, (uint16_t*)&g_s16_const_run_spd    },       /* 適合値0 */
+    {  0,  10, 101, (uint16_t*)&x_u16_drive_mtr_rpmL_kp    },       /* 適合値1 */
+    {  0,  10, 102, (uint16_t*)&x_u16_drive_mtr_rpmL_kd   },       /* 適合値2 */
+    {  0,  10, 103, (uint16_t*)&x_u16_drive_mtr_rpmL_ki   },       /* 適合値3 */
+    {  0,  10, 104, (uint16_t*)&vlume   },       /* 適合値4 */
+    {  0,  10, 105, (uint16_t*)&x_u16_drive_mtr_rpmR_kp   },       /* 適合値5 */
+    {  0,  10, 106, (uint16_t*)&x_u16_drive_mtr_rpmR_kd                     },       /* 適合値6 */
+    {  0,  10, 107, (uint16_t*)&x_u16_drive_mtr_rpmR_ki                     },       /* 適合値7 */
     {  0,  10, 108, (uint16_t*)&vlume                     },       /* 適合値8 */
     {  0,  10, 109, (uint16_t*)&vlume                     },       /* 適合値9 */
 };
@@ -73,17 +84,45 @@ struct comm_data rx_datas[] = {
 void ini_comm( void ){
   ercd = serial_opn_por(SIO_USB_PORTID);
 
-  g_u16_comm_rx_jdg_red  = 0;                            /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-  g_u16_comm_rx_pet_xpos = 50;                           /* カラーチェイス用ペットボトルx軸位置 */
+  g_u16_comm_rx_jdg_red      = 0;                                   /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+  g_u16_comm_rx_pet_xpos_red = 50;                                  /* カラーチェイス用赤ペットボトルx軸位置 */
+  g_u16_comm_rx_pet_xpos_bl  = 50;                                  /* カラーチェイス用青ペットボトルx軸位置 */
+  g_u16_comm_rx_jdg_pet      = 0;                                   /* ペットボトル色判定(1:赤 2:青 0:無) */
+  g_u16_comm_rx_pet_srt      = 0;                                   /* ペットボトル判定開始(1:開始) */
 
-  comm_tx_cnt           = 0;                            /* 送信確認カウンタ */
-  comm_rx_cnt           = 0;                            /* 受信確認カウンタ */
+  comm_tx_cnt                = 0;                                   /* 送信確認カウンタ */
+  comm_rx_cnt                = 0;                                   /* 受信確認カウンタ */
+  comm_watch_cnt             = 0;                                   /* 通信監視カウンタ */
+  comm_reset_flg             = 0;                                   /* 通信リセットフラグ(0:正常 1:リセット中) */
 
-  vlume = 20;
+  vlume = 10;
+}
+
+void cyc_watch_comm( void ){
+    if( 0 == comm_reset_flg ){
+        if( 10 < comm_watch_cnt ){
+            serial_cls_por(SIO_USB_PORTID);                         /* ポートクローズ */
+            comm_watch_cnt = 0;                                     /* カウンタリセット */
+            comm_reset_flg = 1;                                     /* 通信リセットフラグ(0:正常 1:リセット中) */
+        }
+    }
+    else{
+        if( 1 < comm_watch_cnt ){                                   /* 時間経過 */
+            serial_opn_por(SIO_USB_PORTID);                          /* ポートオープン */
+            comm_watch_cnt = 0;                                      /* カウンタリセット */
+            comm_reset_flg = 0;                                      /* 通信リセットフラグ(0:正常 1:リセット中) */
+        }
+    }
+    comm_watch_cnt += 1;
 }
 
 void cyc_tx( void ){
     uint16_t idat;
+
+    if( 1 == comm_reset_flg ){
+        return;
+        /* リセット中のため以下の処理は実施しない */
+    }
 
     for ( idat = 0; idat < TX_DATA_NUM; idat++){
         if( tx_datas[idat].comm_cyc == tx_datas[idat].comm_cnt ){
@@ -94,9 +133,11 @@ void cyc_tx( void ){
     }
 
     comm_tx_cnt += 1;
-    
-    hub_speaker_set_volume(vlume);
+
+    hub_speaker_set_volume(20);
     hub_speaker_play_tone(2000, 2);
+
+    comm_watch_cnt = 0;                         /* カウンタクリア */
 }
 
 void cyc_rx( void ){
@@ -104,18 +145,22 @@ void cyc_rx( void ){
     uint16_t cmd;
     uint16_t data;
 
-    while (1){
-        received_data(&cmd, &data);
-        for ( idat = 0; idat < RX_DATA_NUM; idat++){
-            if( cmd == rx_datas[idat].comm_cmd ){
-                *rx_datas[idat].comm_data = data;
-                break;
-            }
+    if( 1 == comm_reset_flg ){
+        return;
+        /* リセット中のため以下の処理は実施しない */
+    }
+    
+    received_data(&cmd, &data);
+    for ( idat = 0; idat < RX_DATA_NUM; idat++){
+        if( cmd == rx_datas[idat].comm_cmd ){
+            *rx_datas[idat].comm_data = data;
+            break;
         }
     }
 }
 
 void send_data(uint16_t tx_cmd, uint16_t tx_val){
+    int16_t ercode;
 
     tx_buf[3] = '0' + tx_cmd % 10; tx_cmd /= 10;
     tx_buf[2] = '0' + tx_cmd % 10; tx_cmd /= 10;
@@ -128,7 +173,7 @@ void send_data(uint16_t tx_cmd, uint16_t tx_val){
     tx_buf[6]  = '0' + tx_val % 10; tx_val /= 10;
     tx_buf[5]  = '0' + tx_val % 10; tx_val /= 10;
     
-    serial_wri_dat(SIO_USB_PORTID, tx_buf, COM_PACKET_SIZE-1);
+    ercode = serial_wri_dat(SIO_USB_PORTID, tx_buf, COM_PACKET_SIZE-1);
 }
 
 

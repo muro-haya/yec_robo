@@ -21,9 +21,9 @@ uint16_t g_u16_manage_cnt;          /* 難所カウント */
 
 /* 競技攻略初期化処理 */
 void ini_manage( void ){
-    ini_smart_carry();
+    ini_DoubleLoop();
 
-    g_u16_manage_cnt = 0;
+    g_u16_manage_cnt = 1;
 }
 
 /* 競技攻略周期処理 */
@@ -33,6 +33,11 @@ void cyc_manage( void ){
     switch (g_u16_manage_cnt)
     {
     case DOUBLE_LOOP:
+        cyc_DoubleLoop();
+        bdat = cyc_DoubleLoop();
+        if( 1 == bdat ){
+            g_u16_manage_cnt += 1;
+        }
         /* code */
         break;
     case DEBRI_REMOVE:

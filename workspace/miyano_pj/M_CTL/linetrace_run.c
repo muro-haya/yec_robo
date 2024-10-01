@@ -19,16 +19,12 @@
 #include "../D_DEVICE/comm.h"
 
 #define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
-<<<<<<< HEAD
-#define BSSPD  50                              /* 基本指令値 */
-=======
-#define BSSPD  100                              /* 基本指令値 */
->>>>>>> origin/DL3
+#define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
-uint16_t  x_u16_linetrace_run_kp = 345;            /* P項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kp = 600;            /* P項ゲイン値[0.001]800*/
 uint16_t  x_u16_linetrace_run_ki = 0;            /* I項ゲイン値[0.001]*/
-uint16_t  x_u16_linetrace_run_kd = 335;            /* D項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kd = 200;            /* D項ゲイン値[0.001]500*/
 int16_t  x_s16_linetrace_limit_i = 100;        /* I項上限値*/
 
 /* 外部公開変数 */
@@ -42,6 +38,11 @@ int16_t  g_s16_linetrace_run_d;                 /* D項計算結果[-]*/
 int16_t  g_s16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
 uint16_t g_u16_linetrace_run_lpos;              /* 左色値 */
 uint16_t g_u16_linetrace_run_rpos;              /* 右色値 */
+uint16_t g_u16_linetrace_run_edge;              /* エッジ選択(1:左、-1:右) */
+
+uint16_t g_s16_linetrace_run_r = 0;             /*R値観測用*/
+uint16_t g_s16_linetrace_run_g = 0;             /*G値観測用*/
+uint16_t g_s16_linetrace_run_b = 0;             /*B値観測用*/
 
 /* 外部非公開変数 */
 static int16_t s16_posdlt_old;                  /* 位置偏差前回値 */
@@ -59,6 +60,12 @@ void ini_linetrace_run( void ){
     g_s16_linetrace_run_i      = 0;             /* I項計算結果[0.1]*/
     g_s16_linetrace_run_d      = 0;             /* D項計算結果[0.1]*/
     g_s16_linetrace_run_fbCmdv = 0;             /* FB制御指令値[-] */
+
+    g_s16_linetrace_run_r = 0;                  /**/
+    g_s16_linetrace_run_g = 0;                  /**/
+    g_s16_linetrace_run_b = 0;                  /**/
+
+    g_u16_linetrace_run_edge = 1;                  /* エッジ選択(1:左、-1:右) */
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
     s16_spddlt_old             = 0;             /* 速度偏差前回値 */
@@ -84,8 +91,10 @@ void set_tgt_linetrace_run( void ){
     button = 0;
     button = get_button( BUTTON_CENTER );
     if( 1 == button ){
-        g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
+        //g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
+        g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos*3 + g_u16_linetrace_run_rpos*1 ) / 5;
     }
+    
 }
 
 /* ライントレース走行周期処理 */
@@ -122,15 +131,18 @@ void cyc_linetrace_run( void ){
                     + g_s16_linetrace_run_i
                     + g_s16_linetrace_run_d;
 
-    s16_LVulue = (int16_t)g_u16_linetrace_run_bsV - g_s16_linetrace_run_fbCmdv;  /* 左モータ指示値計算 */
-    s16_RVulue = (int16_t)g_u16_linetrace_run_bsV + g_s16_linetrace_run_fbCmdv;  /* 右モータ指示値計算 */
-    if( ( 0 <  s16_run_fbCmdv             )
-     && ( 0 >= g_s16_linetrace_run_fbCmdv )
-    ){
-        set_drive_mtr_spd(0, 0);
-    }
+    s16_run_fbCmdv *= g_u16_linetrace_run_edge;
+
+    s16_LVulue = (int16_t)g_u16_linetrace_run_bsV - s16_run_fbCmdv;  /* 左モータ指示値計算 */
+    s16_RVulue = (int16_t)g_u16_linetrace_run_bsV + s16_run_fbCmdv;  /* 右モータ指示値計算 */
+    //if( ( 0 <  s16_run_fbCmdv             )
+    // && ( 0 >= g_s16_linetrace_run_fbCmdv )
+    //){
+    //    set_drive_mtr_spd(0, 0);
+    //}
+
     /* モータ駆動指示 */
-    else if( 0 == g_u16_linetrace_run_way ){       /* DUTY指示 */
+    if( 0 == g_u16_linetrace_run_way ){       /* DUTY指示 */
         set_drive_mtr_duty(s16_LVulue, s16_RVulue);
     }
     else{                                       /* 回転速度指示 */
