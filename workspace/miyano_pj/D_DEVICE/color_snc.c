@@ -15,22 +15,41 @@
 
 #include "color_snc.h"
 
+/* 外部非公開変数 */
+uint16_t u16_r_valu;
+uint16_t u16_g_valu;
+uint16_t u16_b_valu;
+
 // PUP カラーセンサポンタ
 pup_device_t *colorS;
 
 /* カラーセンサ初期化 */
 void ini_color_snc( void ){
   colorS = pup_color_sensor_get_device(PBIO_PORT_ID_C);
+
+  u16_r_valu = 0;
+  u16_g_valu = 0;
+  u16_b_valu = 0;
+}
+
+/* RGBセンサ値取得 */
+void cyc_get_color_rgb( void ){
+  pup_color_rgb_t rgbcolor;
+  
+  rgbcolor   = pup_color_sensor_rgb(colorS);
+  u16_r_valu = rgbcolor.r;
+  u16_g_valu = rgbcolor.g;
+  u16_b_valu = rgbcolor.b;
+
 }
 
 /* RGB値取得 */
 void get_color_rgb( uint16_t *r_valu, uint16_t *g_valu, uint16_t *b_valu ){
-  pup_color_rgb_t rgbcolor;
-  
-  rgbcolor = pup_color_sensor_rgb(colorS);
-  *r_valu = rgbcolor.r;
-  *g_valu = rgbcolor.g;
-  *b_valu = rgbcolor.b;
+
+  *r_valu = u16_r_valu;
+  *g_valu = u16_g_valu;
+  *b_valu = u16_b_valu;
+
 }
 
 /* 反射光取得 */

@@ -64,8 +64,6 @@ void Main(intptr_t exinf){
   /* 通信用タスク起動 */
   sta_cyc(TX_1M_CYC);
   sta_cyc(RX_1M_CYC);
-  /* サブタスク起動 */
-  sta_cyc(SUB_500M_CYC);
   
   /* タスク終了 */
   ext_tsk();
@@ -73,6 +71,7 @@ void Main(intptr_t exinf){
 
 /* 2msec周期処理 */
 void Main_2m( intptr_t unused ){
+  cyc_get_color_rgb();            /* RGBセンサ値取得 */
   cyc_ctl_main();                 /* 機体制御周期処理 */
   /* タスク終了 */
   ext_tsk();
@@ -109,12 +108,6 @@ void Tx_1m( intptr_t unused ){
 /* 1msec受信処理 */
 void Rx_1m( intptr_t unused ){
   cyc_rx();
-  /* タスク終了 */
-  ext_tsk();
-}
-
-/* 500msecサブタスク */
-void Sub_500m( intptr_t unused ){
   /* タスク終了 */
   ext_tsk();
 }
