@@ -1,5 +1,5 @@
 /* 競技攻略 */
-#define STAR_SET        0
+#define START_SET       0
 #define DOUBLE_LOOP     1
 #define DEBRI_REMOVE    2
 #define SMART_CARRY     3

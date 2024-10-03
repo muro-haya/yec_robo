@@ -6,6 +6,9 @@
 #include "kernel_cfg.h"
 #include "syssvc/serial.h"
 
+#include "spike/hub/display.h"
+#include "pbio/light_matrix.h"
+
 #include "../M_CTL/ctl_main.h"
 #include "../M_MEASURE/cal_distance.h"
 #include "../M_MEASURE/cal_movement.h"
@@ -21,6 +24,7 @@ uint16_t x_u16_DoubleLoop_2_movement = 200;         /* 分岐2での移動量[mm
 uint16_t x_u16_DoubleLoop_3_movement = 50;         /* 分岐3での移動量[mm] */
 uint16_t x_u16_DoubleLoop_4_movement = 50;         /* 分岐4での移動量[mm] */
 uint16_t x_u16_DoubleLoop_spd        = 50;         /* 各分岐での通過速度 */
+int16_t  x_u16_DoubleLoop_curve_rate = 95;         /* 各分岐での曲がり具合 */
 uint16_t x_u16_DoubleLoop_deg1      = 10;          /* 指定旋回角[deg] */
 uint16_t x_u16_DoubleLoop_deg2      = 10;          /* 指定旋回角[deg] */
 uint16_t x_u16_DoubleLoop_line_movement_0 = 300;    /* スタート後の指定距離ライントレース移動量[mm] */
@@ -67,21 +71,26 @@ bool_t cyc_DoubleLoop( void ){
     switch (g_u16_DoubleLoop_phase)
     {
     case 1:
+        hub_display_text_scroll("LD", 50);
         DLline_jdg_movement( x_u16_DoubleLoop_line_movement_0 );
         break;
     case 2:
     case 6:
     case 10:
     case 13:
+        hub_display_text_scroll("LC", 50);
         line_jdg_color( RESULT_BLUE );
         break;
     case 3:
+        hub_display_text_scroll("RM", 50);
         DLrd_jdg_movement( x_u16_DoubleLoop_1_movement, x_u16_DoubleLoop_spd );
         break;
     case 4:
-        DLturn_jdg_deg( x_u16_DoubleLoop_deg1 );
+        // DLturn_jdg_deg( x_u16_DoubleLoop_deg1 );
+        g_u16_DoubleLoop_phase += 1;
         break;
     case 5:
+        hub_display_text_scroll("OK", 50);
         DLline_jdg_movement( x_u16_DoubleLoop_line_movement_1 );
         break;
     case 7:
@@ -222,6 +231,7 @@ void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd ){
         g_u16_ctl_main_mode = CONST_RUN;
         g_u16_const_run_way = 1;
         g_s16_const_run_spd = 250;
+        g_s16_const_curve_rate = x_u16_DoubleLoop_curve_rate;
         
         movement_result = get_cal_movement();
         if( fin_movement < movement_result ){

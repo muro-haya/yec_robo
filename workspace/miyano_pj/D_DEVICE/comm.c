@@ -11,11 +11,12 @@
 #include "syssvc/serial.h"
 #include "drive_mtr.h"
 
+#include "../D_DEVICE/color_snc.h"
 #include "../D_DEVICE/button.h"
 #include "../M_CTL/linetrace_run.h"
 #include "../M_CTL/const_run.h"
-#include "../A_MANAGE/double_loop.h"
 #include "../M_CTL/color_chase.h"
+#include "../A_MANAGE/double_loop.h"
 #include "../A_MANAGE/smart_carry.h"
 
 
@@ -58,10 +59,10 @@ struct comm_data tx_datas[] = {
     {  2, 100, 502, (uint16_t*)&vlume                     },       /* 受信確認返信カウンタ */
     {  3, 100, 503, (uint16_t*)&g_u16_comm_rx_pet_srt     },       /* ペットボトル判定開始(1:開始) */
     
-    {  0, 100, 600, (uint16_t*)&g_u16_smart_carry_phase   },       /* 計測値0 */
-    {  1, 100, 601, (uint16_t*)&g_u16_smart_carry_debug   },       /* 計測値1 */
-    {  2, 100, 602, (uint16_t*)&g_u16_comm_rx_pet_xpos_bl },       /* 計測値2 */
-    {  3, 100, 603, (uint16_t*)&g_u16_comm_rx_jdg_pet     },       /* 計測値3 */
+    {  0, 100, 600, (uint16_t*)&g_u16_r_valu              },       /* 計測値0 */
+    {  1, 100, 601, (uint16_t*)&g_u16_g_valu              },       /* 計測値1 */
+    {  2, 100, 602, (uint16_t*)&g_u16_b_valu              },       /* 計測値2 */
+    {  3, 100, 603, (uint16_t*)&vlume                     },       /* 計測値3 */
     {  4, 100, 604, (uint16_t*)&vlume                     },       /* 計測値4 */
     {  5, 100, 605, (uint16_t*)&vlume                     },       /* 計測値5 */
     {  6, 100, 606, (uint16_t*)&vlume                     },       /* 計測値6 */

@@ -63,9 +63,9 @@ void ini_linetrace_run( void ){
     g_s16_linetrace_run_d      = 0;             /* D項計算結果[0.1]*/
     g_s16_linetrace_run_fbCmdv = 0;             /* FB制御指令値[-] */
 
-    g_u16_linetrace_run_r = 0;                  /*  */
-    g_u16_linetrace_run_g = 0;                  /*  */
-    g_u16_linetrace_run_b = 0;                  /*  */
+    g_s16_linetrace_run_r = 0;                  /*  */
+    g_s16_linetrace_run_g = 0;                  /*  */
+    g_s16_linetrace_run_b = 0;                  /*  */
 
     g_u16_linetrace_run_edge = 1;               /* エッジ選択(1:左 -1:右) */
 
@@ -97,7 +97,7 @@ void set_tgt_linetrace_run( void ){
         g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos*3 + g_u16_linetrace_run_rpos*1 ) / 5;
     }
 
-    get_color_rgb(&g_u16_linetrace_run_r, &g_u16_linetrace_run_g, &g_u16_linetrace_run_b);
+    get_color_rgb(&g_s16_linetrace_run_r, &g_s16_linetrace_run_g, &g_s16_linetrace_run_b);
     g_u16_linetrace_run_fbTgt = ( 400 + 50 ) / 2;
 }
 

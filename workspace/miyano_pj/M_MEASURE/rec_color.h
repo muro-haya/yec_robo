@@ -14,7 +14,7 @@
 #define GREEN_RVALUE     66                 /* 緑色R値 */
 #define GREEN_GVALUE    153                 /* 緑色G値 */
 #define GREEN_BVALUE    122                 /* 緑色B値 */
-#define BLUE_RVALUE     84                /* 青色R値 */
+#define BLUE_RVALUE      84                 /* 青色R値 */
 #define BLUE_GVALUE     213                 /* 青色G値 */
 #define BLUE_BVALUE     353                 /* 青色B値 */
 #define YELLOW_RVALUE   365                 /* 黄色R値 */

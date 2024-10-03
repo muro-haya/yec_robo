@@ -71,7 +71,7 @@ void cyc_song( void ){
         // hub_speaker_play_tone(song_hz, 200);
     }
     song_hz_old = song_hz;
-    // hub_speaker_set_volume(20);
-    hub_speaker_set_volume(0);
+    hub_speaker_set_volume(20);
+    // hub_speaker_set_volume(0);
     hub_speaker_play_tone(song_hz, 200);
 }
