@@ -13,6 +13,7 @@ extern uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチ�
 extern uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
 extern uint16_t g_u16_comm_rx_jdg_pet;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
 extern uint16_t g_u16_comm_rx_pet_srt;                         /* ペットボトル判定開始(1:開始) */
+extern uint16_t comm_reset_flg;                                /* 通信リセットフラグ(0:正常 1:リセット中) */
 
 /* 外部公開関数 */
 extern void ini_comm( void );                                  /* 通信初期化処理 */

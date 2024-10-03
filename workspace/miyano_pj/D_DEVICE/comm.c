@@ -11,6 +11,7 @@
 #include "syssvc/serial.h"
 #include "drive_mtr.h"
 
+#include "../D_DEVICE/button.h"
 #include "../M_CTL/linetrace_run.h"
 #include "../M_CTL/const_run.h"
 #include "../M_CTL/color_chase.h"
@@ -33,12 +34,12 @@ uint16_t g_u16_comm_rx_pet_xpos_red;                    /* カラーチェイス
 uint16_t g_u16_comm_rx_pet_xpos_bl;                     /* カラーチェイス用青ペットボトルx軸位置 */
 uint16_t g_u16_comm_rx_jdg_pet;                         /* ペットボトル色判定(1:赤 2:青 0:無) */
 uint16_t g_u16_comm_rx_pet_srt;                         /* ペットボトル判定開始(1:開始) */
+uint16_t comm_reset_flg;                                /* 通信リセットフラグ(0:正常 1:リセット中) */
 
 /* 外部非公開変数 */
 static uint16_t comm_tx_cnt;                            /* 送信確認カウンタ */
 static uint16_t comm_rx_cnt;                            /* 受信確認カウンタ */
 static uint16_t comm_watch_cnt;                         /* 通信監視カウンタ */
-static uint16_t comm_reset_flg;                         /* 通信リセットフラグ(0:正常 1:リセット中) */
 
 struct comm_data{
     uint16_t  comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
@@ -95,6 +96,7 @@ void ini_comm( void ){
   g_u16_comm_rx_pet_xpos_bl  = 50;                                  /* カラーチェイス用青ペットボトルx軸位置 */
   g_u16_comm_rx_jdg_pet      = 0;                                   /* ペットボトル色判定(1:赤 2:青 0:無) */
   g_u16_comm_rx_pet_srt      = 0;                                   /* ペットボトル判定開始(1:開始) */
+  g_u16_comm_rx_flg          = 0;
 
   comm_tx_cnt                = 0;                                   /* 送信確認カウンタ */
   comm_rx_cnt                = 0;                                   /* 受信確認カウンタ */
@@ -105,27 +107,39 @@ void ini_comm( void ){
 }
 
 void cyc_watch_comm( void ){
-    if( 0 == comm_reset_flg ){
-        if( 10 < comm_watch_cnt ){
-            serial_cls_por(SIO_USB_PORTID);                         /* ポートクローズ */
-            comm_watch_cnt = 0;                                     /* カウンタリセット */
-            comm_reset_flg = 1;                                     /* 通信リセットフラグ(0:正常 1:リセット中) */
-        }
+    uint16_t btn;
+
+    btn = get_button(BUTTON_BT);
+
+    if( 1 == btn ){
+        comm_reset_flg = 1;
     }
-    else{
-        if( 1 < comm_watch_cnt ){                                   /* 時間経過 */
-            serial_opn_por(SIO_USB_PORTID);                          /* ポートオープン */
-            comm_watch_cnt = 0;                                      /* カウンタリセット */
-            comm_reset_flg = 0;                                      /* 通信リセットフラグ(0:正常 1:リセット中) */
-        }
-    }
-    comm_watch_cnt += 1;
+
+    // if( 1 == comm_reset_flg ){
+    //     if( 10 < comm_watch_cnt ){
+    //         serial_cls_por(SIO_USB_PORTID);                         /* ポートクローズ */
+    //         comm_watch_cnt = 0;                                     /* カウンタリセット */
+    //         comm_reset_flg = 0;                                     /* 通信リセットフラグ(0:リセット中 1:正常) */
+    //     }
+    // }
+    // else if( 0 == comm_reset_flg ){
+    //     if( 5 < comm_watch_cnt ){                                   /* 時間経過 */
+    //         serial_opn_por(SIO_USB_PORTID);                          /* ポートオープン */
+    //         comm_watch_cnt = 0;                                      /* カウンタリセット */
+    //         comm_reset_flg = 4;                                      /* 通信リセットフラグ(0:リセット中 1:正常) */
+    //     }
+    // }
+    // else{
+    //     comm_reset_flg -= 1;
+    // }
+    // comm_watch_cnt += 1;
 }
 
 void cyc_tx( void ){
     uint16_t idat;
 
-    if( 1 == comm_reset_flg ){
+    if( ( 1 != comm_reset_flg )
+    ){
         return;
         /* リセット中のため以下の処理は実施しない */
     }
@@ -152,7 +166,7 @@ void cyc_rx( void ){
     uint16_t cmd;
     uint16_t data;
 
-    if( 1 == comm_reset_flg ){
+    if( 1 != comm_reset_flg ){
         return;
         /* リセット中のため以下の処理は実施しない */
     }

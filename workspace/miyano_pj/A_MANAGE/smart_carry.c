@@ -23,11 +23,11 @@
 /* 適合値 */
 uint16_t x_u16_smart_carry_3_distance = 50;         /* キャリーボトル認識距離[mm] */
 int16_t  x_s16_smart_carry_4_movement = 320;         /* ティポジション通過移動量[mm] */
-int16_t  x_s16_smart_carry_5_movement = 300;        /* ディセイブルゾーン通過移動量[mm] */
+int16_t  x_s16_smart_carry_5_movement = 500;        /* ディセイブルゾーン通過移動量[mm] */
 int16_t  x_s16_smart_carry_6_movement = 700;        /* ランディング移動量[mm] */
 int16_t  x_s16_smart_carry_7_movement = 150;        /* 後進移動量[mm] */
 uint16_t x_u16_smart_carry_8_deg      = 100;        /* 指定旋回角[deg] */
-int16_t  x_s16_smart_carry_4_spd      = 100;        /* ティポジション通過速速 */
+int16_t  x_s16_smart_carry_4_spd      = 200;        /* ティポジション通過速速 */
 int16_t  x_s16_smart_carry_6_spd      = 300;        /* ランディング速度 */
 int16_t  x_s16_smart_carry_7_spd      = -150;       /* 後進速度 */
 uint16_t x_u16_smart_carry_deg        = 100;        /* スマートキャリー指定角[deg] */

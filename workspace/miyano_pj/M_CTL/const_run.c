@@ -73,3 +73,8 @@ void cyc_const_turn( void ){
         set_drive_mtr_spd(g_s16_const_run_spd, -g_s16_const_run_spd);
     }
 }
+
+/* 停止周期処理 */
+void cyc_const_stop( void ){
+    set_drive_mtr_duty(0, 0);
+}
