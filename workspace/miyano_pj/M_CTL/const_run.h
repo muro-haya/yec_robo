@@ -12,6 +12,6 @@ extern void cyc_const_stop( void );     /* 停止周期処理 */
 extern uint16_t g_u16_const_run_way;    /* 一定出力制御指令方法(0:DUTY 1:回転速度) */
 extern int16_t  g_s16_const_run_spd;    /* 設定速度 */
 extern int16_t  g_s16_const_run_duty;   /* 設定DUTY */
-extern int16_t  g_s16_const_curve_rate; /* 一定出力 直進率(0~100%) */
+extern int16_t  g_s16_const_curve_rate; /* 一定出力 直進率(Lから見てRの割合) */
 
 #endif
