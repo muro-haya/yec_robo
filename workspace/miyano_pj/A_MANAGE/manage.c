@@ -24,7 +24,6 @@ uint16_t g_u16_manage_cnt;          /* 難所カウント */
 void ini_manage( void ){
     ini_DoubleLoop();
 
-    g_u16_manage_cnt = 1;
     g_u16_manage_cnt = SMART_CARRY;
 
 }
