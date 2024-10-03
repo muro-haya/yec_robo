@@ -109,7 +109,7 @@ void dr_jdg_color( void );                                               /* ボ�
 void dr_rd_jdg_movement( int16_t target_movement, int16_t run_spd );     /* 指定距離までR・D走行するフェイズ */
 void dr_jdg_bottle_count( void );                                        /* 判定フェイズ */
 void dr_rd_jdg_color( uint16_t target_color , int16_t run_spd );         /* 色認識までR・D走行するフェイズ */
-void line_jdg_color( uint16_t target_color, uint16_t edge_side );        /* 色認識までライントレースするフェイズ */
+void br_line_jdg_color( uint16_t target_color, uint16_t edge_side );        /* 色認識までライントレースするフェイズ */
 
 /* デブリリムーバル初期化処理 */
 void ini_debri_remove( void ){
@@ -179,7 +179,7 @@ bool_t cyc_debri_remove( void ){
         break;
     case 10: //黄色検知迄ライントレース
         edge_10 = layout * dr_edge_side;
-        line_jdg_color( RESULT_YELLOW, dr_edge_side );
+        dr_line_jdg_color( RESULT_YELLOW, dr_edge_side );
         edge_10 = 0;
         break;
     case 11:
@@ -338,7 +338,7 @@ void dr_rd_jdg_color( uint16_t target_color , int16_t run_spd ){
 }
 
 /* 色認識までライントレースするフェイズ */ //左右どうするか
-void line_jdg_color( uint16_t target_color, uint16_t edge_side ){
+void dr_line_jdg_color( uint16_t target_color, uint16_t edge_side ){
     uint16_t dr_end_color_result;
 
     g_u16_ctl_main_mode = CONST_RUN;
