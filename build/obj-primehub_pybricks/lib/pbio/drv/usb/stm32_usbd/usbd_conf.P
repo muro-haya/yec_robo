@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/usb/stm32_usbd/usbd_conf.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/usb/stm32_usbd/usbd_conf.o: \
  ../../lib/pbio/drv/usb/stm32_usbd/usbd_conf.c \
  ../../micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/stm32f4xx_hal_conf.h \

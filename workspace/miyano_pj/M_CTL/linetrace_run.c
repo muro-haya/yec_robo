@@ -19,7 +19,7 @@
 #include "../D_DEVICE/comm.h"
 
 #define FB_WAY 1                                /* FB制御指令方法(0:DUTY 1:回転速度) */
-#define BSSPD  100                              /* 基本指令値 */
+#define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
 uint16_t  x_u16_linetrace_run_kp  = 345;        /* P項ゲイン値[0.001]*/
@@ -38,11 +38,13 @@ int16_t  g_s16_linetrace_run_d;                 /* D項計算結果[-]*/
 int16_t  g_s16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
 uint16_t g_u16_linetrace_run_lpos;              /* 左色値 */
 uint16_t g_u16_linetrace_run_rpos;              /* 右色値 */
-uint16_t g_u16_linetrace_run_edge;              /* エッジ選択(1:左 -1:右) */
 
-uint16_t g_u16_linetrace_run_r;                 /* R値観測用 */
-uint16_t g_u16_linetrace_run_g;                 /* G値観測用 */
-uint16_t g_u16_linetrace_run_b;                 /* B値観測用 */
+uint16_t g_u16_linetrace_run_edge;              /* エッジ選択(1:左、-1:右) */
+
+uint16_t g_s16_linetrace_run_r = 0;             /*R値観測用*/
+uint16_t g_s16_linetrace_run_g = 0;             /*G値観測用*/
+uint16_t g_s16_linetrace_run_b = 0;             /*B値観測用*/
+
 
 /* 外部非公開変数 */
 static int16_t s16_posdlt_old;                  /* 位置偏差前回値 */
@@ -91,8 +93,10 @@ void set_tgt_linetrace_run( void ){
     button = 0;
     button = get_button( BUTTON_CENTER );
     if( 1 == button ){
-        g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
+        //g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
+        g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos*3 + g_u16_linetrace_run_rpos*1 ) / 5;
     }
+
     get_color_rgb(&g_u16_linetrace_run_r, &g_u16_linetrace_run_g, &g_u16_linetrace_run_b);
     g_u16_linetrace_run_fbTgt = ( 400 + 50 ) / 2;
 }
@@ -130,7 +134,7 @@ void cyc_linetrace_run( void ){
     s16_run_fbCmdv =  g_s16_linetrace_run_p
                     + g_s16_linetrace_run_i
                     + g_s16_linetrace_run_d;
-    
+  
     s16_run_fbCmdv *= g_u16_linetrace_run_edge;
 
     s16_LVulue = (int16_t)g_u16_linetrace_run_bsV - s16_run_fbCmdv;  /* 左モータ指示値計算 */

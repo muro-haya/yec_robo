@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/ioport/ioport_ev3dev_stretch.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/ioport/ioport_ev3dev_stretch.o: \
  ../../lib/pbio/drv/ioport/ioport_ev3dev_stretch.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h

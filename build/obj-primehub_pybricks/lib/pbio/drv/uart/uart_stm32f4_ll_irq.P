@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/uart/uart_stm32f4_ll_irq.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/uart/uart_stm32f4_ll_irq.o: \
  ../../lib/pbio/drv/uart/uart_stm32f4_ll_irq.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \

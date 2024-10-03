@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/sound/sound_stm32_hal_dac.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/sound/sound_stm32_hal_dac.o: \
  ../../lib/pbio/drv/sound/sound_stm32_hal_dac.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \

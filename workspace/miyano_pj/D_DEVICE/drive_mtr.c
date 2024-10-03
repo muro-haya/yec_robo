@@ -79,8 +79,6 @@ void ini_drive_mtr( void ){
   pup_motor_setup(motorL, PUP_DIRECTION_COUNTERCLOCKWISE, true);
   pup_motor_setup(motorR, PUP_DIRECTION_CLOCKWISE, true);
   
-  pup_motor_set_power(motorL, 0);
-  pup_motor_set_power(motorR, 0);
   // 駆動モータの角度をリセット
   pup_motor_reset_count(motorL);
   pup_motor_reset_count(motorR);
@@ -215,7 +213,7 @@ void rst_drive_mtr_cnt( void ){
   pup_motor_reset_count(motorR);                  // 右駆動モータの角度をリセット
 }
 
-/* 駆動モータエンコーダカウント取得 */
+/* アームモータエンコーダカウント取得 */
 void get_drive_mtr_cnt( int16_t* drive_cntL, int16_t* drive_cntR ){
   int32_t ldat;
   ldat = pup_motor_get_count(motorL);           // 右駆動モータエンコーダカウント取得

@@ -93,7 +93,7 @@ void Main_100m( intptr_t unused ){
     cnt = 0;
   }
   cnt += 1;
-  
+
   /* タスク終了 */
   ext_tsk();
 }

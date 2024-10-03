@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/bricks/primehub_spike-rt/main.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/bricks/primehub_spike-rt/main.o: \
  ../../bricks/primehub_spike-rt/main.c \
  ../..//lib/pbio/include/pbsys/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbsysconfig.h \

@@ -2,14 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <kernel.h>
-
 #include <miyano_pj.h>
-
 #include "kernel_cfg.h"
 #include "syssvc/serial.h"
-
 #include "color_chase.h"
-
 #include "../D_DEVICE/drive_mtr.h"
 #include "../D_DEVICE/color_snc.h"
 #include "../D_DEVICE/comm.h"
@@ -41,9 +37,7 @@ static int16_t s16_spddlt_old;                  /* 速度偏差前回値 */
 static uint16_t u16_dlt_sum;                    /* 位置偏差積算値 */
 static uint16_t u16_wpos;                       /* 白色値 */
 static uint16_t u16_bpos;                       /* 黒色値 */
-
 /* 外部非公開関数 */
-
 /* カラーチェイス 初期化処理 */
 void ini_color_chase( void ){
 
@@ -62,13 +56,13 @@ void ini_color_chase( void ){
     u16_wpos                   = 0;             /* 白色値 */
     u16_bpos                   = 0;             /* 黒色値 */
 }
-
 /* カラーチェイス 周期処理 */
 void cyc_color_chase( void ){
     int16_t s16_posdlt;                         /* 位置偏差 */
     int16_t s16_spddlt;                         /* 速度偏差 */
     int16_t s16_LVulue;                         /* 左モータ指示値 */
     int16_t s16_RVulue;                         /* 右モータ指示値 */
+
     
     /* 偏差計算 */
     if(0 != g_u16_comm_rx_jdg_pet){             /* ペットボトル検出時 */
@@ -105,7 +99,6 @@ void cyc_color_chase( void ){
     else{                                       /* 回転速度指示 */
         set_drive_mtr_spd(s16_LVulue, s16_RVulue);
     }
-
     s16_posdlt_old = s16_posdlt;                /* 前回値保存 */
     s16_spddlt_old = s16_spddlt;                /* 前回値保存 */
 }

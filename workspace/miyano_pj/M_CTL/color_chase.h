@@ -1,9 +1,9 @@
 /* カラーチェイス */
-
 /* 外部参照関数 */
 extern void ini_color_chase( void );        /* カラーチェイス 初期化処理 */
 extern void cyc_color_chase( void );        /* カラーチェイス 周期処理 */
 
+/* 外部参照変数 */
 /* 外部参照変数 */
 extern uint16_t g_u16_color_chase_way;               /* ライントレース制御指令方法(0:DUTY 1:回転速度) */
 extern uint16_t g_u16_color_chase_bsV;               /* FB制御基本値[-] */

@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/counter/counter_ev3dev_stretch_iio.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/counter/counter_ev3dev_stretch_iio.o: \
  ../../lib/pbio/drv/counter/counter_ev3dev_stretch_iio.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h

@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/libm/erf_lgamma.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/libm/erf_lgamma.o: \
  ../../micropython/lib/libm/erf_lgamma.c \
  ../../micropython/lib/libm/fdlibm.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/math.h \

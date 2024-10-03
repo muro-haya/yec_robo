@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/pbio/drv/clock/clock_asp3.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/clock/clock_asp3.o: \
  ../../lib/pbio/drv/clock/clock_asp3.c ../..//lib/contiki-core/contiki.h \
  ../..//lib/contiki-core/contiki-version.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/contiki-conf.h \

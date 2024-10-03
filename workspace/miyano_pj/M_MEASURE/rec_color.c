@@ -14,9 +14,13 @@
 #include "D_DEVICE/comm.h"
 
 /* 外部非公開関数 */
+uint16_t g16_colorRe;
 
 /* 外部公開関数 */
 uint16_t g_u16_rec_color_define_color[36] =   /* 色定義 */
+    // { BLUE_RVALUE,   COLOR_WIDTH, BLUE_GVALUE,   COLOR_WIDTH, BLUE_BVALUE,   COLOR_WIDTH,
+    //   RED_RVALUE,    COLOR_WIDTH, RED_GVALUE,    COLOR_WIDTH, RED_BVALUE,    COLOR_WIDTH,
+    //   GREEN_RVALUE,  COLOR_WIDTH, GREEN_GVALUE,  COLOR_WIDTH, GREEN_BVALUE,  COLOR_WIDTH,
     { RED_RVALUE,    COLOR_WIDTH, RED_GVALUE,    COLOR_WIDTH, RED_BVALUE,    COLOR_WIDTH,
       GREEN_RVALUE,  COLOR_WIDTH, GREEN_GVALUE,  COLOR_WIDTH, GREEN_BVALUE,  COLOR_WIDTH,
       BLUE_RVALUE,   COLOR_WIDTH, BLUE_GVALUE,   COLOR_WIDTH, BLUE_BVALUE,   COLOR_WIDTH,
@@ -51,6 +55,7 @@ uint16_t get_rec_color( void ){
     get_color_rgb( &u16_get_color[0], &u16_get_color[2], &u16_get_color[4] );
 
     for( u16_dat1=0; u16_dat1<6; u16_dat1++ ){
+    // for( u16_dat1=0; u16_dat1<1; u16_dat1++ ){
         for( u16_dat2=0; u16_dat2<5; u16_dat2+=2 ){
             u16_compare_data_max = g_u16_rec_color_define_color[6*u16_dat1+u16_dat2] + g_u16_rec_color_define_color[6*u16_dat1+u16_dat2+1];
             u16_compare_data_min = g_u16_rec_color_define_color[6*u16_dat1+u16_dat2] - g_u16_rec_color_define_color[6*u16_dat1+u16_dat2+1];
@@ -66,7 +71,7 @@ uint16_t get_rec_color( void ){
         }
         u16_cnt = 0;
     }
-
+    g16_colorRe = u16_color;
     return u16_color;
 }
 

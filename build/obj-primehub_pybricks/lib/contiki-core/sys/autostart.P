@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/contiki-core/sys/autostart.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/contiki-core/sys/autostart.o: \
  ../../lib/contiki-core/sys/autostart.c \
  ../..//lib/contiki-core/sys/autostart.h \
  ../..//lib/contiki-core/sys/process.h ../..//lib/contiki-core/sys/pt.h \

@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/ble/le_device_db_memory.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/ble/le_device_db_memory.o: \
  ../../lib/btstack/src/ble/le_device_db_memory.c \
  ../..//lib/btstack/src/ble/le_device_db.h \
  ../..//lib/btstack/src/btstack_util.h \

@@ -20,6 +20,10 @@ uint16_t u16_r_valu;
 uint16_t u16_g_valu;
 uint16_t u16_b_valu;
 
+
+uint16_t g16_snc_r;
+uint16_t g16_snc_g;
+uint16_t g16_snc_b;
 // PUP カラーセンサポンタ
 pup_device_t *colorS;
 

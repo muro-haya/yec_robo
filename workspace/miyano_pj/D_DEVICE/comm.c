@@ -14,6 +14,7 @@
 #include "../D_DEVICE/button.h"
 #include "../M_CTL/linetrace_run.h"
 #include "../M_CTL/const_run.h"
+#include "../A_MANAGE/double_loop.h"
 #include "../M_CTL/color_chase.h"
 #include "../A_MANAGE/smart_carry.h"
 
@@ -36,16 +37,17 @@ uint16_t g_u16_comm_rx_jdg_pet;                         /* ペットボトル色
 uint16_t g_u16_comm_rx_pet_srt;                         /* ペットボトル判定開始(1:開始) */
 uint16_t comm_reset_flg;                                /* 通信リセットフラグ(0:正常 1:リセット中) */
 
+
 /* 外部非公開変数 */
 static uint16_t comm_tx_cnt;                            /* 送信確認カウンタ */
 static uint16_t comm_rx_cnt;                            /* 受信確認カウンタ */
 static uint16_t comm_watch_cnt;                         /* 通信監視カウンタ */
 
 struct comm_data{
-    uint16_t  comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
-    uint16_t  comm_cyc;                                  /* 周期(受信では使用しない 一応記載) */
-    uint16_t  comm_cmd;                                  /* コマンド */
-    uint16_t* comm_data;                                 /* 通信データ */
+    uint16_t comm_cnt;                                  /* 周期カウンタ(受信では使用しない) */
+    uint16_t comm_cyc;                                  /* 周期(受信では使用しない 一応記載) */
+    uint16_t comm_cmd;                                  /* コマンド */
+    int32_t* comm_data;                                 /* 通信データ */
 };
 
 #define TX_DATA_NUM 14                                   /* 送信データ数 */

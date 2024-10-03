@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/chipset/cc256x/btstack_chipset_cc256x.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/chipset/cc256x/btstack_chipset_cc256x.o: \
  ../../lib/btstack/chipset/cc256x/btstack_chipset_cc256x.c \
  ../..//lib/pbio/platform/prime_hub_spike-rt/btstack_config.h \
  ../../lib/btstack/chipset/cc256x/btstack_chipset_cc256x.h \

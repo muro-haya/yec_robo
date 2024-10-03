@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/libm/ef_rem_pio2.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/libm/ef_rem_pio2.o: \
  ../../micropython/lib/libm/ef_rem_pio2.c \
  ../../micropython/lib/libm/fdlibm.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/math.h \

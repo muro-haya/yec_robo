@@ -1,4 +1,4 @@
-/home/hayato/spike-rt/build/obj-primehub_pybricks/lib/btstack/src/hci_transport_h4.o: \
+/home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/hci_transport_h4.o: \
  ../../lib/btstack/src/hci_transport_h4.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/inttypes.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/newlib.h \
