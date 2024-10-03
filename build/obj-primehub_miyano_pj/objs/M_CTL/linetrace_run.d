@@ -63,7 +63,9 @@ objs/M_CTL/linetrace_run.o: \
  ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \
  ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h \
  ../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h \
- ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h
+ ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \
+ ../../asp3/../drivers/include/spike/hub/speaker.h \
+ ../../workspace/miyano_pj/M_CTL/../D_DEVICE/comm.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h:
@@ -130,3 +132,5 @@ kernel_cfg.h:
 ../../asp3/../external/libpybricks/lib/pbio/include/pbdrv/button.h:
 ../../asp3/../external/libpybricks/lib/pbio/include/pbio/config.h:
 ../../asp3/../external/libpybricks/lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h:
+../../asp3/../drivers/include/spike/hub/speaker.h:
+../../workspace/miyano_pj/M_CTL/../D_DEVICE/comm.h:

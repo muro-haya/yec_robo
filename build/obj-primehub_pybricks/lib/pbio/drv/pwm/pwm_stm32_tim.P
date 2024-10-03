@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/pwm/pwm_stm32_tim.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/pwm/pwm_stm32_tim.o: \
+>>>>>>> horikawa_step0
  ../../lib/pbio/drv/pwm/pwm_stm32_tim.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h \

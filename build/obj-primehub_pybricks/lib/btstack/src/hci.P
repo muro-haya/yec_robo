@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/hci.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/hci.o: \
+>>>>>>> horikawa_step0
  ../../lib/btstack/src/hci.c \
  ../..//lib/pbio/platform/prime_hub_spike-rt/btstack_config.h \
  ../../lib/btstack/src/gap.h ../../lib/btstack/src/btstack_defines.h \

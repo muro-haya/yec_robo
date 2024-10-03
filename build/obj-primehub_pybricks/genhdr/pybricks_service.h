@@ -1,9 +1,17 @@
 
+<<<<<<< HEAD
 // /home/fumitake/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h generated from ../..//lib/pbio/drv/bluetooth/pybricks_service.gatt for BTstack
 // it needs to be regenerated when the .gatt file is updated. 
 
 // To generate /home/fumitake/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h:
 // ../..//lib/btstack/tool/compile_gatt.py ../..//lib/pbio/drv/bluetooth/pybricks_service.gatt /home/fumitake/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h
+=======
+// /home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h generated from ../..//lib/pbio/drv/bluetooth/pybricks_service.gatt for BTstack
+// it needs to be regenerated when the .gatt file is updated. 
+
+// To generate /home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h:
+// ../..//lib/btstack/tool/compile_gatt.py ../..//lib/pbio/drv/bluetooth/pybricks_service.gatt /home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/genhdr/pybricks_service.h
+>>>>>>> horikawa_step0
 
 // att db format version 1
 

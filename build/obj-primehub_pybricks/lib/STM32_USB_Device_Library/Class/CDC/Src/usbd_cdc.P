@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o: \
+>>>>>>> horikawa_step0
  ../../lib/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c \
  ../..//lib/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
  ../..//lib/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \

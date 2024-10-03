@@ -26,6 +26,7 @@ uint16_t g_u16_manage_cnt;          /* 難所カウント */
 /* 競技攻略初期化処理 */
 void ini_manage( void ){
     ini_DoubleLoop();
+    ini_debri_remove();
     ini_smart_carry();
 
     g_u16_manage_cnt = START_SET;
@@ -50,7 +51,10 @@ void cyc_manage( void ){
         }
         break;
     case DEBRI_REMOVE:
-        /* code */
+        bdat = cyc_debri_remove();
+        if( 1 == bdat ){
+            //g_u16_manage_cnt += 1;
+        }
         break;
     case SMART_CARRY:
         bdat = cyc_smart_carry();

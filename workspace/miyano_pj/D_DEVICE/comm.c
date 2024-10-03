@@ -20,6 +20,8 @@
 #include "../A_MANAGE/smart_carry.h"
 
 
+#include "../A_MANAGE/debri_remove.h"
+
 #include "comm.h"
 
 #define COM_PACKET_SIZE (sizeof("@000:000000\n"))

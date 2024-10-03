@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/sys/status.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/sys/status.o: \
+>>>>>>> horikawa_step0
  ../../lib/pbio/sys/status.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/assert.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \

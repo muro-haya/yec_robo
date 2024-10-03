@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/ble/le_device_db_memory.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/ble/le_device_db_memory.o: \
+>>>>>>> horikawa_step0
  ../../lib/btstack/src/ble/le_device_db_memory.c \
  ../..//lib/btstack/src/ble/le_device_db.h \
  ../..//lib/btstack/src/btstack_util.h \
