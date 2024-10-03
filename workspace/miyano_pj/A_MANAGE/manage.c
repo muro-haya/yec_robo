@@ -11,6 +11,7 @@
 #include "double_loop.h"
 #include "debri_remove.h"
 #include "smart_carry.h"
+#include "start_set.h"
 
 /* 外部公開変数 */
 uint16_t g_u16_manage_cnt;          /* 難所カウント */
@@ -24,6 +25,8 @@ void ini_manage( void ){
     ini_DoubleLoop();
 
     g_u16_manage_cnt = 1;
+    g_u16_manage_cnt = SMART_CARRY;
+
 }
 
 /* 競技攻略周期処理 */
@@ -32,6 +35,12 @@ void cyc_manage( void ){
 
     switch (g_u16_manage_cnt)
     {
+    case STAR_SET:
+        bdat = cyc_start_set();
+        if( 1 == bdat ){
+            g_u16_manage_cnt = SMART_CARRY;
+        }
+        break;
     case DOUBLE_LOOP:
         cyc_DoubleLoop();
         bdat = cyc_DoubleLoop();

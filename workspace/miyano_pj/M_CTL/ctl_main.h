@@ -7,6 +7,7 @@
 #define CONST_TURN      2               /* 一定旋回 */
 #define ARM_CTL         3               /* アーム動作 */
 #define COLOR_CHASE     4               /* カラーチェイス */
+#define STOP            5               /* 停止 */
 
 /* 外部参照関数 */
 extern void ini_ctl_main( void );       /* 機体制御初期化 */

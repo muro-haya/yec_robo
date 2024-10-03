@@ -15,3 +15,8 @@ extern int16_t  g_s16_color_chase_d;                 /* D項計算結果[0.1]*/
 extern int16_t  g_s16_color_chase_fbCmdv;            /* FB制御指令値[-] */
 
 extern int16_t  g_s16_color_chase_debug;
+
+/* 適合値 */
+extern int16_t  x_u16_color_chase_kp;                 /* P項ゲイン値[0.01]*/
+extern int16_t  x_u16_color_chase_ki;                 /* I項ゲイン値[0.01]*/
+extern int16_t  x_u16_color_chase_kd;                 /* D項ゲイン値[0.01]*/

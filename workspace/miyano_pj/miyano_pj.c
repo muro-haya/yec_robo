@@ -15,6 +15,7 @@
 #include "syssvc/serial.h"
 
 #include "A_MANAGE/manage.h"
+#include "M_CTL/song.h"
 #include "M_CTL/ctl_main.h"
 #include "M_CTL/linetrace_run.h"
 #include "M_CTL/const_run.h"
@@ -47,6 +48,7 @@ void Main(intptr_t exinf){
   ini_cal_distance();
   ini_cal_movement();
   ini_rec_color();
+  ini_song();
   /* アプリ層 */
   ini_manage();
 
@@ -85,6 +87,13 @@ void Main_10m( intptr_t unused ){
 /* 100msec周期処理 */
 void Main_100m( intptr_t unused ){
   cyc_watch_comm();
+
+  if(1 < cnt){
+    cyc_song();
+    cnt = 0;
+  }
+  cnt += 1;
+
   /* タスク終了 */
   ext_tsk();
 }

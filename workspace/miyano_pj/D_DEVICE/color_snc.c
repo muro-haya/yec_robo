@@ -20,10 +20,10 @@ uint16_t u16_r_valu;
 uint16_t u16_g_valu;
 uint16_t u16_b_valu;
 
+
 uint16_t g16_snc_r;
 uint16_t g16_snc_g;
 uint16_t g16_snc_b;
-
 // PUP カラーセンサポンタ
 pup_device_t *colorS;
 
@@ -53,10 +53,6 @@ void get_color_rgb( uint16_t *r_valu, uint16_t *g_valu, uint16_t *b_valu ){
   *r_valu = u16_r_valu;
   *g_valu = u16_g_valu;
   *b_valu = u16_b_valu;
-
-  g16_snc_r = *r_valu;
-  g16_snc_g = *g_valu;
-  g16_snc_b = *b_valu;
 
 }
 

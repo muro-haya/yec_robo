@@ -15,7 +15,7 @@
 #define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
-int16_t  x_u16_color_chase_kp = 30;            /* P項ゲイン値[0.01]*/
+int16_t  x_u16_color_chase_kp = 80;            /* P項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_ki = 0;            /* I項ゲイン値[0.01]*/
 int16_t  x_u16_color_chase_kd = 0;            /* D項ゲイン値[0.01]*/
 
@@ -63,29 +63,35 @@ void cyc_color_chase( void ){
     int16_t s16_LVulue;                         /* 左モータ指示値 */
     int16_t s16_RVulue;                         /* 右モータ指示値 */
 
+    
+    /* 偏差計算 */
+    if(0 != g_u16_comm_rx_jdg_pet){             /* ペットボトル検出時 */
+        s16_posdlt = g_u16_comm_rx_pet_xpos_red - g_u16_color_chase_fbTgt;  /* 位置偏差計算 */
+    }
+    else{                                       /* 未検出 */
+        s16_posdlt     = 0;
+        s16_posdlt_old = 0;
+        u16_dlt_sum    = 0;
+        s16_spddlt     = 0;
+    }
     /* P項計算 */
-    s16_posdlt = g_u16_comm_rx_pet_xpos_red - g_u16_color_chase_fbTgt;  /* 位置偏差計算 */
     g_s16_color_chase_p = s16_posdlt * x_u16_color_chase_kp;        /* P項計算 */
     /* I項計算 */
-    u16_dlt_sum += s16_posdlt;                                          /* 位置偏差積算 */
+    u16_dlt_sum += s16_posdlt;                                      /* 位置偏差積算 */
     g_s16_color_chase_i = u16_dlt_sum * x_u16_color_chase_ki;       /* I項計算 */
     /* D項計算 */
-    s16_spddlt = s16_posdlt - s16_posdlt_old;                           /* 速度偏差取得 */
+    s16_spddlt = s16_posdlt - s16_posdlt_old;                       /* 速度偏差取得 */
     g_s16_color_chase_d = s16_spddlt * x_u16_color_chase_kd;        /* D項計算 */
 
     /* 指示値算出 */
     g_s16_color_chase_fbCmdv =    g_s16_color_chase_p/100
                                 + g_s16_color_chase_i/100
                                 + g_s16_color_chase_d/100;
-    // if( g_s16_color_chase_fbCmdv < 40 ){
-    //     g_s16_color_chase_fbCmdv = 40;
-    // }
 
     s16_LVulue = (int16_t)g_u16_color_chase_bsV - g_s16_color_chase_fbCmdv;  /* 左モータ指示値計算 */
     s16_RVulue = (int16_t)g_u16_color_chase_bsV + g_s16_color_chase_fbCmdv;  /* 右モータ指示値計算 */
     g_s16_color_chase_debug = s16_LVulue;
-    // s16_LVulue = 100;
-    // s16_RVulue = 100;
+    
     /* モータ駆動指示 */
     if( 0 == g_u16_color_chase_way ){            /* DUTY指示 */
         set_drive_mtr_duty(s16_LVulue, s16_RVulue);

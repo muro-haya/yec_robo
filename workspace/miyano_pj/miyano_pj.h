@@ -28,5 +28,6 @@ extern void Main_10m( intptr_t unused );
 extern void Main_100m( intptr_t unused );
 extern void Tx_1m( intptr_t unused );
 extern void Rx_1m( intptr_t unused );
+extern void Sub_500m( intptr_t unused );
 
 #endif /* TOPPERS_MACRO_ONLY */
