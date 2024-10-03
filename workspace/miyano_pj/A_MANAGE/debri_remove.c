@@ -97,6 +97,10 @@ uint16_t dr_start_button;
 
 /* 外部非公開変数 */
 uint16_t dr_reset_flg;                      /* リセットフラグ */
+int16_t turndeg_0;
+int16_t turndeg_6;
+int16_t turndeg_9;
+int16_t edge_10;
 
 /* 外部非公開関数 */
 void dr_turn_jdg_deg( int16_t target_deg );                              /* 指定角まで旋回するフェイズ */
@@ -138,7 +142,9 @@ bool_t cyc_debri_remove( void ){
     switch (g_u16_debri_remove_phase)
     {
     case 0:  //ボトルの方に回転
-        dr_turn_jdg_deg( turn_pattern[pattern_nom][g_u16_bottle_count] );
+        turndeg_0 = layout * turn_pattern[pattern_nom][g_u16_bottle_count];
+        dr_turn_jdg_deg( turndeg_0 );
+        turndeg_0 = 0;
         break;
     case 1:  //ボトル迄直進
         dr_chase_jdg_movement( chase_straight_pattern[pattern_nom][g_u16_bottle_count], chase_straight_spd );
@@ -156,7 +162,9 @@ bool_t cyc_debri_remove( void ){
         dr_jdg_bottle_count();
         break;
     case 6:  //攻略終了地点に向けて回転
-        dr_turn_jdg_deg( last_turn_pattern[pattern_nom][g_u16_bottle_count] );
+        turndeg_6 = layout * last_turn_pattern[pattern_nom][g_u16_bottle_count];
+        dr_turn_jdg_deg( turndeg_6 );
+        turndeg_6 = 0;
         break;
     case 7:  //攻略終了地点に向けて直進
         dr_rd_jdg_movement( last_straight_pattern[pattern_nom][g_u16_bottle_count], last_straight_spd );
@@ -165,10 +173,14 @@ bool_t cyc_debri_remove( void ){
         dr_rd_jdg_color( RESULT_BLACK, last_straight_color_search_spd );
         break;
     case 9:  //ライントレースのために回転
+        turndeg_9 = layout * assist_turn_pattern[pattern_nom][g_u16_bottle_count];
         dr_turn_jdg_deg( assist_turn_pattern[pattern_nom][g_u16_bottle_count] );
+        turndeg_9 = 0;
         break;
     case 10: //黄色検知迄ライントレース
+        edge_10 = layout * dr_edge_side;
         line_jdg_color( RESULT_YELLOW, dr_edge_side );
+        edge_10 = 0;
         break;
     case 11:
         flg_dr_end = 1;

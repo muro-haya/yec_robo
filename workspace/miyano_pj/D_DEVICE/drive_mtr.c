@@ -129,19 +129,19 @@ void set_drive_mtr_spd( int16_t spdL, int16_t spdR )
 
   //FF直達項　
   if(spdL < 0){
-    g_s16_drive_mtr_spdL_FF = spdL*5/72-35;
+    g_s16_drive_mtr_spdL_FF = spdL*5/72-25;  //-35
   }else if(spdL == 0){
     g_s16_drive_mtr_spdL_FF = 0;
   }else{
-    g_s16_drive_mtr_spdL_FF = spdL*5/72+35;
+    g_s16_drive_mtr_spdL_FF = spdL*5/72+25;  //35
   }
 
   if(spdR < 0){
-    g_s16_drive_mtr_spdR_FF = spdR*5/72-30;
+    g_s16_drive_mtr_spdR_FF = spdR*5/72-25;  //-30
   }else if(spdR == 0){
     g_s16_drive_mtr_spdR_FF = 0;
   }else{
-    g_s16_drive_mtr_spdR_FF = spdR*5/72+30;
+    g_s16_drive_mtr_spdR_FF = spdR*5/72+25;  //30
   }
 
   //FB項
