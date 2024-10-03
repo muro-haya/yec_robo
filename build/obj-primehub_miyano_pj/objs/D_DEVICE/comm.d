@@ -49,6 +49,13 @@ objs/D_DEVICE/comm.o: ../../workspace/miyano_pj/D_DEVICE/comm.c \
  ../../asp3/../drivers/include/spike/hub/system.h \
  ../../asp3/../external/libpybricks/lib/pbio/include/pbio/color.h \
  kernel_cfg.h ../../asp3/syssvc/serial.h \
+<<<<<<< Updated upstream
+=======
+ ../../workspace/miyano_pj/D_DEVICE/../M_CTL/linetrace_run.h \
+ ../../workspace/miyano_pj/D_DEVICE/../M_CTL/const_run.h \
+ ../../workspace/miyano_pj/D_DEVICE/../M_CTL/color_chase.h \
+ ../../workspace/miyano_pj/D_DEVICE/../A_MANAGE/debri_remove.h \
+>>>>>>> Stashed changes
  ../../workspace/miyano_pj/D_DEVICE/comm.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
@@ -102,4 +109,11 @@ objs/D_DEVICE/comm.o: ../../workspace/miyano_pj/D_DEVICE/comm.c \
 ../../asp3/../external/libpybricks/lib/pbio/include/pbio/color.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
+<<<<<<< Updated upstream
+=======
+../../workspace/miyano_pj/D_DEVICE/../M_CTL/linetrace_run.h:
+../../workspace/miyano_pj/D_DEVICE/../M_CTL/const_run.h:
+../../workspace/miyano_pj/D_DEVICE/../M_CTL/color_chase.h:
+../../workspace/miyano_pj/D_DEVICE/../A_MANAGE/debri_remove.h:
+>>>>>>> Stashed changes
 ../../workspace/miyano_pj/D_DEVICE/comm.h:

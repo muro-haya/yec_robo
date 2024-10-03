@@ -73,6 +73,10 @@ objs/D_DEVICE/drive_mtr.o: ../../workspace/miyano_pj/D_DEVICE/drive_mtr.c \
  ../../asp3/../external/libpybricks/lib/pbio/include/pbio/differentiator.h \
  ../../workspace/miyano_pj/miyano_pj.h kernel_cfg.h \
  ../../asp3/syssvc/serial.h \
+<<<<<<< Updated upstream
+=======
+ ../../workspace/miyano_pj/D_DEVICE/../M_CTL/const_run.h \
+>>>>>>> Stashed changes
  ../../workspace/miyano_pj/D_DEVICE/drive_mtr.h
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/stdlib.h:
 /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h:
@@ -150,4 +154,8 @@ objs/D_DEVICE/drive_mtr.o: ../../workspace/miyano_pj/D_DEVICE/drive_mtr.c \
 ../../workspace/miyano_pj/miyano_pj.h:
 kernel_cfg.h:
 ../../asp3/syssvc/serial.h:
+<<<<<<< Updated upstream
+=======
+../../workspace/miyano_pj/D_DEVICE/../M_CTL/const_run.h:
+>>>>>>> Stashed changes
 ../../workspace/miyano_pj/D_DEVICE/drive_mtr.h:
