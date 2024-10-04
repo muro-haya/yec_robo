@@ -2,6 +2,7 @@
 
 /*適合値*/
 extern uint16_t pattern_nom;                      // パターン番号（0～4）
+extern int16_t layout;                            // レイアウト変更（L:1, R:-1）
 extern int16_t D_straight;                        // 直進量適合値_デブリボトル運搬[mm]
 extern int16_t D_spd;                             // 直進速度適合値_デブリボトル運搬
 extern int16_t R_straight;                        // 後退量適合値_デブリボトル運搬後[mm]
@@ -14,7 +15,9 @@ extern int16_t last_straight_pattern[5][5];       // 直進量適合値_最終�
 extern int16_t last_straight_spd;                 // 直進速度適合値_最終直進
 extern int16_t last_straight_color_search_spd;    // 直進速度適合値_最終直進色認識迄
 extern int16_t assist_turn_pattern[5][5];         // 回転角適合値_ライントレース前の補正[deg]
-extern int16_t dr_edge_side;                      // ライントレースのエッジ（左右判定）
+extern int16_t dr_edge_side[5][5];                // ライントレースのエッジ（左右判定）
+extern int16_t dr_go_circle_center;               // 直進量適合値_黄色円中心迄直進[mm]
+extern int16_t dr_end_turn_pattern[5][5];         // 回転角適合値_次の難所方向に向くための回転[deg]
 
 /* 外部公開変数 */
 extern uint16_t g_u16_debri_remove_phase;         /* デブリリムーバルフェイズカウント */
