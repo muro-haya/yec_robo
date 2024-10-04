@@ -18,7 +18,7 @@
 
 /* 物体との距離計測初期化 */
 void ini_cal_distance( void ){
-
+    ;
 }
 
 /* 物体との距離計測 */
