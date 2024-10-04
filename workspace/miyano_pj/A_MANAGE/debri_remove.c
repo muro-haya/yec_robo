@@ -128,6 +128,7 @@ void dr_jdg_bottle_count( void );                                        /* 判�
 void dr_rd_jdg_color( uint16_t target_color , int16_t run_spd );         /* 色認識迄R・D走行するフェイズ */
 void dr_line_jdg_color( uint16_t target_color, uint16_t edge_side );     /* 色認識迄ライントレースするフェイズ */
 
+
 /* デブリリムーバル初期化処理 */
 void ini_debri_remove( void ){
     g_u16_debri_remove_phase = 99;  //要変更
