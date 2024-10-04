@@ -66,13 +66,13 @@ bool_t cyc_start_set( void ){
     
     btn = get_button( BUTTON_CENTER );
     if( 1 == btn ){
-        g_u16_ctl_main_mode = CONST_RUN;
-        g_u16_const_run_way = 1;
-        g_s16_const_run_spd = 300;
-        g_s16_const_curve_rate = 100;
+        // g_u16_ctl_main_mode = CONST_RUN;
+        // g_u16_const_run_way = 1;
+        // g_s16_const_run_spd = 300;
+        // g_s16_const_curve_rate = 100;
 
-        // g_u16_ctl_main_mode = COLOR_CHASE;
-        // g_u16_comm_rx_pet_srt = 1;
+        g_u16_ctl_main_mode = COLOR_CHASE;
+        g_u16_comm_rx_pet_srt = 1;
     }
 
     btn = 0;

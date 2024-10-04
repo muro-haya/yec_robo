@@ -69,7 +69,7 @@ struct comm_data tx_datas[] = {
     {  4, 100, 604, (uint16_t*)&g_u16_ctl_main_mode       },       /* 計測値4 */
     {  5, 100, 605, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* 計測値5 */
     {  6, 100, 606, (uint16_t*)&g_u16_comm_rx_jdg_pet     },       /* 計測値6 */
-    {  7, 100, 607, (uint16_t*)&g_u16_degfin              },       /* 計測値7 */
+    {  7, 100, 607, (uint16_t*)&g_s16_color_chase_debug   },       /* 計測値7 */
     {  8, 100, 608, (uint16_t*)&g_16_DLdeg                },       /* 計測値8 */
     {  9, 100, 609, (uint16_t*)&vlume                     },       /* 計測値9 */
 };

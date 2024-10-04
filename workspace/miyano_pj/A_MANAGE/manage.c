@@ -41,7 +41,7 @@ void cyc_manage( void ){
     case START_SET:
         bdat = cyc_start_set();
         if( 1 == bdat ){
-            g_u16_manage_cnt = DEBRI_REMOVE;
+            g_u16_manage_cnt = DOUBLE_LOOP;
         }
         break;
     case DOUBLE_LOOP:
