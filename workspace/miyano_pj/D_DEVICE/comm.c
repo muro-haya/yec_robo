@@ -19,8 +19,7 @@
 #include "../M_CTL/ctl_main.h"
 #include "../A_MANAGE/double_loop.h"
 #include "../A_MANAGE/smart_carry.h"
-
-
+#include "../A_MANAGE/manage.h"
 #include "../A_MANAGE/debri_remove.h"
 
 #include "comm.h"
@@ -65,13 +64,13 @@ struct comm_data tx_datas[] = {
     {  0, 100, 600, (uint16_t*)&g_u16_r_valu              },       /* 計測値0 */
     {  1, 100, 601, (uint16_t*)&g_u16_g_valu              },       /* 計測値1 */
     {  2, 100, 602, (uint16_t*)&g_u16_b_valu              },       /* 計測値2 */
-    {  3, 100, 603, (uint16_t*)&g_u16_comm_rx_pet_srt     },       /* 計測値3 */
+    {  3, 100, 603, (uint16_t*)&g_u16_debri_remove_phase  },       /* 計測値3 */
     {  4, 100, 604, (uint16_t*)&g_u16_ctl_main_mode       },       /* 計測値4 */
     {  5, 100, 605, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* 計測値5 */
     {  6, 100, 606, (uint16_t*)&g_u16_comm_rx_jdg_pet     },       /* 計測値6 */
     {  7, 100, 607, (uint16_t*)&g_u16_degfin              },       /* 計測値7 */
     {  8, 100, 608, (uint16_t*)&g_16_DLdeg                },       /* 計測値8 */
-    {  9, 100, 609, (uint16_t*)&vlume                     },       /* 計測値9 */
+    {  9, 100, 609, (uint16_t*)&g_u16_manage_cnt                     },       /* 計測値9 */
 };
 #define RX_DATA_NUM 15                                   /* 受信データ数 */
 /* 受信情報 */

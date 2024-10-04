@@ -97,12 +97,13 @@ void cyc_song( void ){
     uint16_t song_hz;
     uint16_t song_nobashi;
     
-    if( 0 == g_u16_comm_rx_flg ){
+    // if( 0 == g_u16_comm_rx_flg ){
+    if( 0 == comm_reset_flg ){
         u16_song_index = 0;
         return;
         /* 以降の処理は実施しない */
     }
-    g_u16_comm_rx_flg = 0;
+    // g_u16_comm_rx_flg = 0;
 
     song_hz      = u16_song_buf[u16_song_index];
     song_nobashi = u16_song_nobashi[u16_song_index];

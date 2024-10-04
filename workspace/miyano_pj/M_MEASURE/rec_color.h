@@ -17,15 +17,15 @@
 #define BLUE_RVALUE      84                /* 青色R値 */
 #define BLUE_GVALUE     213                 /* 青色G値 */
 #define BLUE_BVALUE     353                 /* 青色B値 */
-#define YELLOW_RVALUE   365                 /* 黄色R値 */
-#define YELLOW_GVALUE   349                 /* 黄色G値 */
-#define YELLOW_BVALUE   210                 /* 黄色B値 */
-#define WHITE_RVALUE    320                 /* 白色R値 */
-#define WHITE_GVALUE    375                 /* 白色G値 */
-#define WHITE_BVALUE    413                 /* 白色B値 */
-#define BLACK_RVALUE    200                 /* 黒色R値 */
-#define BLACK_GVALUE    200                 /* 黒色G値 */
-#define BLACK_BVALUE    200                 /* 黒色B値 */
+#define YELLOW_RVALUE   600                 /* 黄色R値 */
+#define YELLOW_GVALUE   580                 /* 黄色G値 */
+#define YELLOW_BVALUE   360                 /* 黄色B値 */
+#define WHITE_RVALUE    620                 /* 白色R値 */
+#define WHITE_GVALUE    720                 /* 白色G値 */
+#define WHITE_BVALUE    780                 /* 白色B値 */
+#define BLACK_RVALUE    40                 /* 黒色R値 */
+#define BLACK_GVALUE    40                 /* 黒色G値 */
+#define BLACK_BVALUE    40                 /* 黒色B値 */
 
 #define COLOR_WIDTH      40                 /* 色幅 */
 

@@ -45,12 +45,12 @@ bool_t cyc_start_set( void ){
 
     btn = get_button(BUTTON_BT);
     if( 1 == btn ){
-        if( 0 == comm_reset_flg ){
-            comm_reset_flg = 0;
-        }
-        else{
+        // if( 0 == comm_reset_flg ){
+        //     comm_reset_flg = 0;
+        // }
+        // else{
             comm_reset_flg = 1;
-        }
+        // }
     }
 
     btn = get_button( BUTTON_LEFT );
@@ -80,11 +80,11 @@ bool_t cyc_start_set( void ){
     if( 200 > distance ){
         start_set_distance_flg += 1;
     }
-    if( 200 <= start_set_distance_flg ){
-        hub_display_text_scroll("OK", 40);
+    if( 100 <= start_set_distance_flg ){
+        // hub_display_text_scroll("O", 10);
         if( 200 < distance ){
             start_set_distance_flg = 0;
-            btn = 1;
+            // btn = 1;
         }
     }
     g_u16_start_set_distance = distance;
