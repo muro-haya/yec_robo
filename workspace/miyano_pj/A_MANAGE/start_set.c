@@ -61,7 +61,8 @@ bool_t cyc_start_set( void ){
     if( 1 == btn ){
         get_color_rgb(0, &g_u16_linetrace_run_rpos, 0);
     }
-    g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
+    //g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos + g_u16_linetrace_run_rpos ) / 2;
+    g_u16_linetrace_run_fbTgt = ( g_u16_linetrace_run_lpos*3 + g_u16_linetrace_run_rpos*1 ) / 5;
     
     btn = get_button( BUTTON_CENTER );
     if( 1 == btn ){

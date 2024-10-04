@@ -20,16 +20,22 @@
 
 /* 適合値 */
 uint16_t x_u16_DoubleLoop_1_movement = 60;         /* 分岐1での移動量[mm]50 */
-uint16_t x_u16_DoubleLoop_2_movement = 200;         /* 分岐2での移動量[mm] */
-uint16_t x_u16_DoubleLoop_3_movement = 50;         /* 分岐3での移動量[mm] */
+uint16_t x_u16_DoubleLoop_2_movement1 = 250;         /* 分岐2での移動量[mm] */
+uint16_t x_u16_DoubleLoop_2_movement2 = 60;
+uint16_t x_u16_DoubleLoop_3_movement = 60;         /* 分岐3での移動量[mm] */
 uint16_t x_u16_DoubleLoop_4_movement = 50;         /* 分岐4での移動量[mm] */
-uint16_t x_u16_DoubleLoop_spd        = 50;         /* 各分岐での通過速度 */
-int16_t  x_u16_DoubleLoop_curve_rate = 95;         /* 各分岐での曲がり具合 */
+uint16_t x_u16_DoubleLoop_spd        = 250;         /* 各分岐での通過速度 */
+int16_t  x_s16_DoubleLoop_curve_rate1 = 100;        /* 各分岐での曲がり具合 */
+int16_t  x_s16_DoubleLoop_curve_rate2_1 = 100;        /* 各分岐での曲がり具合 */
+int16_t  x_s16_DoubleLoop_curve_rate2_2 = 120;
+int16_t  x_s16_DoubleLoop_curve_rate3 = 110;
+int16_t  x_s16_DoubleLoop_curve_rate4 = 110;
 uint16_t x_u16_DoubleLoop_deg1      = 10;          /* 指定旋回角[deg] */
-uint16_t x_u16_DoubleLoop_deg2      = 10;          /* 指定旋回角[deg] */
-uint16_t x_u16_DoubleLoop_line_movement_0 = 300;    /* スタート後の指定距離ライントレース移動量[mm] */
-uint16_t x_u16_DoubleLoop_line_movement_1 = 1000;   /* 分岐1での指定距離ライントレース移動量[mm]*/
-uint16_t x_u16_DoubleLoop_line_movement_2 = 1000;
+uint16_t x_u16_DoubleLoop_deg2      = 5;          /* 指定旋回角[deg] */
+uint16_t x_u16_DoubleLoop_deg3      = 5;
+uint16_t x_u16_DoubleLoop_line_movement_0 = 250;    /* スタート後の指定距離ライントレース移動量[mm] */
+uint16_t x_u16_DoubleLoop_line_movement_1 = 1500;   /* 分岐1での指定距離ライントレース移動量[mm]*/
+uint16_t x_u16_DoubleLoop_line_movement_2 = 1500;
 uint16_t x_u16_DoubleLoop_line_movement_3 = 500;
 uint16_t x_u16_DoubleLoop_line_movement_4 = 500;
 
@@ -52,15 +58,17 @@ uint16_t blueCount;
 
 /* 外部非公開関数 */
 void line_jdg_color( uint16_t fin_color );                            /* 色認識までライントレース走行するフェイズ */
-void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd );     /* 指定距離までR・D走行するフェイズ */
+void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd, int16_t curverate);     /* 指定距離までR・D走行するフェイズ */
 void DLturn_jdg_deg( int16_t fin_deg );                              /* 指定角まで旋回するフェイズ */
 void DLline_jdg_movement( uint16_t fin_movement );
+void DLstop();
 
 /* ダブルループ初期化処理 */
 void ini_DoubleLoop( void ){
     g_u16_DoubleLoop_phase = 1;
     DLreset_flg = 0;
 }
+
 
 /* ダブルループ周期処理 */
 bool_t cyc_DoubleLoop( void ){
@@ -71,50 +79,63 @@ bool_t cyc_DoubleLoop( void ){
     switch (g_u16_DoubleLoop_phase)
     {
     case 1:
-        hub_display_text_scroll("LD", 50);
         DLline_jdg_movement( x_u16_DoubleLoop_line_movement_0 );
         break;
     case 2:
     case 6:
-    case 10:
-    case 13:
-        hub_display_text_scroll("LC", 50);
+    //case 10:
+    //case 14:
         line_jdg_color( RESULT_BLUE );
         break;
     case 3:
-        hub_display_text_scroll("RM", 50);
-        DLrd_jdg_movement( x_u16_DoubleLoop_1_movement, x_u16_DoubleLoop_spd );
+        DLrd_jdg_movement( x_u16_DoubleLoop_1_movement, x_u16_DoubleLoop_spd, x_s16_DoubleLoop_curve_rate1 );
         break;
     case 4:
-        // DLturn_jdg_deg( x_u16_DoubleLoop_deg1 );
-        g_u16_DoubleLoop_phase += 1;
+        DLturn_jdg_deg( x_u16_DoubleLoop_deg1 );
         break;
     case 5:
-        hub_display_text_scroll("OK", 50);
         DLline_jdg_movement( x_u16_DoubleLoop_line_movement_1 );
         break;
     case 7:
-        DLrd_jdg_movement( x_u16_DoubleLoop_2_movement, x_u16_DoubleLoop_spd );
-        break;
-    case 8:
-        DLline_jdg_movement( x_u16_DoubleLoop_line_movement_2 );
-        break;
-    case 9:
         DLturn_jdg_deg( x_u16_DoubleLoop_deg2 );
         break;
+    case 8:
+        DLrd_jdg_movement( x_u16_DoubleLoop_2_movement1, x_u16_DoubleLoop_spd, x_s16_DoubleLoop_curve_rate2_1 );
+        break;  
+    case 9:
+        DLline_jdg_movement( x_u16_DoubleLoop_line_movement_2 );
+        break; 
+
+    /*ダブルループ？*/
+    //case 7:
+    //    DLrd_jdg_movement( x_u16_DoubleLoop_2_movement1, x_u16_DoubleLoop_spd, x_s16_DoubleLoop_curve_rate2_1 );
+    //    break;
+    //case 8:
+    //    DLrd_jdg_movement( x_u16_DoubleLoop_2_movement2, x_u16_DoubleLoop_spd, x_s16_DoubleLoop_curve_rate2_2 );
+    //    break;
+
+    
+
+    /*
     case 11:
-        DLrd_jdg_movement( x_u16_DoubleLoop_3_movement, x_u16_DoubleLoop_spd );
+        DLturn_jdg_deg( x_u16_DoubleLoop_deg3 );
         break;
     case 12:
+        DLrd_jdg_movement( x_u16_DoubleLoop_2_movement1, x_u16_DoubleLoop_spd, x_s16_DoubleLoop_curve_rate3 );
+        break;
+    case 13:
         DLline_jdg_movement( x_u16_DoubleLoop_line_movement_3 );
         break;
-    case 14:
-        DLrd_jdg_movement( x_u16_DoubleLoop_4_movement, x_u16_DoubleLoop_spd );
-        break;
-    case 15:
-        DLline_jdg_movement( x_u16_DoubleLoop_line_movement_4 );
-        break;
-    case 16:
+    
+    //case 15:
+    //    DLrd_jdg_movement( x_u16_DoubleLoop_4_movement, x_u16_DoubleLoop_spd, x_s16_DoubleLoop_curve_rate4 );
+    //    break;
+    //case 16:
+    //    DLline_jdg_movement( x_u16_DoubleLoop_line_movement_4 );
+    //    break;
+    */
+    case 10:
+        DLstop();
         bdat = 1;
         break;
     default:
@@ -136,7 +157,7 @@ void line_jdg_color( uint16_t fin_color ){
 
     if( fin_color == color_result ){
         blueCount += 1;
-        if( blueCount > 3 ){
+        if( blueCount > 0 ){
             g_u16_DoubleLoop_phase += 1;
             DLreset_flg = 0;
             blueCount = 0;
@@ -146,7 +167,6 @@ void line_jdg_color( uint16_t fin_color ){
         blueCount = 0;
     }
 }
-
 
 /* 指定角まで旋回するフェイズ */
 void DLturn_jdg_deg( int16_t fin_deg ){
@@ -176,7 +196,7 @@ void DLturn_jdg_deg( int16_t fin_deg ){
                 if( fin_deg < deg_result ){
                     g_u16_DoubleLoop_phase += 1;
                     DLreset_flg = 0;
-                    g_u16_linetrace_run_edge *= -1;
+                    //g_u16_linetrace_run_edge *= -1;
                 }
             //}
         }
@@ -185,7 +205,7 @@ void DLturn_jdg_deg( int16_t fin_deg ){
             if( fin_deg > deg_result ){
                 g_u16_DoubleLoop_phase += 1;
                 DLreset_flg = 0;
-                g_u16_linetrace_run_edge *= -1;
+                //g_u16_linetrace_run_edge *= -1;
             }
         }
 
@@ -220,7 +240,7 @@ void DLline_jdg_movement( uint16_t fin_movement ){
 }
 
 /* 指定距離までR・D走行するフェイズ */
-void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd ){
+void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd,int16_t curverate){
     uint16_t movement_result;
 
     if( 0 == DLreset_flg ){
@@ -230,17 +250,23 @@ void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd ){
     else{
         g_u16_ctl_main_mode = CONST_RUN;
         g_u16_const_run_way = 1;
-        g_s16_const_run_spd = 250;
-        g_s16_const_curve_rate = x_u16_DoubleLoop_curve_rate;
+        g_s16_const_run_spd = run_spd;
+        g_s16_const_curve_rate = curverate;
         
         movement_result = get_cal_movement();
         if( fin_movement < movement_result ){
             g_u16_DoubleLoop_phase += 1;
             DLreset_flg = 0;
             
-            //if(g_u16_DoubleLoop_phase > 4){
-            //    g_u16_linetrace_run_edge *= -1;     /* ライントレースの左右を反転*/
+            //if(g_u16_DoubleLoop_phase != 7){
+                g_u16_linetrace_run_edge *= -1;     /* ライントレースの左右を反転*/
             //}
         }
     }
 }
+
+
+void DLstop(){
+    g_u16_ctl_main_mode = STOP;
+}
+
