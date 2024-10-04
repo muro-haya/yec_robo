@@ -131,7 +131,7 @@ void dr_line_jdg_color( uint16_t target_color, uint16_t edge_side );     /* 色�
 
 /* デブリリムーバル初期化処理 */
 void ini_debri_remove( void ){
-    g_u16_debri_remove_phase = 99;  //要変更
+    g_u16_debri_remove_phase = 0;  //要変更
     g_u16_debri_count = 0;
     g_u16_danger_count = 0;
     g_u16_bottle_count = 0;
