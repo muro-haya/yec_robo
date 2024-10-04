@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/bluetooth_stm32_bluenrg.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/drv/bluetooth/bluetooth_stm32_bluenrg.o: \
+>>>>>>> horikawa_step0
  ../../lib/pbio/drv/bluetooth/bluetooth_stm32_bluenrg.c \
  ../..//lib/pbio/include/pbdrv/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbdrvconfig.h

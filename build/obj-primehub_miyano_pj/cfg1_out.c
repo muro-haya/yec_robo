@@ -908,7 +908,7 @@ const unsigned_t TOPPERS_cfg_static_api_67 = 67;
 #line 5 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_valueof_tskatr_67 = (unsigned_t)(TA_NULL);
 #line 5 "../../workspace/miyano_pj/miyano_pj.cfg"
-const signed_t TOPPERS_cfg_valueof_itskpri_67 = (signed_t)(8);
+const signed_t TOPPERS_cfg_valueof_itskpri_67 = (signed_t)(4);
 #line 5 "../../workspace/miyano_pj/miyano_pj.cfg"
 const unsigned_t TOPPERS_cfg_valueof_stksz_67 = (unsigned_t)(STACK_SIZE);
 

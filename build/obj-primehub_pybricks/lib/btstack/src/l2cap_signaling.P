@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/l2cap_signaling.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/btstack/src/l2cap_signaling.o: \
+>>>>>>> horikawa_step0
  ../../lib/btstack/src/l2cap_signaling.c \
  ../../lib/btstack/src/l2cap_signaling.h \
  /usr/local/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \

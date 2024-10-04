@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/light/animation.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/pbio/src/light/animation.o: \
+>>>>>>> horikawa_step0
  ../../lib/pbio/src/light/animation.c \
  ../..//lib/pbio/include/pbio/config.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/pbioconfig.h \

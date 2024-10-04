@@ -69,7 +69,7 @@ bool_t cyc_start_set( void ){
         g_u16_ctl_main_mode = CONST_RUN;
         g_u16_const_run_way = 1;
         g_s16_const_run_spd = 300;
-        g_s16_const_curve_rate = 95;
+        g_s16_const_curve_rate = 100;
     }
 
     btn = 0;
@@ -77,8 +77,9 @@ bool_t cyc_start_set( void ){
     if( 200 > distance ){
         start_set_distance_flg += 1;
     }
+    // hub_display_text_scroll("YEC", 100);
     if( 200 <= start_set_distance_flg ){
-        hub_display_text_scroll("OK", 100);
+        hub_display_text_scroll("OK", 40);
         if( 200 < distance ){
             start_set_distance_flg = 0;
             btn = 1;

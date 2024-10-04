@@ -20,6 +20,8 @@
 #include "../A_MANAGE/smart_carry.h"
 
 
+#include "../A_MANAGE/debri_remove.h"
+
 #include "comm.h"
 
 #define COM_PACKET_SIZE (sizeof("@000:000000\n"))
@@ -54,11 +56,10 @@ struct comm_data{
 #define TX_DATA_NUM 14                                   /* 送信データ数 */
 /* 送信情報 */
 struct comm_data tx_datas[] = {
-    {  0, 100, 500, (uint16_t*)&comm_tx_cnt               },       /* 送信確認カウンタ */
-    {  1, 100, 501, (uint16_t*)&comm_rx_cnt               },       /* 受信確認返信カウンタ */
-    {  2, 100, 502, (uint16_t*)&vlume                     },       /* 受信確認返信カウンタ */
-    {  3, 100, 503, (uint16_t*)&g_u16_comm_rx_pet_srt     },       /* ペットボトル判定開始(1:開始) */
-    
+    {  0, 1000, 500, (uint16_t*)&comm_tx_cnt              },       /* 送信確認カウンタ */
+    {  1, 1000, 501, (uint16_t*)&comm_rx_cnt              },       /* 受信確認返信カウンタ */
+    {  2, 1000, 502, (uint16_t*)&vlume                    },       /* 受信確認返信カウンタ */
+    {  3,  100, 503, (uint16_t*)&g_u16_comm_rx_pet_srt    },       /* ペットボトル判定開始(1:開始) */
     {  0, 100, 600, (uint16_t*)&g_u16_r_valu              },       /* 計測値0 */
     {  1, 100, 601, (uint16_t*)&g_u16_g_valu              },       /* 計測値1 */
     {  2, 100, 602, (uint16_t*)&g_u16_b_valu              },       /* 計測値2 */
@@ -73,22 +74,22 @@ struct comm_data tx_datas[] = {
 #define RX_DATA_NUM 15                                   /* 受信データ数 */
 /* 受信情報 */
 struct comm_data rx_datas[] = {
-    {  0, 100, 000, (uint16_t*)&comm_rx_cnt               },       /* 受信確認カウンタ */
-    {  0,  10, 001, (uint16_t*)&g_u16_comm_rx_jdg_red     },       /* 指定座標の赤判定フラグ(0:ある 1:ない) */
-    {  0,  10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},       /* カラーチェイス用赤ペットボトルx軸位置 */
-    {  0,  10, 003, (uint16_t*)&g_u16_comm_rx_pet_xpos_bl },       /* カラーチェイス用青ペットボトルx軸位置 */
-    {  0,  10, 004, (uint16_t*)&g_u16_comm_rx_jdg_pet     },       /* ペットボトル色判定(1:赤 2:青 0:無) */
+    {  0,  100, 000, (uint16_t*)&comm_rx_cnt               },      /* 受信確認カウンタ */
+    {  0,   10, 001, (uint16_t*)&g_u16_comm_rx_jdg_red     },      /* 指定座標の赤判定フラグ(0:ある 1:ない) */
+    {  0,   10, 002, (uint16_t*)&g_u16_comm_rx_pet_xpos_red},      /* カラーチェイス用赤ペットボトルx軸位置 */
+    {  0,   10, 003, (uint16_t*)&g_u16_comm_rx_pet_xpos_bl },      /* カラーチェイス用青ペットボトルx軸位置 */
+    {  0,   10, 004, (uint16_t*)&g_u16_comm_rx_jdg_pet     },      /* ペットボトル色判定(1:赤 2:青 0:無) */
     
-    {  0,  10, 100, (uint16_t*)&g_u16_comm_rx_pet_srt     },       /* 適合値0 */
-    {  0,  10, 101, (uint16_t*)&vlume                     },       /* 適合値1 */
-    {  0,  10, 102, (uint16_t*)&vlume                     },       /* 適合値2 */
-    {  0,  10, 103, (uint16_t*)&vlume                     },       /* 適合値3 */
-    {  0,  10, 104, (uint16_t*)&vlume                     },       /* 適合値4 */
-    {  0,  10, 105, (uint16_t*)&vlume                     },       /* 適合値5 */
-    {  0,  10, 106, (uint16_t*)&vlume                     },       /* 適合値6 */
-    {  0,  10, 107, (uint16_t*)&vlume                     },       /* 適合値7 */
-    {  0,  10, 108, (uint16_t*)&vlume                     },       /* 適合値8 */
-    {  0,  10, 109, (uint16_t*)&vlume                     },       /* 適合値9 */
+    {  0,   10, 100, (uint16_t*)&g_u16_comm_rx_pet_srt     },      /* 適合値0 */
+    {  0,   10, 101, (uint16_t*)&vlume                     },      /* 適合値1 */
+    {  0,   10, 102, (uint16_t*)&vlume                     },      /* 適合値2 */
+    {  0,   10, 103, (uint16_t*)&vlume                     },      /* 適合値3 */
+    {  0,   10, 104, (uint16_t*)&vlume                     },      /* 適合値4 */
+    {  0,   10, 105, (uint16_t*)&vlume                     },      /* 適合値5 */
+    {  0,   10, 106, (uint16_t*)&vlume                     },      /* 適合値6 */
+    {  0,   10, 107, (uint16_t*)&vlume                     },      /* 適合値7 */
+    {  0,   10, 108, (uint16_t*)&vlume                     },      /* 適合値8 */
+    {  0,   10, 109, (uint16_t*)&vlume                     },      /* 適合値9 */
 };
 
 void ini_comm( void ){

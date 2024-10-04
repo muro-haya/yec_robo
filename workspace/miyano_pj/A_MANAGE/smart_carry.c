@@ -22,12 +22,12 @@
 
 /* 適合値 */
 uint16_t x_u16_smart_carry_3_distance = 50;         /* キャリーボトル認識距離[mm] */
-int16_t  x_s16_smart_carry_4_movement = 320;         /* ティポジション通過移動量[mm] */
-int16_t  x_s16_smart_carry_5_movement = 500;        /* ディセイブルゾーン通過移動量[mm] */
+int16_t  x_s16_smart_carry_4_movement = 440;        /* ティポジション通過移動量[mm] */
+int16_t  x_s16_smart_carry_5_movement = 400;        /* ディセイブルゾーン通過移動量[mm] */
 int16_t  x_s16_smart_carry_6_movement = 700;        /* ランディング移動量[mm] */
 int16_t  x_s16_smart_carry_7_movement = 150;        /* 後進移動量[mm] */
-uint16_t x_u16_smart_carry_8_deg      = 100;        /* 指定旋回角[deg] */
-int16_t  x_s16_smart_carry_4_spd      = 200;        /* ティポジション通過速速 */
+uint16_t x_u16_smart_carry_8_deg      = 130;        /* 指定旋回角[deg] */
+int16_t  x_s16_smart_carry_4_spd      = 300;        /* ティポジション通過速速 */
 int16_t  x_s16_smart_carry_6_spd      = 300;        /* ランディング速度 */
 int16_t  x_s16_smart_carry_7_spd      = -150;       /* 後進速度 */
 uint16_t x_u16_smart_carry_deg        = 100;        /* スマートキャリー指定角[deg] */
@@ -52,7 +52,7 @@ void chase_jdg_movement( int16_t fin_movement );                    /* 指定距
 
 /* スマートキャリー初期化処理 */
 void ini_smart_carry( void ){
-    g_u16_smart_carry_phase   = 0;
+    g_u16_smart_carry_phase   = 1;
     u16_smart_carry_reset_flg = 0;
 
     g_u16_smart_carry_debug   = 0;
@@ -107,6 +107,9 @@ bool_t cyc_smart_carry( void ){
         rd_jdg_color(RESULT_BLACK);
         break;
     case 10:
+        line_jdg_movement( 500 );
+        break;
+    case 11:
         bdat = 1;
         break;
     default:
@@ -174,6 +177,7 @@ void rd_jdg_movement( int16_t fin_movement, int16_t run_spd ){
         g_u16_ctl_main_mode = CONST_RUN;
         g_u16_const_run_way = 1;
         g_s16_const_run_spd = run_spd;
+        g_s16_const_curve_rate = 100;
         
         movement_result = abs(get_cal_movement());
         g_u16_smart_carry_debug = movement_result;
@@ -189,7 +193,7 @@ void line_jdg_obj( uint16_t fin_distance ){
 
     g_u16_ctl_main_mode = LINETRACE_RUN;
     g_u16_linetrace_run_way = 1;
-    g_u16_linetrace_run_bsV = 100;
+    g_u16_linetrace_run_bsV = 150;
 
     distance_result = get_cal_distance();
     if( fin_distance < distance_result ){
@@ -207,7 +211,7 @@ void line_jdg_movement( int16_t fin_movement ){
     else{
         g_u16_ctl_main_mode = LINETRACE_RUN;
         g_u16_linetrace_run_way = 1;
-        g_u16_linetrace_run_bsV = 200;
+        g_u16_linetrace_run_bsV = 150;
         
         movement_result = get_cal_movement();
         if( fin_movement < movement_result ){

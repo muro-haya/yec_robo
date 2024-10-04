@@ -23,9 +23,9 @@
 #define WHITE_RVALUE    320                 /* 白色R値 */
 #define WHITE_GVALUE    375                 /* 白色G値 */
 #define WHITE_BVALUE    413                 /* 白色B値 */
-#define BLACK_RVALUE     25                 /* 黒色R値 */
-#define BLACK_GVALUE     30                 /* 黒色G値 */
-#define BLACK_BVALUE     34                 /* 黒色B値 */
+#define BLACK_RVALUE    200                 /* 黒色R値 */
+#define BLACK_GVALUE    200                 /* 黒色G値 */
+#define BLACK_BVALUE    200                 /* 黒色B値 */
 
 #define COLOR_WIDTH      40                 /* 色幅 */
 

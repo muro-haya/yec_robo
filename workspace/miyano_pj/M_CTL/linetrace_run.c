@@ -22,9 +22,9 @@
 #define BSSPD  200                              /* 基本指令値 */
 
 /* 適合値 */
-uint16_t  x_u16_linetrace_run_kp  = 600;        /* P項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kp  = 600;//345;        /* P項ゲイン値[0.001]*/
 uint16_t  x_u16_linetrace_run_ki  = 0;          /* I項ゲイン値[0.001]*/
-uint16_t  x_u16_linetrace_run_kd  = 200;        /* D項ゲイン値[0.001]*/
+uint16_t  x_u16_linetrace_run_kd  = 200;//325;        /* D項ゲイン値[0.001]*/
 int16_t   x_s16_linetrace_limit_i = 100;        /* I項上限値*/
 
 /* 外部公開変数 */

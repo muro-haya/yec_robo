@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o: \
+>>>>>>> horikawa_step0
  ../../micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
  ../../micropython/lib/stm32lib/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../..//lib/pbio/platform/prime_hub_spike-rt/stm32f4xx_hal_conf.h \

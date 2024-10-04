@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /home/fumitake/yec_robo/build/obj-primehub_pybricks/lib/libm/wf_tgamma.o: \
+=======
+/home/sw20fzx250/robot_contest_2024/yec_robo/build/obj-primehub_pybricks/lib/libm/wf_tgamma.o: \
+>>>>>>> horikawa_step0
  ../../micropython/lib/libm/wf_tgamma.c \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/math.h \
  /usr/local/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h \
