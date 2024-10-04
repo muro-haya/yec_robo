@@ -41,7 +41,7 @@ void cyc_manage( void ){
     case START_SET:
         bdat = cyc_start_set();
         if( 1 == bdat ){
-            g_u16_manage_cnt = SMART_CARRY;
+            g_u16_manage_cnt = DEBRI_REMOVE;
         }
         break;
     case DOUBLE_LOOP:
@@ -53,7 +53,7 @@ void cyc_manage( void ){
     case DEBRI_REMOVE:
         bdat = cyc_debri_remove();
         if( 1 == bdat ){
-            //g_u16_manage_cnt += 1;
+            g_u16_manage_cnt += 1;
         }
         break;
     case SMART_CARRY:

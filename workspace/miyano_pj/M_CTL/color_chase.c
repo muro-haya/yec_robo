@@ -42,7 +42,7 @@ static uint16_t u16_bpos;                       /* 黒色値 */
 void ini_color_chase( void ){
 
     g_u16_color_chase_way    = FB_WAY;          /* FB制御指令方法(0:DUTY 1:回転速度) */
-    g_u16_color_chase_bsV    = 50;              /* FB制御基本値[-] */
+    g_u16_color_chase_bsV    = 250;              /* FB制御基本値[-] */
     g_u16_color_chase_fbTgt  = 50;              /* FB制御目標値[-] */
     g_u16_color_chase_fbPv   = 0;               /* FB制御現在値[-] */
     g_s16_color_chase_p      = 0;              /* P項計算結果[0.01]*/

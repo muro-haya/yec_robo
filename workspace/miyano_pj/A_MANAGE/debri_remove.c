@@ -27,16 +27,17 @@
 /* 適合値 */
 
 //左右切り替えの適合値も必要か　左右切り替えた場合、角度とライントレースだけ反対にすればよい（*-1か）
-uint16_t pattern_nom = 1;               //パターン番号（0～4）
+uint16_t pattern_nom = 0;               //パターン番号（0～4）
 int16_t layout = 1;                     //レイアウト変更（L:1, R:-1）
 
-int16_t D_straight = 200;               //直進量適合値_デブリボトル運搬[mm]
+int16_t D_straight = 150;               //直進量適合値_デブリボトル運搬[mm]
 int16_t D_spd = 200;                    //直進速度適合値_デブリボトル運搬
-int16_t R_straight = 200;               //後退量適合値_デブリボトル運搬後[mm]
+int16_t R_straight = 150;               //後退量適合値_デブリボトル運搬後[mm]
 int16_t R_spd = -200;                   //後退速度適合値_デブリボトル運搬後
 
 int16_t turn_pattern[5][5] = {           //回転角適合値[deg]
-        {35, 90, -135, -60, 0},          //2パターン0
+        // {25, 90, -135, -60, 0},          //2パターン0
+        {25, 60, -70, -70, 0},          //2パターン0
         {75, -165, 150, -75, 0},         //2パターン1
         {0, 110, -175, 90, 0},           //2パターン2
         {0, 80, -140, 90, 0},            //2パターン3
@@ -44,7 +45,8 @@ int16_t turn_pattern[5][5] = {           //回転角適合値[deg]
         };
 
 int16_t chase_straight_pattern[5][5] = { //直進量適合値_ボトル判定迄[mm]
-        {424, 424, 600, 671, 0},         //2パターン0
+        // {474, 424, 600, 671, 0},         //2パターン0
+        {540, 250, 500, 650, 0},         //2パターン0
         {870, 750, 530, 400, 0},         //2パターン1
         {370, 970, 580, 360, 0},         //2パターン2
         {5, 950, 580, 690, 0},           //2パターン3
@@ -54,7 +56,8 @@ int16_t chase_straight_pattern[5][5] = { //直進量適合値_ボトル判定迄
 int16_t chase_straight_spd = 250;        //直進速度適合値_ボトル判定迄
 
 int16_t last_turn_pattern[5][5] = {      //回転角適合値_最終回転[deg]（攻略終了地点に向けた回転）
-        {0, 0, -120, 50, 140},           //2パターン0
+        // {0, 0, -120, 50, 140},           //2パターン0
+        {0, 0, -120, 50, 120},           //2パターン0
         {0, 0, 135, -15, 115},           //2パターン1
         {0, 0, -115, 115, 45},           //2パターン2
         {0, 0, -80, 115, 75},            //2パターン3
@@ -62,7 +65,7 @@ int16_t last_turn_pattern[5][5] = {      //回転角適合値_最終回転[deg]�
         };
 
 int16_t last_straight_pattern[5][5] = {  //直進量適合値_最終直進[mm]（攻略終了地点に向けた直進）
-        {0, 0, 850, 450, 900},           //2パターン0
+        {0, 0, 850, 450, 600},           //2パターン0
         {0, 0, 1200, 650, 630},          //2パターン1
         {0, 0, 950, 800, 350},           //2パターン2
         {0, 0, 950, 800, 250},           //2パターン3
@@ -131,7 +134,8 @@ void dr_line_jdg_color( uint16_t target_color, uint16_t edge_side );     /* 色�
 
 /* デブリリムーバル初期化処理 */
 void ini_debri_remove( void ){
-    g_u16_debri_remove_phase = 99;  //要変更
+    // g_u16_debri_remove_phase = 99;  //要変更
+    g_u16_debri_remove_phase = 0;
     g_u16_debri_count = 0;
     g_u16_danger_count = 0;
     g_u16_bottle_count = 0;
@@ -274,14 +278,14 @@ void dr_chase_jdg_movement( int16_t target_movement, int16_t run_spd ){
         dr_reset_flg = 1;
     }
     else{
-        //g_u16_ctl_main_mode = CONST_RUN;  //変更要
-        //g_u16_const_run_way = 1;
-        //g_s16_const_run_spd = run_spd;
+        g_u16_ctl_main_mode = CONST_RUN;  //変更要
+        g_u16_const_run_way = 1;
+        g_s16_const_run_spd = run_spd;
 
-        g_u16_ctl_main_mode = COLOR_CHASE;
-        g_u16_color_chase_way = 1;
-        g_u16_color_chase_bsV = run_spd;
-        g_u16_comm_rx_pet_srt = 1;
+        // g_u16_ctl_main_mode = COLOR_CHASE;
+        // g_u16_color_chase_way = 1;
+        // g_u16_color_chase_bsV = run_spd;
+        // g_u16_comm_rx_pet_srt = 1;
         
         movement_result = get_cal_movement();
         if( g_u16_comm_rx_jdg_pet != 0 ){
@@ -304,14 +308,14 @@ void dr_jdg_color( void ){
     uint16_t RED = 1;
     uint16_t BLUE = 2;
 
-    if( RED == dr_color_result ){  //赤ならデンジャボトルのカウントを+1, フェイズを0に戻す
-        g_u16_danger_count += 1;
-        g_u16_debri_remove_phase = 0;
-        dr_color_result = 0;
-    }
-    else if( BLUE == dr_color_result ){  //青ならデブリボトルのカウントを+1, フェイズを+1
+    if( BLUE == dr_color_result ){  //青ならデブリボトルのカウントを+1, フェイズを+1
         g_u16_debri_count += 1;
         g_u16_debri_remove_phase += 1;
+        dr_color_result = 0;
+    }
+    else{                           //赤ならデンジャボトルのカウントを+1, フェイズを0に戻す
+        g_u16_danger_count += 1;
+        g_u16_debri_remove_phase = 0;
         dr_color_result = 0;
     }
 }
@@ -341,7 +345,10 @@ void dr_rd_jdg_movement( int16_t target_movement, int16_t run_spd ){
 void dr_jdg_bottle_count( void ){
     
 
-    if (g_u16_debri_count >= 2){  //デブリボトルのカウントが2以上ならフェイズを+1
+    // if ( ( g_u16_debri_count >= 2                      )  //デブリボトルのカウントが2以上ならフェイズを+1
+    //   || ( g_u16_danger_count + g_u16_debri_count >= 4 )
+    if(( g_u16_danger_count + g_u16_debri_count >= 4 )
+    ){
         g_u16_debri_remove_phase += 1;
     }
     else{                         //デブリボトルのカウントが2未満ならフェイズを0に戻す
