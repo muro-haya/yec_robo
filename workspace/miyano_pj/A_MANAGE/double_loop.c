@@ -30,8 +30,8 @@ int16_t  x_s16_DoubleLoop_curve_rate2_1 = 100;        /* 各分岐での曲が�
 int16_t  x_s16_DoubleLoop_curve_rate2_2 = 120;
 int16_t  x_s16_DoubleLoop_curve_rate3 = 110;
 int16_t  x_s16_DoubleLoop_curve_rate4 = 110;
-uint16_t x_u16_DoubleLoop_deg1      = 10;          /* 指定旋回角[deg] 10*/
-uint16_t x_u16_DoubleLoop_deg2      = 12;          /* 指定旋回角[deg] */
+uint16_t x_u16_DoubleLoop_deg1      = -10;          /* 指定旋回角[deg] 10*/
+uint16_t x_u16_DoubleLoop_deg2      = -12;          /* 指定旋回角[deg] */
 uint16_t x_u16_DoubleLoop_deg3      = 5;
 uint16_t x_u16_DoubleLoop_line_movement_0 = 5800;    /* スタート後の指定距離ライントレース移動量[mm] */
 uint16_t x_u16_DoubleLoop_line_movement_1 = 1500;   /* 分岐1での指定距離ライントレース移動量[mm]*/
@@ -180,9 +180,9 @@ void DLturn_jdg_deg( int16_t fin_deg ){
         DLreset_flg = 1;
         fin_deg *= g_s16_linetrace_run_edge;
         DLturn_spd = 200;
-        //if( fin_deg < 0 ){
-        //    DLturn_spd *= -1;
-        //}
+        if( fin_deg < 0 ){
+            DLturn_spd *= -1;
+        }
     }
     else{
         g_u16_ctl_main_mode = CONST_TURN;
