@@ -178,7 +178,7 @@ void DLturn_jdg_deg( int16_t fin_deg ){
     if( 0 == DLreset_flg ){
         reset_cal_movement();
         DLreset_flg = 1;
-        fin_deg *= g_u16_linetrace_run_edge;
+        fin_deg *= g_s16_linetrace_run_edge;
         DLturn_spd = 200;
         //if( fin_deg < 0 ){
         //    DLturn_spd *= -1;
@@ -199,7 +199,7 @@ void DLturn_jdg_deg( int16_t fin_deg ){
                 if( fin_deg < deg_result ){
                     g_u16_DoubleLoop_phase += 1;
                     DLreset_flg = 0;
-                    //g_u16_linetrace_run_edge *= -1;
+                    //g_s16_linetrace_run_edge *= -1;
                 }
             //}
         }
@@ -208,7 +208,7 @@ void DLturn_jdg_deg( int16_t fin_deg ){
             if( fin_deg > deg_result ){
                 g_u16_DoubleLoop_phase += 1;
                 DLreset_flg = 0;
-                //g_u16_linetrace_run_edge *= -1;
+                //g_s16_linetrace_run_edge *= -1;
             }
         }
 
@@ -268,7 +268,7 @@ void DLrd_jdg_movement( uint16_t fin_movement, int16_t run_spd,int16_t curverate
             DLreset_flg = 0;
             
             //if(g_u16_DoubleLoop_phase != 7){
-                g_u16_linetrace_run_edge *= -1;     /* ライントレースの左右を反転*/
+                g_s16_linetrace_run_edge *= -1;     /* ライントレースの左右を反転*/
             //}
         }
     }

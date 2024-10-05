@@ -39,7 +39,7 @@ int16_t  g_s16_linetrace_run_fbCmdv;            /* FB制御指令値[-] */
 uint16_t g_u16_linetrace_run_lpos;              /* 左色値 */
 uint16_t g_u16_linetrace_run_rpos;              /* 右色値 */
 
-uint16_t g_u16_linetrace_run_edge;              /* エッジ選択(1:左、-1:右) */
+int16_t g_s16_linetrace_run_edge;              /* エッジ選択(1:左、-1:右) */
 
 uint16_t g_s16_linetrace_run_r = 0;             /*R値観測用*/
 uint16_t g_s16_linetrace_run_g = 0;             /*G値観測用*/
@@ -67,7 +67,7 @@ void ini_linetrace_run( void ){
     g_s16_linetrace_run_g = 0;                  /*  */
     g_s16_linetrace_run_b = 0;                  /*  */
 
-    g_u16_linetrace_run_edge = 1;               /* エッジ選択(1:左 -1:右) */
+    g_s16_linetrace_run_edge = -1;               /* エッジ選択(1:左 -1:右) */
 
     s16_posdlt_old             = 0;             /* 位置偏差前回値 */
     s16_spddlt_old             = 0;             /* 速度偏差前回値 */
@@ -135,7 +135,7 @@ void cyc_linetrace_run( void ){
                     + g_s16_linetrace_run_i
                     + g_s16_linetrace_run_d;
   
-    s16_run_fbCmdv *= g_u16_linetrace_run_edge;
+    s16_run_fbCmdv *= g_s16_linetrace_run_edge;
 
     s16_LVulue = (int16_t)g_u16_linetrace_run_bsV - s16_run_fbCmdv;  /* 左モータ指示値計算 */
     s16_RVulue = (int16_t)g_u16_linetrace_run_bsV + s16_run_fbCmdv;  /* 右モータ指示値計算 */

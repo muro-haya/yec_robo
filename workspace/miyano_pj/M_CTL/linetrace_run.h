@@ -30,6 +30,6 @@ extern uint16_t g_s16_linetrace_run_r;
 extern uint16_t g_s16_linetrace_run_g;
 extern uint16_t g_s16_linetrace_run_b;
 
-extern uint16_t g_u16_linetrace_run_edge;
+extern int16_t g_s16_linetrace_run_edge;
 
 #endif

@@ -402,7 +402,7 @@ void dr_line_jdg_color( uint16_t target_color, uint16_t edge_side ){
     g_u16_ctl_main_mode = LINETRACE_RUN;
     g_u16_linetrace_run_way = 1;
     g_u16_linetrace_run_bsV = 250;
-    g_u16_linetrace_run_edge = edge_side;
+    g_s16_linetrace_run_edge = edge_side;
     
     // dr_end_color_result = get_rec_color();
     // if( target_color == dr_end_color_result ){
