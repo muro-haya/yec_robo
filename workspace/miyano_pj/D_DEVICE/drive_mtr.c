@@ -27,7 +27,7 @@ uint16_t x_u16_drive_mtr_rpmL_kp = 14;      /* 2号機 */
 uint16_t x_u16_drive_mtr_rpmL_kd = 0;
 uint16_t x_u16_drive_mtr_rpmL_ki = 0;
 
-uint16_t x_u16_drive_mtr_rpmR_kp = 11;//46  /* 1号機・2号機 */
+uint16_t x_u16_drive_mtr_rpmR_kp = 8;//11//46  /* 1号機・2号機 */
 uint16_t x_u16_drive_mtr_rpmR_kd = 0;//52
 uint16_t x_u16_drive_mtr_rpmR_ki = 0;//52
 

@@ -81,10 +81,10 @@ bool_t cyc_start_set( void ){
         start_set_distance_flg += 1;
     }
     if( 100 <= start_set_distance_flg ){
-        // hub_display_text_scroll("O", 10);
+        hub_display_text_scroll("O", 10);
         if( 200 < distance ){
             start_set_distance_flg = 0;
-            // btn = 1;
+            btn = 1;
         }
     }
     g_u16_start_set_distance = distance;
